@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="2columns-right">
+    <head>
+        <css src="Maxime_Jobs::jobs.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Maxime\Jobs\Block\Job\View" name="jobs_job_view" template="jobs/job/view.phtml" />
+        </referenceContainer>
+    </body>
+</page>

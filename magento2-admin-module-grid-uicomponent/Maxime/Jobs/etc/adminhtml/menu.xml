@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+<!--    <menu>
+        <add id="Maxime_Jobs::job_head" title="Jobs" module="Maxime_Jobs" sortOrder="100" parent="Magento_Backend::stores" resource="Maxime_Jobs::job_head" />
+        <add id="Maxime_Jobs::department" title="Departments" module="Maxime_Jobs" sortOrder="10" parent="Maxime_Jobs::job_head" action="jobs/department" resource="Maxime_Jobs::job" />
+        <add id="Maxime_Jobs::job" title="Jobs" module="Maxime_Jobs" sortOrder="20" parent="Maxime_Jobs::job_head" action="jobs/job" resource="Maxime_Jobs::job" />
+    </menu>-->
+    <menu>
+        <add id="Maxime_Jobs::job_head" title="Maxime Jobs" module="Maxime_Jobs" sortOrder="100" resource="Maxime_Jobs::job_head" />
+        <add id="Maxime_Jobs::department" title="Departments" module="Maxime_Jobs" sortOrder="10" parent="Maxime_Jobs::job_head" action="jobs/department" resource="Maxime_Jobs::job" />
+        <add id="Maxime_Jobs::job" title="Jobs" module="Maxime_Jobs" sortOrder="20" parent="Maxime_Jobs::job_head" action="jobs/job" resource="Maxime_Jobs::job" />
+    </menu>
+</config>

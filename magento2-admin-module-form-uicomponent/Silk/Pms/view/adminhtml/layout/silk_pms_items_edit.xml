@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Silk. All rights reserved.
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <block class="Silk\Pms\Block\Adminhtml\Items\Edit\Tabs" name="silk_pms_items_edit_tabs">
+                <block class="Silk\Pms\Block\Adminhtml\Items\Edit\Tab\Main" name="silk_pms_items_edit_tab_main"/>
+                <block class="Silk\Pms\Block\Adminhtml\Items\Edit\Tab\Info" name="silk_pms_items_edit_tab_info"/>
+                <!--添加多个Tab选项可以看到效果-->
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">silk_pms_items_edit_tab_main</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section2</argument>
+                    <argument name="block" xsi:type="string">silk_pms_items_edit_tab_info</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Silk\Pms\Block\Adminhtml\Items\Edit" name="pms_items_edit"/>
+        </referenceContainer>
+    </body>
+</page>

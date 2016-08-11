@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default><!--即表示对system.xml中设置默认值-->
+        <jobs><!--该节点对应system.xml中的section节点id值-->
+            <department><!--该节点对应system.xml中的group节点id值-->
+                <view_list>1</view_list><!--该节点对应system.xml中field节点的id值-->
+            </department>
+            <cron>
+                <!-- Every day at midnight -->
+                <schedule>0 10 * * *</schedule>
+            </cron>
+        </jobs>
+    </default>
+
+    <!--这里还可以设置website,store的默认值,websitecode,storeviewcode对应在创建website和store时自定义的code值(Store Configuration->Create Website|Store)-->
+    <!--<websites>
+        <websitecode>
+            <jobs>
+                <department>
+                    <view_list>1</view_list>
+                </department>
+            </jobs>
+        </websitecode>
+    </websites>
+    <stores>
+        <storeviewcode>
+            <jobs>
+                <department>
+                    <view_list>1</view_list>
+                </department>
+            </jobs>
+        </storeviewcode>
+    </stores>-->
+</config>

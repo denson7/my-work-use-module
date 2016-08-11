@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Create our type DepartmentGridDataProvider -->
+    <virtualType name="DepartmentGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Maxime\Jobs\Model\Resource\Department\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">DepartmentGridFilterPool</argument> <!-- Define new object for filters -->
+        </arguments>
+    </virtualType>
+
+    <!-- Create our type DepartmentGridFilterPool -->
+    <virtualType name="DepartmentGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Custom collection factory here -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <!-- Type for jobs_department_listing_data_source -->
+                <item name="jobs_department_listing_data_source" xsi:type="string">Maxime\Jobs\Model\ResourceModel\Grid\Department\Collection</item>
+                <!-- Type for jobs_job_listing_data_source -->
+                <!--<item name="jobs_job_listing_data_source" xsi:type="string">Maxime\Jobs\Model\ResourceModel\Grid\Job\Collection</item>-->
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Simulate our class Maxime\Jobs\Model\ResourceModel\Grid\Department\Collection -->
+    <virtualType name="Maxime\Jobs\Model\ResourceModel\Grid\Department\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">maxime_department</argument>
+            <argument name="resourceModel" xsi:type="string">Maxime\Jobs\Model\ResourceModel\Department</argument>
+        </arguments>
+    </virtualType>
+
+    <!--JOB Add-->
+    <!-- Create our type JobGridDataProvider -->
+    <virtualType name="JobGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Maxime\Jobs\Model\Resource\Job\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">JobGridFilterPool</argument> <!-- Define new object for filters -->
+        </arguments>
+    </virtualType>
+
+    <!-- Create our type JobGridFilterPool -->
+    <virtualType name="JobGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Type for jobs_job_listing_data_source -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="jobs_job_listing_data_source" xsi:type="string">Maxime\Jobs\Model\ResourceModel\Grid\Job\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Simulate our class Maxime\Jobs\Model\ResourceModel\Grid\Job\Collection -->
+    <virtualType name="Maxime\Jobs\Model\ResourceModel\Grid\Job\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">maxime_job</argument>
+            <argument name="resourceModel" xsi:type="string">Maxime\Jobs\Model\ResourceModel\Job</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Logger and Handler 创建自定义模块的log日志-->
+    <type name="Maxime\Jobs\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Maxime\Jobs\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">maximeJobs</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Maxime\Jobs\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>
+

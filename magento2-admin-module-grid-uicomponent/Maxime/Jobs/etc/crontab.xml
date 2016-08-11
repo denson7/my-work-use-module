@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="maxime_jobs_disable_jobs" instance="Maxime\Jobs\Cron\DisableJobs" method="execute">
+            <!-- Every five minutes -->
+            <!--<schedule>*/5 * * * *</schedule>-->
+            <config_path>jobs/cron/schedule</config_path>
+        </job>
+    </group>
+</config>

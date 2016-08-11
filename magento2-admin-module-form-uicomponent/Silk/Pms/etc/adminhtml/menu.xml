@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="silk::base" title="Silk Pms" module="Silk_Pms"  parent="Maxime_Jobs::job_head" sortOrder="90" resource="Silk_Pms::sample"/>
+        <add id="silk_pms::pms" title="Items" module="Silk_Pms" sortOrder="10" parent="silk::base" action="silk_pms/items/" resource="Silk_Pms::items"/>
+    </menu>
+</config>

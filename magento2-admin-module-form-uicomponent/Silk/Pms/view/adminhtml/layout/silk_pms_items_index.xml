@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Silk\Pms\Block\Adminhtml\Items" name="adminhtml.block.promo.quote.grid.container">
+                <block class="Magento\Backend\Block\Widget\Grid" name="adminhtml.block.promo.quote.grid" as="grid">
+                    <arguments>
+                        <argument name="id" xsi:type="string">silk_pms_items_grid</argument>
+                        <argument name="dataSource" xsi:type="object">Silk\Pms\Model\ResourceModel\Items\Collection</argument>
+                        <argument name="default_sort" xsi:type="string">id</argument>
+                        <argument name="default_dir" xsi:type="string">ASC</argument>
+                        <argument name="save_parameters_in_session" xsi:type="string">1</argument>
+                    </arguments>
+                    <!--批量操作-->
+                    <block class="Magento\Backend\Block\Widget\Grid\Massaction"
+                           name="adminhtml.block.promo.quote.grid.massaction" as="grid.massaction">
+                        <arguments>
+                            <argument name="massaction_id_field" xsi:type="string">id</argument>
+                            <argument name="form_field_name" xsi:type="string">pms</argument><!--这里命名pms与massDelete中的参数接收有关-->
+                            <argument name="options" xsi:type="array">
+                                <item name="delete" xsi:type="array">
+                                    <item name="label" xsi:type="string" translate="true">
+                                        Delete
+                                    </item>
+                                    <item name="url" xsi:type="string">*/*/massDelete</item>
+                                    <item name="confirm" xsi:type="string" translate="true">
+                                        Are you sure you want to delete?
+                                    </item>
+                                </item>
+                            </argument>
+                        </arguments>
+                    </block>
+                    <!--使用xml输出Grid页面的又一种方式,另一种参考Ui-Component模块-->
+                    <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" name="adminhtml.promo.quote.grid.columnSet" as="grid.columnSet">
+                        <arguments>
+                            <argument name="rowUrl" xsi:type="array">
+                                <item name="path" xsi:type="string">silk_pms/*/edit</item>
+                                <item name="extraParamsTemplate" xsi:type="array">
+                                    <item name="id" xsi:type="string">getId</item>
+                                </item>
+                            </argument>
+                            <!--name=filter_visibility属性表示列表第一行是否显示搜索框,0为隐藏,1为显示-->
+                            <argument name="filter_visibility" xsi:type="string">0</argument>
+                        </arguments>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="id">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">ID</argument>
+                                <argument name="index" xsi:type="string">id</argument>
+                                <argument name="column_css_class" xsi:type="string">col-id</argument>
+                                <argument name="header_css_class" xsi:type="string">col-id</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="name">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Name</argument>
+                                <argument name="index" xsi:type="string">name</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="description">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Description</argument>
+                                <argument name="index" xsi:type="string">description</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="comment">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Comment</argument>
+                                <argument name="index" xsi:type="string">comment</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="image">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Image</argument>
+                                <argument name="index" xsi:type="string">image</argument>
+                                <argument name="renderer" xsi:type="string">Silk\Pms\Block\Adminhtml\Items\Grid\Renderer\Image</argument>
+                            </arguments>
+                        </block>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

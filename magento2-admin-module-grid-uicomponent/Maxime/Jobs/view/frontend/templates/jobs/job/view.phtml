@@ -1,0 +1,31 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: denson
+ * Date: 16-8-5
+ * Time: 下午2:50
+ */
+$arr = $block->test();
+print_r($arr);
+$job = $this->getLoadedJob();
+
+$department = $this->getLoadedDepartment();
+
+echo "122313";
+?>
+<?php if($job->getId()) : ?>
+    <div class="job-view-wrapper">
+        <div class="department_name">
+            <?php echo __('Department : '); ?>
+            <a href="<?php echo $this->getDepartmentUrl($job); ?>" title="<?php echo $department->getName(); ?>">
+                <?php echo $department->getName(); ?>
+            </a>
+        </div>
+        <div class="type"><?php echo $job->getType(); ?></div>
+        <div class="location"><?php echo $job->getLocation(); ?></div>
+        <div class="date"><?php echo $this->formatDate($job->getDate()); ?></div>
+        <div class="description"><?php echo $job->getDescription(); ?></div>
+    </div>
+<?php else : ?>
+    <?php echo __('This job does not exist'); ?>
+<?php endif; ?>

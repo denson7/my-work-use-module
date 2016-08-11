@@ -1,0 +1,49 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: denson
+ * Date: 16-8-5
+ * Time: 下午2:50
+ */
+$department = $this->getLoadedDepartment();
+
+if($this->getConfigListJobs()){
+    $jobCollection = $this->getLoadedJobsCollection();
+    $iterator = 1;
+    $total = $jobCollection->count();
+} else {
+    $total = 0;
+}
+?>
+<?php if($department->getId()) : ?>
+    <div class="department-view-wrapper">
+        <div class="description"><?php echo $department->getDescription(); ?></div>
+    </div>
+    <?php if($total): ?>
+        <h2><?php echo __('Jobs for this department'); ?></h2>
+        <?php foreach($jobCollection AS $job): ?>
+            <ol class="jobs list">
+                <li class="item<?php echo ($iterator == 1) ? ' first' : ''; ?><?php echo ($total == $iterator) ? ' last' : ''; ?>">
+                    <div class="title">
+                        <a href="<?php echo $this->getJobUrl($job); ?>" title="<?php echo $job->getTitle(); ?>">
+                            <?php echo $job->getTitle(); ?>
+                        </a>
+                    </div>
+                    <div class="department_name">
+                        <?php echo __('Department : '); ?>
+                        <a href="<?php echo $this->getDepartmentUrl($job); ?>" title="<?php echo $job->getDepartmentName(); ?>">
+                            <?php echo $job->getDepartmentName(); ?>
+                        </a>
+                    </div>
+                    <div class="type"><?php echo $job->getType(); ?></div>
+                    <div class="location"><?php echo $job->getLocation(); ?></div>
+                    <div class="date"><?php echo $this->formatDate($job->getDate()); ?></div>
+                    <div class="description"><?php echo $job->getDescription(); ?></div>
+                </li>
+            </ol>
+            <?php $iterator++; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+<?php else : ?>
+    <?php echo __('This department does not exist'); ?>
+<?php endif; ?>
