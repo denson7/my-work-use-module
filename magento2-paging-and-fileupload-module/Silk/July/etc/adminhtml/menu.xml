@@ -1,0 +1,10 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+<!--    <menu>
+        <add id="Silk_July::july" title="Silk July" module="Silk_July" sortOrder="35" resource="Silk_July::july"/>
+        <add id="Silk_July::manage_items" title="Manage Employees" module="Silk_July" sortOrder="12" parent="Silk_July::july" action="july/index/" resource="Silk_July::july"/>
+    </menu>-->
+    <menu>
+        <add id="Silk_July::july" title="Silk July" module="Silk_July" parent="Maxime_Jobs::job_head" sortOrder="35" resource="Silk_July::july"/>
+        <add id="Silk_July::manage_items" title="Silk July" module="Silk_July" sortOrder="12" parent="Silk_July::july" action="july/index/" resource="Silk_July::july"/>
+    </menu>
+</config>
