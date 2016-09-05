@@ -1,0 +1,15 @@
+<?php
+
+
+class Niveus_ProductVideo_Block_Product_View_Media extends Mage_Catalog_Block_Product_View_Media
+{
+    protected function _toHtml()
+	{
+	if(Mage::getStoreConfig('niveus_productvideo/settings/enable'))
+	{
+		$html = parent::_toHtml();
+		$html .= $this->getChildHtml('media_video');
+		return $html;
+	}
+	}
+}

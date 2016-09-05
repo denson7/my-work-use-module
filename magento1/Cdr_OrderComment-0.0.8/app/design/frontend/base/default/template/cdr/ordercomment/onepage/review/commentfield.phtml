@@ -1,0 +1,40 @@
+<?php /* @var $this Cdr_OrderComment_Block_Checkout_Onepage_Review_Commentfield */ ?>
+
+<?php if ($this->isActive()) : ?>
+
+    <form action="" id="cdr_ordercomment-form" onsubmit="return false;">
+        <div class="buttons-set">
+            <ul class="form-list">
+                <li>
+                    <fieldset>
+                        <ul>
+                            <li class="wide">
+                                <label for="cdr_ordercomment"><?php echo $this->__($this->getCommentHeader()); ?></label>
+                                <div class="input-box">
+                                    <textarea id="cdr_ordercomment" class="input-text validation-passed" name="cdr_ordercomment" title="<?php echo $this->__('CDR Order Comment') ?>" rows="5" cols="10" maxlength="<?php echo $this->getMaxCommentSize(); ?>"></textarea>
+                                    <?php if ($this->limitTextArea()): ?>
+                                        <p><span id="cdr_ordercomment-max-len"><?php echo $this->getMaxCommentSize(); ?></span> <?php echo $this->__('Chars Remaining'); ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                </li>
+            </ul>
+        </div>
+    </form>
+    <script>
+        if ($('checkout-agreements'))
+            $('checkout-agreements').appendChild($('cdr_ordercomment-form'));
+        else
+            $('cdr_ordercomment-form').id = 'checkout-agreements';
+
+    <?php if ($this->limitTextArea()): ?>
+            $('cdr_ordercomment').observe('keyup', function(event) {
+                var max = <?php echo $this->getMaxCommentSize(); ?>;
+                var current = event.element().value.length;
+                $('cdr_ordercomment-max-len').innerHTML = (max - current);
+            });
+    <?php endif; ?>
+    </script>
+<?php endif; ?>

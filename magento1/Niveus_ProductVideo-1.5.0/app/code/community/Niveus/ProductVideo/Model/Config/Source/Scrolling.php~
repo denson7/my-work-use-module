@@ -1,0 +1,21 @@
+<?php
+
+class Niveus_ProductVideo_Model_Config_Source_Scrolling extends Varien_Object
+{
+    public function toOptionArray()
+    {
+        $vals = array(
+        		'auto' => 'auto',
+        		'yes' => 'yes',
+        		'no' => 'no',
+        );
+        $options = array();
+        foreach ($vals as $k => $v)
+            $options[] = array(
+                    'value' => $k,
+                    'label' => $v
+            );
+
+        return $options;
+    }
+}

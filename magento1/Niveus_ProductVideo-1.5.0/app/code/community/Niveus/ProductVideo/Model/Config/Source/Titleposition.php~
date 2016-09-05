@@ -1,0 +1,21 @@
+<?php
+
+class Niveus_ProductVideo_Model_Config_Source_Titleposition extends Varien_Object
+{
+    public function toOptionArray()
+    {
+        $vals = array(
+        		'outside' => 'outside',
+        		'inside' => 'inside',
+        		'over' => 'over',
+        );
+        $options = array();
+        foreach ($vals as $k => $v)
+            $options[] = array(
+                    'value' => $k,
+                    'label' => $v
+            );
+
+        return $options;
+    }
+}

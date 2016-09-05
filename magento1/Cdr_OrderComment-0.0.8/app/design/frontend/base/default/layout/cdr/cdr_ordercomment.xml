@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<layout>
+    <checkout_onepage_review>
+        <reference name="checkout.onepage.review.info.items.after">   
+            <block type="ordercomment/checkout_onepage_review_commentfield" name="cdr_order_comment" template="cdr/ordercomment/onepage/review/commentfield.phtml" />
+        </reference>
+    </checkout_onepage_review>
+    
+    <checkout_multishipping_overview>
+        <reference name="checkout.multishipping.overview.items.after">   
+            <block type="ordercomment/checkout_onepage_review_commentfield" name="cdr_order_comment" template="cdr/ordercomment/onepage/review/commentfield.phtml" />
+        </reference>
+    </checkout_multishipping_overview>
+
+
+	<opc_index_index translate="label">
+	        <reference name="checkout.order.comment">
+			<action method="setTemplate">
+				<template>cdr/ordercomment/onepage/iwd/comment.phtml</template>
+			</action>
+		</reference>
+	</opc_index_index>	
+    
+    <sales_order_view>
+        <reference name="my.account.wrapper">
+            <block type="ordercomment/sales_order_view_ordercomment" name="cdr_ordercomment_info" after="sales.order.info" template="cdr/ordercomment/sales/order/view/ordercomment.phtml" />
+        </reference>
+    </sales_order_view>
+</layout>

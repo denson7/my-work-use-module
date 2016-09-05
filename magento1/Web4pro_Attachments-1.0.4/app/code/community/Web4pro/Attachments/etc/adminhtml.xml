@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * WEB4PRO - Creating profitable online stores
+ * 
+ * @author WEB4PRO <srepin@corp.web4pro.com.ua>
+ * @category  WEB4PRO
+ * @package   Web4pro_Attachments
+ * @copyright Copyright (c) 2015 WEB4PRO (http://www.web4pro.net)
+ * @license   http://www.web4pro.net/license.txt
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <web4pro_attachments translate="title" module="web4pro_attachments">
+                                        <title>Attachments</title>
+                                    </web4pro_attachments>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <web4pro_attachments translate="title" module="web4pro_attachments">
+                        <title>Web4pro</title>
+                        <children>
+                            <attachment translate="title" module="web4pro_attachments">
+                                <title>Attachment</title>
+                                <sort_order>0</sort_order>
+                            </attachment>
+                        </children>
+                    </web4pro_attachments>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <web4pro_attachments translate="title" module="web4pro_attachments">
+            <title>Web4pro</title>
+            <sort_order>25</sort_order>
+            <children>
+                <attachment translate="title" module="web4pro_attachments">
+                    <title>Attachments</title>
+                    <action>adminhtml/attachments_attachment</action>
+                    <sort_order>0</sort_order>
+                </attachment>
+            </children>
+        </web4pro_attachments>
+    </menu>
+</config>

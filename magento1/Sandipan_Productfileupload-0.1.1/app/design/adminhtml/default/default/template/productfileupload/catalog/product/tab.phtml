@@ -1,0 +1,59 @@
+<?php
+/**
+ * Custom tab template
+ */
+?>
+<div class="entry-edit">
+    <?php if(Mage::getStoreConfig('product_additional_files_general/product_additional_files_info/jquery_enable')) { ?>
+        <script type="text/javascript" src="<?php echo $this->getSkinUrl('productfileupload/jquery-1.8.3.min.js')?>"></script>
+    <?php } ?>
+        <script type="text/javascript">
+		var $j = jQuery.noConflict();
+		function deleteFile(divId) {
+			//alert(divId);
+			$j('#'+divId).val('0');
+			$j('#'+divId).parent().parent().css('display', 'none');
+		}
+        </script>
+        <script type="text/javascript" src="<?php echo $this->getSkinUrl('productfileupload/jquery.MultiFile.js')?>"></script>
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend">Additional Files Uplaod</h4>
+        <div class="form-buttons"></div>
+    </div>
+    <div id="productfileupload_div" class="fieldset">
+    	<div class="hor-scroll">
+        <?php $energyGuidesFiles = $this->getEnergyGuidesFiles(); ?>
+        <?php if($energyGuidesFiles['totalRecords'] > 0) { ?>
+        <div class="file_data grid">
+        	<table cellspacing="0" id="group_prices_table" class="data border">
+                <thead>
+                    <tr class="headings">
+                        <th>Sl</th>
+                        <th>File</th>
+                        <th class="last">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="group_price_container">
+                <?php $fi = 1 ;?>
+            <?php foreach($energyGuidesFiles['items'] as $egfile) { ?>
+                <tr>
+                    <td><?php echo $fi?></td>
+                    <td><a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'productfileupload/' . $egfile['filename'] ?>" target="_blank"><?php echo $egfile['filename']?></a></td>
+                    <td class="last"><input type="hidden" id="<?php echo 'addi_file_'. $egfile['fid'] .'_delete'; ?>" value="1" class="delete" name="addi_file[<?php echo $egfile['fid']?>]"><button onclick="deleteFile('<?php echo 'addi_file_'. $egfile['fid'] .'_delete' ?>');" class="scalable delete icon-btn delete-product-option" type="button" title="Delete File"><span>Delete</span></button></td>
+                </tr>
+                <?php $fi++; ?>
+			<?php } ?>
+                </tbody>
+            </table>
+        </div>
+        <?php } ?>
+        
+        <div id="additional_file_upload">
+        	<div class="bold" for="energy_guide_file">Upload Files</div>
+            <span><input id="fileToUpload" type="file" name="energy_guide_file[]" class="multi" /></span>
+            <p class="info_text">Add multiple files one by one</p>
+        </div>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,1 @@
+<?xml version="1.0"?><layout>	<productvideo_admin_adminhtml_videos_index>		<block type="core/text_list" name="root">			<block type="productvideo/adminhtml_catalog_product_edit_tab_videos" name="catalog.product.edit.tab.videos" />		</block>	</productvideo_admin_adminhtml_videos_index></layout>

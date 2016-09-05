@@ -1,0 +1,69 @@
+<?php
+/**
+ * Video Plugin for Magento
+ * 
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   Niveus
+ * @package    Niveus_ProductVideo
+ * @copyright  Copyright (c) 2013 Niveus Solutions (http://www.niveussolutions.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author     Niveus Solutions <support@niveussolutions.com>
+ */
+?>
+
+<?php 
+  $_productVideos = $this->_getProductVideos();
+  $a=0;
+  $showThumbnail = false;
+
+  if($_productVideos && $_productVideos->count() > 1){
+    $showThumbnail = true;
+  }
+?>
+<?php if($_productVideos && $_productVideos->count() > 0):?>
+   <h3><?php echo $this->__('Product Videos') ?></h3>
+
+   <table>
+     <tr>
+       <td>
+        
+<?php foreach($_productVideos as $video) : ?>
+    <?php 
+         $videourl = $this->getCode($video);
+         
+         if($this->is_youtube($videourl)){
+          $video_code = $this->youtube_video_id($videourl);
+          $final_video_url = "http://www.youtube.com/embed/$video_code?rel=0";
+          $final_thumnail_url = "http://img.youtube.com/vi/$video_code/default.jpg"; 
+         }
+         elseif($this->is_vimeo($videourl)) {
+           $video_code = $this->vimeo_video_id($videourl);
+           $final_video_url = "http://player.vimeo.com/video/$video_code?title=0&byline=0&portrait=0;loop=0";
+           $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$video_code.php"));
+           $final_thumnail_url = $hash[0]['thumbnail_medium'];  
+         }    
+    ?>
+     
+<?php 
+  if ($showThumbnail) {  
+    echo "<a href=$final_video_url target=\"productVideoFrame\"><img src=$final_thumnail_url height=\"100\" width=\"100\"></a>";
+  }  
+    ?>&nbsp;
+  
+<?php endforeach; ?>
+         </td>
+         <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+         <td>
+           <?php echo "<iframe name=\"productVideoFrame\" src=$final_video_url width=\"560\" height=\"340\" frameborder=\"0\"></iframe>";?>
+         </td>
+       </tr>
+</table>
+
+   
+
+           
+<?php endif;?>

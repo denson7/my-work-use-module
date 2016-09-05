@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * WEB4PRO - Creating profitable online stores
+ * 
+ * @author WEB4PRO <srepin@corp.web4pro.com.ua>
+ * @category  WEB4PRO
+ * @package   Web4pro_Attachments
+ * @copyright Copyright (c) 2015 WEB4PRO (http://www.web4pro.net)
+ * @license   http://www.web4pro.net/license.txt
+ */
+-->
+<layout>
+    
+    <catalog_product_view>
+        <reference name="product.info">
+            <block type="web4pro_attachments/catalog_product_list_attachment" name="product.info.attachments" as="product_attachments" template="web4pro_attachments/catalog/product/list/attachment.phtml">
+                <action method="addToParentGroup"><group>detailed_info</group></action>
+                <action method="setTitle" translate="value" module="web4pro_attachments"><value>Attachments</value></action>
+            </block>
+        </reference>
+    </catalog_product_view>
+</layout>

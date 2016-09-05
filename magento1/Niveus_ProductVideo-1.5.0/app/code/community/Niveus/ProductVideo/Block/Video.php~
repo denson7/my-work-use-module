@@ -1,0 +1,47 @@
+<?php
+
+class Niveus_ProductVideo_Block_Video extends Mage_Catalog_Block_Product_View_Abstract
+{
+    protected $_videosCollection = null;
+	
+	
+    public function getCode($video)
+    {
+	   return $video->getVideoCode();
+    }
+    
+    public function getTitle($video)
+    {
+	if ($video->getVideoTitle())
+	{
+		return $video->getVideoTitle();
+	}
+	else
+	{
+		return $this->getProduct()->getName();
+	}
+    }
+  
+    
+    protected function _getProductVideos()
+    {
+        $storeId = Mage::app()->getStore()->getId();
+        
+        if (is_null($this->_videosCollection))
+    	{
+            $this->_videosCollection = $this->_getVideosCollection($storeId)->getSize() ? $this->_getVideosCollection($storeId) : $this->_getVideosCollection();
+    	}
+        
+        return $this->_videosCollection;
+    }
+    
+    
+    protected function _getVideosCollection($storeId = 0)
+    {
+        return Mage::getModel('productvideo/videos')
+            ->getCollection()
+ 	    ->addFieldToFilter('product_id', $this->getProduct()->getId())
+            ->addFieldToFilter('store_id', $storeId);
+    }
+
+}

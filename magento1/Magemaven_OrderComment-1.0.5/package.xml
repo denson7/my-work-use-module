@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+    <name>Magemaven_OrderComment</name>
+    <version>1.0.5</version>
+    <stability>stable</stability>
+    <license uri="http://www.opensource.org/licenses/academic.php">AFL 3.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Optional comment  for customer orders.</summary>
+    <description>Allows customer to specify optional comment during order placing.</description>
+    <notes>Bugfix release.&#xD;
+&#xD;
+Fixed broken paginator in orders grid&#xD;
+Added workaround to resolve conflict with Seamless Delete Order</notes>
+    <authors><author><name>Sergey Storchay</name><user>magemaven</user><email>r8@r8.com.ua</email></author></authors>
+    <date>2012-06-09</date>
+    <time>08:26:12</time>
+    <contents><target name="mageetc"><dir name="modules"><file name="Magemaven_OrderComment.xml" hash="878a9262e6d855cb2624591c46555ec4"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="template"><dir name="ordercomment"><dir name="checkout"><file name="agreements.phtml" hash="f4f205e21f78d9250bc8c846d94a4924"/></dir></dir></dir></dir></dir></dir></target><target name="magecommunity"><dir name="Magemaven"><dir name="OrderComment"><dir name="Block"><dir name="Adminhtml"><dir name="Sales"><dir name="Order"><file name="Grid.php" hash="7eeda93e100cc9f674978a7d173fe861"/></dir></dir></dir><dir name="Checkout"><file name="Agreements.php" hash="60527197f00214c2dd09815e0c0e24da"/></dir></dir><dir name="Helper"><file name="Data.php" hash="21bdf034ce4e73b86ac1abb5fd2c95e7"/></dir><dir name="Model"><dir name="Mysql4"><dir name="Order"><dir name="Grid"><file name="Collection.php" hash="7b734d707fea6e038d3359eeefe4b473"/></dir></dir></dir><file name="Observer.php" hash="ea382dc1a765eca4f9944632a97fe9f4"/><dir name="Resource"><dir name="Order"><dir name="Grid"><file name="Collection.php" hash="414c5da53ec8a50b174a0502512c2139"/></dir></dir></dir></dir><dir name="etc"><file name="config.xml" hash="f097313427d90f2e74af98f0503067e9"/></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

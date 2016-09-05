@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * WEB4PRO - Creating profitable online stores
+ * 
+ * @author WEB4PRO <srepin@corp.web4pro.com.ua>
+ * @category  WEB4PRO
+ * @package   Web4pro_Attachments
+ * @copyright Copyright (c) 2015 WEB4PRO (http://www.web4pro.net)
+ * @license   http://www.web4pro.net/license.txt
+ */
+--> 
+<layout>
+    <adminhtml_attachments_attachment_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>web4pro_attachments/attachment</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="web4pro_attachments/adminhtml_attachment" name="attachment" />
+
+        </reference>
+    </adminhtml_attachments_attachment_index>
+    <adminhtml_attachments_attachment_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="web4pro_attachments/adminhtml_attachment_grid" name="attachment_grid"/>
+        </block>
+    </adminhtml_attachments_attachment_grid>
+    <!-- Attachment add/edit action -->
+    <adminhtml_attachments_attachment_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>web4pro_attachments/attachment</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="web4pro_attachments/adminhtml_attachment_edit" name="attachment_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="web4pro_attachments/adminhtml_attachment_edit_tabs" name="attachment_tabs"></block>
+        </reference>
+    </adminhtml_attachments_attachment_edit>
+    <!--产品列表编辑页面-->
+    <adminhtml_attachments_attachment_catalog_product_attachments>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="web4pro_attachments/adminhtml_catalog_product_edit_tab_form" name="product.edit.tab.form"/>
+            <block type="web4pro_attachments/adminhtml_catalog_product_edit_tab_attachment" name="product.edit.tab.attachment">
+            </block>
+            <block type="adminhtml/widget_grid_serializer" name="attachment_grid_serializer">
+                <reference name="attachment_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>product.edit.tab.attachment</grid_block_name>
+                        <data_callback>getSelectedAttachments</data_callback>
+                        <hidden_input_name>attachments</hidden_input_name>
+                        <reload_param_name>product_attachments</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_attachments_attachment_catalog_product_attachments>
+
+    <!--web4pro模块下attachment grid show product list-->
+    <adminhtml_attachments_attachment_catalog_product_attachmentsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="web4pro_attachments/adminhtml_catalog_product_edit_tab_attachment" name="product.edit.tab.attachment"/>
+        </block>
+    </adminhtml_attachments_attachment_catalog_product_attachmentsgrid>
+    <adminhtml_attachments_attachment_products>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="web4pro_attachments/adminhtml_attachment_edit_tab_product" name="attachment.edit.tab.product"/>
+            <block type="adminhtml/widget_grid_serializer" name="product_grid_serializer">
+                <reference name="product_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>attachment.edit.tab.product</grid_block_name>
+                        <data_callback>getSelectedProducts</data_callback>
+                        <hidden_input_name>products</hidden_input_name>
+                        <reload_param_name>attachment_products</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_attachments_attachment_products>
+    <adminhtml_attachments_attachment_productsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="web4pro_attachments/adminhtml_attachment_edit_tab_product" name="attachment.edit.tab.product"/>
+        </block>
+    </adminhtml_attachments_attachment_productsgrid>
+</layout>

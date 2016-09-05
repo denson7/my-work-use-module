@@ -1,0 +1,16 @@
+<?php /* @var $this Cdr_OrderComment_Block_Sales_Order_View_Ordercomment */ ?>
+
+<?php if($this->isActive()) : ?>
+<div class="col1-set order-info-box">     
+    <div class="col-1">         
+        <div class="box">             
+            <div class="box-title">                 
+                <h2>Order Comment</h2>             
+            </div>             
+            <div class="box-content">                 
+                <?php echo $this->getOrderComment(); ?>         
+            </div>         
+        </div>     
+    </div>              
+</div>
+<?php endif; ?>

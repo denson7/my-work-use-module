@@ -1,0 +1,37 @@
+<?php
+/**
+ * WEB4PRO - Creating profitable online stores
+ * 
+ * @author WEB4PRO <srepin@corp.web4pro.com.ua>
+ * @category  WEB4PRO
+ * @package   Web4pro_Attachments
+ * @copyright Copyright (c) 2015 WEB4PRO (http://www.web4pro.net)
+ * @license   http://www.web4pro.net/license.txt
+ */
+/**
+ * Attachment list template on product page
+ *
+ * @category    Web4pro
+ * @package     Web4pro_Attachments
+ * @author      WEB4PRO <srepin@corp.web4pro.com.ua>
+ */
+
+/** @see Web4pro_Attachments_Block_Catalog_Product_List_Attachment */
+?>
+<?php
+$attachments = $this->getAttachmentCollection();
+$helper = Mage::helper('web4pro_attachments/attachment');
+?>
+<?php if ($attachments && $attachments->count() > 0) :?>
+<div class="box-collateral box-attachments box-up-sell">
+    <?php foreach ($attachments as $_attachment) : ?>
+        <div class="item">
+            <?php $_fileSize = $helper->getFileSize($_attachment->getAttachmentPath()); ?>
+            <?php echo $_attachment->getIcon(); ?>
+            <a href="<?php echo $_attachment->getAttachmentUrl(); ?>"><?php echo $_attachment->getTitle()?></a>
+            <?php echo $this->__('Size: (' .$_fileSize  . ')'); ?>
+            <br />
+        </div>
+    <?php endforeach; ?>
+</div>
+<?php endif;?>

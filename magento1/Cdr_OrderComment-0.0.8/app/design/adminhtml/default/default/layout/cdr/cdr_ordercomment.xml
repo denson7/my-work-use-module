@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<layout>
+    <add_order_grid_column_handle>
+        <reference name="sales_order.grid">
+            <action method="addColumnAfter" ifconfig="ordercomment/settings/grid">
+                <columnId>cdr_order_comment</columnId>
+                <arguments module="sales" translate="header">
+                    <header>Order Comment</header>
+                    <index>cdr_order_comment</index>
+                    <type>text</type>
+                    <filter_index>main_table.cdr_order_comment</filter_index>
+                </arguments>
+                <after>status</after>
+            </action>
+        </reference>
+    </add_order_grid_column_handle>
+    
+    <adminhtml_sales_order_grid>
+        <update handle="add_order_grid_column_handle" />
+    </adminhtml_sales_order_grid>
+    
+    <adminhtml_sales_order_index>
+        <update handle="add_order_grid_column_handle" />
+    </adminhtml_sales_order_index>
+</layout>

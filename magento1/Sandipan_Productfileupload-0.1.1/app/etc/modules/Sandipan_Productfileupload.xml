@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Sandipan_Productfileupload>
+      <active>true</active>
+      <codePool>community</codePool>
+      <version>0.1.0</version>
+    </Sandipan_Productfileupload>
+  </modules>
+</config>

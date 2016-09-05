@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Niveus_ProductVideo>
+            <version>1.5.0</version>
+        </Niveus_ProductVideo>
+    </modules>
+
+    <global>
+    	<models>
+            <productvideo>
+		<class>Niveus_ProductVideo_Model</class>
+                <resourceModel>productvideo_resource</resourceModel>
+	    </productvideo>
+            <productvideo_resource>
+                <class>Niveus_ProductVideo_Model_Resource</class>
+                <entities>
+                    <videos>
+                        <table>niveus_youtube_videos</table>
+                    </videos>
+                </entities>
+            </productvideo_resource>
+    	</models>
+    	
+        <resources>
+            <niveus_productvideo_setup>
+             	<setup>
+                    <module>Niveus_ProductVideo</module>
+		    <class>Niveus_ProductVideo_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </niveus_productvideo_setup>
+            <niveus_productvideo_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </niveus_productvideo_write>
+            <niveus_productvideo_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </niveus_productvideo_read>
+        </resources>
+        
+        <helpers>
+		<productvideo>
+			<class>Niveus_ProductVideo_Helper</class>
+		</productvideo>
+        </helpers>
+        
+        <blocks>
+            <productvideo>
+            	<class>Niveus_ProductVideo_Block</class>
+            </productvideo>
+            
+            <catalog>
+            	<rewrite>
+            		<product_view_media>Niveus_ProductVideo_Block_Product_View_Media</product_view_media>
+            	</rewrite>
+            </catalog>
+			
+            <adminhtml>
+		<rewrite>
+			<catalog_product_edit_tabs>Niveus_ProductVideo_Block_Rewrite_AdminhtmlCatalogProductEditTabs</catalog_product_edit_tabs>
+		</rewrite>
+	    </adminhtml>
+        </blocks>
+        
+        <events>
+		<catalog_product_save_after>
+			<observers>
+				<productvideo>
+					<type>singleton</type>
+					<class>productvideo/observer</class>
+					<method>catalog_product_save_after</method>
+				</productvideo>
+			</observers>
+		</catalog_product_save_after>
+        </events>
+    </global>
+    
+    <frontend>
+       <layout>
+		<updates>
+			<productvideo>
+				<file>niveusproductvideo.xml</file>
+			</productvideo>
+		</updates>
+	</layout>
+    </frontend>
+    
+    <admin>
+        <routers>
+            <productvideo_admin>
+                <use>admin</use>
+                    <args>
+                        <module>Niveus_ProductVideo</module>
+                        <frontName>productvideo</frontName>
+                    </args>
+            </productvideo_admin>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+	<layout>
+            <updates>
+                <productvideo>
+			<file>niveusproductvideo.xml</file>
+		</productvideo>
+	    </updates>
+	</layout>
+    </adminhtml>
+   
+</config>

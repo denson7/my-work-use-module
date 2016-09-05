@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout>
+    <catalog_product_view>
+        <reference name="product.info.additional">
+            <block type="productfileupload/catalog_product_view_additional" name="product_additional_files" before="product_tag_list">
+	        	<action method="setTemplate"><template>productfileupload/catalog/product/view/additional_files.phtml</template></action>
+            </block>
+        </reference>
+    </catalog_product_view>
+</layout>

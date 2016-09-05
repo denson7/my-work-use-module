@@ -1,0 +1,21 @@
+<?php
+
+class Niveus_ProductVideo_Model_Config_Source_Transition extends Varien_Object
+{
+    public function toOptionArray()
+    {
+        $vals = array(
+        		'elastic' => 'elastic',
+        		'fade' => 'fade',
+        		'none' => 'none',
+        );
+        $options = array();
+        foreach ($vals as $k => $v)
+            $options[] = array(
+                    'value' => $k,
+                    'label' => $v
+            );
+
+        return $options;
+    }
+}

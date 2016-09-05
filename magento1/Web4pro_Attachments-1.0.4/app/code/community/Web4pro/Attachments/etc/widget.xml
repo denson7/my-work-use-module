@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * WEB4PRO - Creating profitable online stores
+ * 
+ * @author WEB4PRO <srepin@corp.web4pro.com.ua>
+ * @category  WEB4PRO
+ * @package   Web4pro_Attachments
+ * @copyright Copyright (c) 2015 WEB4PRO (http://www.web4pro.net)
+ * @license   http://www.web4pro.net/license.txt
+ */
+-->
+<widgets>
+    <attachments_attachment_view type="web4pro_attachments/attachment_widget_view" translate="name description" module="web4pro_attachments">
+        <name>Attachment view</name>
+        <description>Attachment view widget</description>
+        <is_email_compatible>0</is_email_compatible>
+        <parameters>
+            <attachment_id type="complex" translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Attachment</label>
+                <type>label</type>
+                <helper_block>
+                    <type>web4pro_attachments/adminhtml_attachment_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Attachment</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>120</sort_order>
+            </attachment_id>
+        </parameters>
+    </attachments_attachment_view>
+    <attachments_attachment_link type="web4pro_attachments/attachment_widget_link" translate="name description" module="web4pro_attachments">
+        <name>Attachment link</name>
+        <description>Attachment link widget</description>
+        <is_email_compatible>0</is_email_compatible>
+        <parameters>
+            <attachment_id type="complex" translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Attachment</label>
+                <type>label</type>
+                <helper_block>
+                    <type>web4pro_attachments/adminhtml_attachment_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Attachment</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>130</sort_order>
+            </attachment_id>
+        </parameters>
+    </attachments_attachment_link>
+</widgets>

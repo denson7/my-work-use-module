@@ -1,0 +1,30 @@
+<?php
+/**
+ * WEB4PRO - Creating profitable online stores
+ * 
+ * @author WEB4PRO <srepin@corp.web4pro.com.ua>
+ * @category  WEB4PRO
+ * @package   Web4pro_Attachments
+ * @copyright Copyright (c) 2015 WEB4PRO (http://www.web4pro.net)
+ * @license   http://www.web4pro.net/license.txt
+ */
+/**
+ * Attachment view widget template
+ *
+ * @category    Web4pro
+ * @package     Web4pro_Attachments
+ * @author      WEB4PRO <srepin@corp.web4pro.com.ua>
+ */
+
+/** @see Web4pro_Attachments_Block_Attachment_Widget_View */
+
+?>
+<?php $_attachment = $this->getCurrentAttachment();?>
+<?php if ($_attachment) :?>
+    <div class="attachment-widget-view">
+        <h3><?php echo $_attachment->getTitle()?></h3>
+        <div>
+
+        </div>
+    </div>
+<?php endif;?>
