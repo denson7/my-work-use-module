@@ -1,0 +1,107 @@
+<?php $brand = Mage::getSingleton('shopbybrand/brand')->getBrand();?>
+<?php $displayBrandSignup = $this->displayBrandSignup(); ?>
+<?php $displayBrandSearch = $this->displayBrandsearch(); ?>
+<?php $displayLogo = $this->displayLogo(); ?>
+
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/shopbybrand/templates/default/default.css'); ?>" media="all" />
+        <?php if($this->displayBanner()== 1):?>        
+            <?php if (!$this->getBrandBannerUrl()){}
+            else {
+            ?>
+            <div class="brand-banner">
+                <a href="<?php if (!$this->getBannerLink()) echo '#'; else echo $this->getBannerLink();?>">
+                <?php echo $this->getBrandBannerUrl();?>
+                </a>
+            </div>
+            <?php }?>
+        <?php endif;?>
+<?php 
+    $helper = Mage::helper('cms');
+    $processor = $helper->getBlockTemplateProcessor();
+?>
+<?php if($this->getBrandLogoUrl() != null || $brand->getDescription() != null): ?>
+        <div class="brand-description">
+            <?php if($displayLogo): ?>
+            <div class="blogo"><?php echo $this->getBrandLogoUrl(); ?></div>
+            <?php endif; ?>
+            <div class="des" <?php if(!$displayLogo) echo 'style="width:100%;"'; ?> >                
+                <?php
+                    $html=$processor->filter($brand->getDescription());
+                    echo $html;
+                ?>
+            </div>
+        </div>
+<?php endif; ?>
+        <?php $displayBrandCategories = $this->displayBrandCategories(); ?>
+        <?php if ($displayBrandCategories && count($this->getBrandCategories())): ?>
+        <?php $cats = $this->getParentCategories(); 
+         if(count($cats['parent'])|| count($cats['children'])):?>
+        <div class="brand-category">
+            <div class="shopbybrand-title category-title">
+                <h1><?php echo $this->__('Brand categories'); ?></h1>
+            </div>			
+            <div class="brand-category-content">
+                <ul>
+                <?php 	$cats = $this->getParentCategories(); $categories = $cats['parent'];
+						$count=count($categories);	
+						$div = intval($count/3);
+						if($count%3==2) $div++ ;
+						if($count%3==1) $div_more=$div+1;
+						$j=0;
+						$column=1;
+				?>
+                <?php $i=0; foreach ($categories as $category) {
+                    if(isset($cats['children'][$category->getId()]))
+                        $childs = $cats['children'][$category->getId()];
+                    else $childs = array();
+					$i++;
+					$j++;
+                    ?>
+					<?php if($j==1): ?>
+					<ol class="<?php if($column==3): ?>last<?php endif; ?>  col-md-4 col-sm-6 col-xs-12"><?php endif;?>
+                    <li id="cat-<?php echo $i; ?>">
+						<?php if(count($childs)>1) : ?>
+						<a class="show-child" onclick="showChild(this)">&nbsp;</a>
+						<?php endif;?>
+                        <a href="<?php echo $this->getBaseUrl().$brand->getUrlKey().'?cat='.$category->getId(); ?>">
+                            <?php echo $category->getName(); ?>
+                        </a>
+                        <?php if(count($childs)>1) : ?>
+                                                <ul class="brand-child" style="display:none;">
+							<?php
+								foreach($childs as $child):
+									if($child->getId() != $category->getId()):
+							?>
+										<li class="child-cat">
+											<a href="<?php echo $this->getBaseUrl().$brand->getUrlKey().'?cat='.$child->getId(); ?>" onclick="">
+												<?php echo $child->getName(); ?>
+											</a>
+										</li>
+							<?php endif;endforeach;?>
+                        </ul>
+						<?php endif;?>
+                    </li>
+					<?php if($count%3==1):if($column==1):if($j==$div_more):?></ol><?php $j=0;$column++;endif;endif;endif;?>
+					<?php if($count%3==1):if($column!=1):if($j==$div&&$div>0): ?></ol><?php $j=0;$column++; endif;endif;endif;?>
+					<?php if($count%3==2||$count%3==0):if($j==$div):?></ol><?php $j=0;$column++;endif;endif;?>								
+					<?php if($count%3==2): if($column==3):if($j==$div-1&&$div>1): ?></ol><?php endif; endif;endif;?>						
+                <?php } ?>
+            </ul>
+			<script>
+				function showChild(el){
+                                var showChild = el.next('ul')
+                                if(el.hasClassName('child_active')){
+                                        el.removeClassName('child_active');
+                                        showChild.hide();
+                                    }
+                                    else{
+                                        el.addClassName('child_active');
+                                        showChild.show();
+                                    }
+        }
+			</script>
+            </div>
+        </div>
+    <?php endif; ?>
+    <?php echo $this->getChildHtml('brandfeaturedproduct');?>        		
+<?php endif; ?>

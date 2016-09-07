@@ -1,0 +1,91 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23-12-2014, 09:10:30
+    Author     : Sally
+*/
+
+.shopbybrand-title h1{
+    color:#fff;
+    font-size: 16px;
+    background-color:  #ffa500;
+    background: url("images/image-icon.png") no-repeat -3px -594px;
+    font-weight: 700;
+    padding: 7px 0px 7px 50px;
+    text-transform: capitalize;
+    font-family: inherit;
+    margin-top: 0;
+}
+
+#filterbar #brand_search_box input[type=text]{
+    width: 100%;
+    height: 38px;
+    background-image: url("images/image-icon.png") ;
+    background-repeat: no-repeat ;
+    background-position: 0px -197px;
+    padding-left: 40px;
+    box-sizing: border-box;
+    max-width: 370px;
+    float: right;
+    margin-top: 2px;
+    font-size: 13px;
+    
+}
+.sidebar #brand_search_box input[type=text]{
+     width: 100%;
+    height: 38px;
+    background-image: url("images/image-icon.png") ;
+    background-repeat: no-repeat ;
+    background-position: 0px -57px;
+    padding-left: 40px;
+    box-sizing: border-box;
+    max-width: 370px;
+    float: right;
+    margin-top: 2px;
+    font-size: 13px;
+}
+
+/*#brand_search_box input[type=text]:focus{
+    background: url("images/image-icon.png") no-repeat 0px -199px;
+    padding-left:40px;
+}*/
+
+.shopbybrand-index-index a:focus{
+    outline: none;
+}
+.shopbybrand-index-index :focus{
+    outline: none;
+}
+.shopbybrand-list .brands .brandslist .brand-begin-label strong{
+    float: left;
+    width: 37px;
+    height: 37px;
+    background: #f7f7f7;
+    margin-bottom: 5px;
+    line-height: 36px;
+    text-align: center;
+    background: #3399cc;
+    color: #fff;
+}
+.brandscategories strong{
+    float: left;
+    padding-top: 10px;
+}
+.shopbybrand-index-index .col .list_1{
+    text-align: center;
+    float: left;
+/*    height: 230px;*/
+/*    border: 1px solid #ececec;
+    background: #f7f7f7;*/
+    margin: 1.89%;
+}
+.footer .block-subscribe .input-box{
+    border:1px solid #ccc;
+}
+
+.shopbybrand-list .brand-child li.child-cat a{
+    padding-left: 10%;
+}

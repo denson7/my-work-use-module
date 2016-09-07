@@ -1,0 +1,56 @@
+<style>
+    .s_description{
+        width:100%;
+        height:auto;
+        text-align: justify;
+    }
+    .s_description img{
+        max-width:100%;
+    }
+	.short_des{
+	clear: both;
+	}
+    .box1{ 
+        -o-text-overflow: ellipsis;   /* Opera */
+        text-overflow:    ellipsis;   /* IE, Safari (WebKit) */
+        overflow:hidden;              /* don't show excess chars */
+        white-space:nowrap;           /* force single line */
+        width: 100%;	
+    }
+</style>
+<?php 
+    $brand = $this->getBrand();
+    if($brand):
+    if($brand->getId()):
+?>
+<div class="short_des">
+<a href="<?php echo $this->getUrl($brand->getUrlKey());?>">
+    <?php
+        if($brand->getThumbnailImage())
+		{
+            //$path = 'brands' . DS . $brand->getId();
+            $path = 'brands' . DS . 'thumbnail'.DS.$brand->getId();
+            $imgSrc = Mage::helper('shopbybrand/image')->init($brand, $path)->resizeThumbnail(60, 40);
+            ?>
+                <img  src="<?php echo $imgSrc;?>" title="<?php echo $brand->getName();?>"/>
+            <?php
+		}
+    ?>
+    <div class="box1">
+        <?php echo $brand->getName();?>
+    </div>                                                                   
+</a>
+<!-- Edit by Son-->
+<div class="s_description">
+    <p>
+        <?php 
+            $helper = Mage::helper('cms');
+           $processor = $helper->getBlockTemplateProcessor();
+            $html=$processor->filter($brand->getShortDescription());
+            echo $html;
+        ?>
+    </p>
+</div>
+</div>
+<!-- Edit by Son-->
+<?php endif; endif; ?>

@@ -1,0 +1,87 @@
+.featuredbrands{
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #ccc;
+    margin-bottom: 20px;
+}
+.ca-wrapper{
+    width:100%;
+    height:100%;
+    position:relative;
+    overflow: hidden;    
+}
+.ca-item{
+    padding-top: 5px;
+    position:relative;
+    float:left;
+    width:175px;
+    height:180px;
+    text-align:center;
+}
+.ca-item-main{
+    position:absolute;
+    top:5px;
+    left:10px;
+    right:10px;
+    bottom:5px;
+    background:#fff;
+    overflow:hidden;
+    border: 1px solid #ccc;
+}
+.ca-item-main:hover{
+     border: 1px solid #3399CC;
+}
+.ca-nav span:hover{
+    opacity:1.0;
+}
+.ca-container{
+    position:relative;
+    margin:25px auto 20px auto;
+    height:200px;
+}
+.ca-container .brand-logo {
+    /*height: 125px;*/
+    align-items: center;
+    display: inline-flex;
+}
+
+@media screen and (min-width: 0px) and (max-width: 250px) {
+    .ca-container{
+	width:220px;
+    }
+    .ca-nav span{
+	left:-10px;
+    }
+    .ca-nav span.ca-nav-next{
+	right:-10px;
+    }
+}
+
+@media screen and (min-width: 251px) and (max-width: 479px) {
+    .ca-container{
+	width:220px;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 719px) {
+    .ca-container{
+	width:440px;
+    }
+}
+
+@media screen and (min-width: 720px) and (max-width: 959px) {
+    .ca-container{
+	width:660px;
+    }
+}
+@media screen and (min-width: 960px) and (max-width: 1199px) {
+    .ca-container{
+	width:880px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .ca-container{
+	width:880px;
+    }
+}

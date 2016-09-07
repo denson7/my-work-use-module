@@ -1,0 +1,42 @@
+<?php
+    $store_id = Mage::app()->getStore()->getStoreId();
+?>
+<style>
+    .bestsllerbrand .shopbybrand-title h1,
+    .brand-search .shopbybrand-title h1,
+    .shopbybrand-title h1 {
+        background-color: #<?php echo Mage::getStoreConfig('shopbybrand/style_config/background_title', $store_id) ?>;
+        color:#<?php echo Mage::getStoreConfig('shopbybrand/style_config/brand_title_color', $store_id) ?>;
+    }
+    .shopbybrand-list .brands .brandslist .brand-begin-label strong{
+        background-color: #<?php echo Mage::getStoreConfig('shopbybrand/style_config/background-filter-label', $store_id) ?>;
+        color:#<?php echo Mage::getStoreConfig('shopbybrand/style_config/color-filter-label', $store_id) ?>;
+    }
+    .shopbybrand-list .charlist a{
+        background-color: #<?php echo Mage::getStoreConfig('shopbybrand/style_config/background-filter-link', $store_id) ?> !important;
+        color:#<?php echo Mage::getStoreConfig('shopbybrand/style_config/color-link-fitler', $store_id) ?> !important;
+    }
+    .shopbybrand-list .brands .brandslist .brand-begin-label{
+        border-bottom: 1px solid #<?php echo Mage::getStoreConfig('shopbybrand/style_config/background-filter-label', $store_id) ?>  !important;
+    }
+    .shopbybrand-list .filterbar #charaters-list ul li.charlist a:hover,
+    .shopbybrand-list .filterbar #charaters-list ul li.isActiveCate a,
+    .shopbybrand-list .filterbar #charaters-list ul li.charlist a.isActiveCate{
+        background-color: #<?php echo Mage::getStoreConfig('shopbybrand/style_config/background-filter-link-hover', $store_id) ?> !important;
+        color:#<?php echo Mage::getStoreConfig('shopbybrand/style_config/color-filter-link-hover', $store_id) ?> !important;
+    }
+  
+    .shopbybrand-list a{
+        color:#<?php echo Mage::getStoreConfig('shopbybrand/style_config/color-link', $store_id) ?> !important;
+    }
+    .shopbybrand-list a:hover {
+        color:#<?php echo Mage::getStoreConfig('shopbybrand/style_config/color-link-hover', $store_id) ?> !important;
+    }
+    @media screen and (min-width:768px) and (max-width: 979px) {
+            .shopbybrand_sidebar .shopbybrand-title h1,
+            .brand-search .shopbybrand-title h1,
+            .bestsllerbrand .shopbybrand-title h1{
+            background-color: #<?php echo Mage::getStoreConfig('shopbybrand/style_config/background_title', $store_id) ?> !important;
+        }   
+    }
+</style>

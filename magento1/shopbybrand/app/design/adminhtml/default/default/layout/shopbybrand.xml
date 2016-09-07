@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Shopbybrand
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <!-- Edit by Son-->
+    <default>
+        <reference name="head">
+        <action method="addJs"><script>shopbybrand/jscolor/jscolor.js</script></action> 
+        <action method="addItem"><type>js</type><name>mage/adminhtml/wysiwyg/tiny_mce/setup.js</name></action>
+        <action method="addItem"><type>js</type><name>tiny_mce/tiny_mce.js</name></action>
+        </reference>
+    </default>
+    <!-- Edit by Son -->
+    <brandadmin_adminhtml_brand_index>
+        <reference name="content">
+            <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+            <block type="shopbybrand/adminhtml_brand" name="brand" />
+        </reference>
+    </brandadmin_adminhtml_brand_index>
+    <brandadmin_adminhtml_brand_edit>
+        <update handle="editor"/>
+        <block name="left">
+            <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+        </block>
+    </brandadmin_adminhtml_brand_edit>
+	<brandadmin_adminhtml_subscriber_index>
+        <reference name="content">
+            <block type="shopbybrand/adminhtml_subscriber" name="subscriber" />
+        </reference>
+    </brandadmin_adminhtml_subscriber_index>
+    <brandadmin_adminhtml_brand_product>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="shopbybrand/adminhtml_brand_edit_tab_products" name="shopbybrand.block.adminhtml.brand.edit.tab.products"/>
+            <block type="adminhtml/widget_grid_serializer" name="related_grid_serializer">
+                <reference name="related_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>shopbybrand.block.adminhtml.brand.edit.tab.products</grid_block_name>
+                        <data_callback>getSelectedProducts</data_callback>
+                        <hidden_input_name>sproducts</hidden_input_name>
+                        <reload_param_name>brand_products</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>position</input_name>
+<!--                        add by cuong
+                        <input_name>is_featured</input_name>
+                        end add by cuong-->
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </brandadmin_adminhtml_brand_product>
+    <brandadmin_adminhtml_brand_productgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+         <block type="shopbybrand/adminhtml_brand_edit_tab_products" name="shopbybrand.block.adminhtml.brand.edit.tab.products"/>
+        </block>
+    </brandadmin_adminhtml_brand_productgrid>
+    <brandadmin_adminhtml_brand_subcriber>
+        <block type="core/text_list" name="root" output="toHtml">
+         <block type="shopbybrand/adminhtml_brand_edit_tab_subcribers" name="subcribers">
+         
+         </block>
+        </block>
+
+    </brandadmin_adminhtml_brand_subcriber>
+</layout>

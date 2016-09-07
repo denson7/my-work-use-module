@@ -1,0 +1,9 @@
+<?php 
+    $allSiderbar = $this->getAllSidebar();
+    $allSidebarName = array_keys($allSiderbar);
+    
+    if (count($allSidebarName)){
+        foreach ($allSidebarName as $name) {
+                echo $this->getChildHtml($name);
+        }
+    }

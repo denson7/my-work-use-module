@@ -1,0 +1,23 @@
+/* featuredbrands */
+.featuredbrands {
+    width: 100%;
+    margin: 30px 0px;
+}
+.featuredbrands .page-title {
+    width: 100%;
+}
+.featuredbrands .content {
+    width: 100%;
+}
+.featuredbrands .content ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+.featuredbrands .content ul li {
+    float: left;
+    text-align: center;
+}
+.featuredbrands .content ul li a {
+    text-align: center;
+}

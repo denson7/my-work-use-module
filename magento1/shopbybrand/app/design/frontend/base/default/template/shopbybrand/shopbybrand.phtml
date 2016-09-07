@@ -1,0 +1,241 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/shopbybrand/templates/default/default.css'); ?>" media="all" />
+
+<?php
+$categoryId = $this->getRequest()->getParam('category');
+$lists = $this->getListCharacterBegin();
+
+$store = Mage::app()->getStore()->getId();
+$showFeaturedBrands = Mage::getStoreConfig('shopbybrand/brand_list/display_featured_brand', $store);
+$showBrandCategories = Mage::getStoreConfig('shopbybrand/brand_list/display_brand_category', $store);
+$showCharatersList = Mage::getStoreConfig('shopbybrand/brand_list/display_brand_character_list', $store);
+$showSearchBox = Mage::getStoreConfig('shopbybrand/brand_list/display_brand_search_box', $store);
+$showLogoImage = Mage::getStoreConfig('shopbybrand/brand_list/display_brand_image', $store);
+$brandsListStyle = Mage::getStoreConfig('shopbybrand/brand_list/display_brand_group_by_name', $store);
+$logo_width = Mage::getStoreConfig('shopbybrand/brand_list/brand_logo_width', $store);
+$logo_height = Mage::getStoreConfig('shopbybrand/brand_list/brand_logo_height', $store);
+$showNumberOfProducts = Mage::getStoreConfig('shopbybrand/brand_list/display_product_number', $store);
+$onlyBrandHaveProduct = Mage::getStoreConfig('shopbybrand/brand_list/display_brand_have_product', $store);
+?>
+
+<div class="shopbybrand-list">
+
+    <!-- Featured Brands box BEGIN -------------------------------------------->
+    <?php
+    if ($showFeaturedBrands) {
+        echo Mage::app()->getLayout()
+                ->createBlock('shopbybrand/featuredbrand')
+                ->setTemplate('shopbybrand/featuredbrand.phtml')
+                ->toHtml();
+    }
+    ?>
+    <!-- Featured Brands box END ---------------------------------------------->
+
+    <!-- Brands Categories END ------------------------------------------------>
+    <?php
+    if ($showBrandCategories) {
+        echo Mage::app()->getLayout()
+                ->createBlock('shopbybrand/brandcategories')
+                ->setTemplate('shopbybrand/brandcategories.phtml')
+                ->toHtml();
+    }
+    ?>
+    <!-- Brands Categories END ------------------------------------------------>
+
+    <!-- Filter bar & Search box BEGIN ---------------------------------------->
+    <div class="filterbar col" id="filterbar">
+        <!-- Character bar END-->
+        <div class="shopbybrand-title">
+            <h1><?php echo $this->__('Shop by Brand filter') ?></h1>
+        </div>
+        <?php if ($showCharatersList) : ?>
+            <div id="charaters-list" class="col-lg-8 col-md-8 col-sm-12 col-xm-12">
+                <ul>
+                    <li class="charlist charlist_all isActiveCate ">
+                        <strong><a href="javascript:void(0)" group="" onclick="charFilter(this)">ALL</a></strong>
+                    </li>
+                    <li class="charlist">
+                        <a href="javascript:void(0)" id="charlist_number" group="number" style="opacity: 0.2;pointer-events: none;" onclick="charFilter(this)">0-9</a>
+                    </li>
+                    <?php foreach ($lists as $char): ?>                
+                        <li class="charlist">
+                            <a href="javascript:void(0)" id="charlist_<?php echo $char ?>" group="<?php echo $char ?>" style="opacity: 0.2;pointer-events: none;" onclick="charFilter(this)"><?php echo $char; ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+        <!-- Character bar END-->
+
+        <!-- Search box BEGIN -->
+        <?php
+        if ($showSearchBox) {
+            echo $this->getLayout()
+                    ->createBlock('shopbybrand/searchbox')
+                    ->setTemplate('shopbybrand/searchbox.phtml')
+                    ->toHtml();
+        }
+        ?>
+        <!-- Search box END -->
+    </div>
+    <!-- Filter bar & Search box END ------------------------------------------>
+    <div class="brands">
+        <ul class="col">
+            <?php
+//                $baseUrl = $this->getBaseUrl();
+            $shopbybrands = Mage::getSingleton('shopbybrand/brand')->getBrandsData();
+            $noImg = '';
+            if ($shopbybrands[0]) {
+                $path = 'brands/thumbnail' . DS . $shopbybrands[0]['brand_id'];
+                $noImg = Mage::helper('shopbybrand/image')
+                        ->resizeThumbnail1('', $path, $logo_width, $logo_height);
+            }
+            foreach ($shopbybrands as $brand) :
+                if ($showLogoImage) :
+                    ?>
+                    <li class="list_1 <?php echo $this->getCateClass($brand['category_ids']); ?>" style="text-align: center; float: left; height: <?php echo $logo_height + 30; ?>px;">
+                        <a href="<?php echo Mage::app()->getStore()->getUrl($brand['url_key']); ?>">
+                            <?php
+                            $path = 'brands/thumbnail' . DS . $brand['brand_id'];
+
+                            $img = ($brand['thumbnail_image'] == NULL) ? $noImg : Mage::helper('shopbybrand/image')
+                                            ->resizeThumbnail1($brand['thumbnail_image'], $path, $logo_width, $logo_height);
+                            ?>
+                            <div><img src="<?php echo $img; ?>" style="width: 100%; max-height: <?php echo $logo_height; ?>px;" /></div>
+                            <div style="display: block;" class="box"><?php echo ucfirst($brand['name']); ?><?php if ($showNumberOfProducts) echo '(', $brand['number_product'], ')'; ?></div>
+                        </a>
+                    </li>
+                <?php else : ?>
+                    <li class="list_1 <?php echo $this->getCateClass($brand['category_ids']); ?>" style="float: left">
+                        <a href="<?php echo Mage::app()->getStore()->getUrl($brand['url_key']); ?>">
+                            <div class="box">
+                                <?php echo ucfirst($brand['name']);
+                                if ($showNumberOfProducts)
+                                    echo '(', $brand['number_product'], ')';
+                                ?>
+                            </div>
+                        </a>
+                    </li>
+                <?php
+                endif;
+            endforeach;
+            ?>            
+        </ul>
+        <div class="brand-ajax-loading"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>brands/pageloading.gif" style="display: none;"/></div>
+        <div class="brand-not-found" style="display: none;"><?php echo $this->__('Brand Not Found!'); ?></div>
+    </div>
+<script>
+    var listchars = <?php echo json_encode($lists); ?>;
+    var numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    $$('li.list_1').each(function(el) {
+        var char = el.textContent.trim().charAt(0);
+        if (listchars.indexOf(char) != -1)
+            el.addClassName(char);
+        else if (numbers.indexOf(char) != -1)
+            el.addClassName('number');
+//        else
+//            el.hide();
+    });
+
+
+    listchars.each(function(el) {
+        if ($$('li.' + el).length) {
+            if($('charlist_' + el)){
+            $('charlist_' + el).style.opacity = '';
+            $('charlist_' + el).style.pointerEvents = 'all';
+        }
+        }
+    });
+    if ($$('li.number').length) {
+        if($('charlist_number')){
+            $('charlist_number').style.opacity = '';
+            $('charlist_number').style.pointerEvents = 'all';
+    }
+    }
+
+
+    var curentActiveCate = null;
+    var curentFilter = $$('.charlist_all').first();
+    function charFilter(el) {
+        if (curentFilter)
+            curentFilter.removeClassName('isActiveCate');
+        el.addClassName('isActiveCate');
+        curentFilter = el;
+        brandFilter();
+    }
+    function brandFilter() {
+        var cat = '';
+        var char = '';
+        if (curentActiveCate && curentActiveCate.readAttribute('cateId') != '')
+            cat = '.c' + curentActiveCate.readAttribute('cateId');
+        if (curentFilter&&curentFilter.readAttribute('group'))
+            char = '.' + curentFilter.readAttribute('group');
+        $$('li.list_1').each(function(el) {
+            el.hide();
+        });
+        $$('li.list_1' + cat + char).each(function(el) {
+            el.show();
+        });
+        if ($$('.brandslist'))
+            $$('.brandslist').each(function(el) {
+                if (!$$('.brandslist#' + el.id + ' li.list_1' + cat + char).length)
+                    el.hide();
+                else
+                    el.show();
+            });
+        brandLoading($$('li.list_1' + cat + char).length);
+    }
+
+    function brandLoading(list) {
+        $$('.brands ul').first().hide();
+        $$('.brand-ajax-loading img').first().show();
+        $$('.brand-not-found').first().hide();
+        setTimeout(function() {
+            $$('.brand-ajax-loading img').first().hide();
+            if (list)
+                $$('.brands ul').first().show();
+            else
+                $$('.brand-not-found').first().show();
+        }, 2000);
+    }
+
+<?php if ($brandsListStyle) : ?>
+        $$('.brands').first().hide();
+        if ($$('li.number').length) {
+            $$('.brands ul').first().insert('<li class="brandslist col" id="number"><div class="brand-begin-label"><strong>0-9</strong></div><ul></ul></li>');
+            $$('.brands li.number').each(function(el) {
+                $('number').insert(el.outerHTML);
+                el.outerHTML = '';
+            });
+        }
+        listchars.each(function(el) {
+            if ($$('li.' + el).length) {
+                $$('.brands ul').first().insert('<li class="brandslist col" id="' + el + '"><div class="brand-begin-label"><strong>' + el + '</strong></div><ul></ul></li>');
+                $$('.brands li.' + el).each(function(element) {
+                    $(el).insert(element.outerHTML);
+                    element.outerHTML = '';
+                });
+            }
+        });
+        $$('.brands').first().show();
+<?php endif; ?>
+</script>
+</div>
+<style>
+    .brands .list_1 div{
+        max-width: 90%;
+        align-items: center;
+        display: inline-flex;
+        align-items: center;
+        width: <?php echo $logo_width; ?>px;
+        margin: 0 auto;
+        min-height: 85%;
+        overflow: hidden;
+    }
+    .brand-ajax-loading img{
+        width: 180px;
+        height:50px;
+        margin: 0 auto;
+        clear: both;
+        display:block;
+    }
+</style>

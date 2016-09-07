@@ -1,0 +1,73 @@
+<?php
+/**
+ * filter template
+ */
+?>
+<div id="page:main-container">
+    <div id="messages"></div>
+    <div class="content-header">
+        <table cellspacing="0">
+            <tbody>
+                <tr>
+                    <td style="width:50%;"><h3 class="icon-head head-report-product-sold"><?php echo $this->getTiltle() ?></h3></td>
+                    <td class="form-buttons"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div> 
+        <div class="shopbybrand-report-store_switcher" style=""> 
+            <?php echo $this->getChildHtml('store_switcher') ?>
+        </div> 
+        <div class="shopbybrand-report-from-to" style=""> 
+            <div class="magestore-shopbybrand-report" style="float:right;">
+                <span style="float: left; margin-right:20px;"><h3 class="icon-head" style="color:#eb5e00;margin-bottom:0px;"><?php echo $this->__('Show Sales Report'); ?></h3></span>
+                <div class="f-left">
+                    <div id="magestore-shopbybrand-formdate"><?php echo $this->__('From') ?>:&nbsp;<input class="input-text no-changes required-entry" type="text" id="period_date_from" name="report_from" value="<?php echo $this->getFilter('report_from') ?>" style="width:5em" /> <img src="<?php echo $this->getSkinUrl('images/grid-cal.gif') ?>" title="<?php echo $this->__('Select Date') ?>" id="period_date_from_trig" alt="<?php echo $this->__('Select Date') ?>" class="v-middle"/>&nbsp;&nbsp;</div>
+                    <div id="period_date_from_advaice"></div>
+                </div>
+                <div class="f-left">
+                    <div id="magestore-shopbybrand-todate"><?php echo $this->__('To') ?>:&nbsp;<input  class="input-text no-changes required-entry" type="text" id="period_date_to" name="report_to"  value="<?php echo $this->getFilter('report_to') ?>" style="width:5em" /> <img src="<?php echo $this->getSkinUrl('images/grid-cal.gif') ?>" class="v-middle" title="<?php echo $this->__('Select Date') ?>"id="period_date_to_trig" alt="<?php echo $this->__('Select Date') ?>"/>&nbsp;&nbsp;</div>
+                    <div id="period_date_to_advaice"></div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                <!--
+                Calendar.setup({
+                    inputField : 'period_date_from',
+                    ifFormat : '<?php echo $this->getDateFormat() ?>',
+                    button : 'period_date_from_trig',
+                    align : 'Bl',
+                    singleClick : true
+                });
+                Calendar.setup({
+                    inputField : 'period_date_to',
+                    ifFormat : '<?php echo $this->getDateFormat() ?>',
+                    button : 'period_date_to_trig',
+                    align : 'Bl',
+                    singleClick : true
+                });
+                //-->
+            </script>
+        </div> 
+    </div>
+    <div style="margin-top: 40px;">
+        <?php echo $this->getChildHtml('grid_content') ?>
+    </div>
+</div>
+
+<script type="text/javascript">
+<!--
+	brandGridJsObject.doFilter = function (){
+        var filters = $$('#'+this.containerId+' .filter input', '#'+this.containerId+' .filter select', '#magestore-shopbybrand-formdate input', '#magestore-shopbybrand-todate input');
+        var elements = [];
+        for(var i in filters){
+            if(filters[i].value && filters[i].value.length) elements.push(filters[i]);
+        }
+        if (!this.doFilterCallback || (this.doFilterCallback && this.doFilterCallback())) {
+            this.reload(this.addVarToUrl(this.filterVar, encode_base64(Form.serializeElements(elements))));
+        }
+    }
+//-->
+</script>

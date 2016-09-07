@@ -1,0 +1,198 @@
+<?php 
+    $store = Mage::app()->getStore()->getId();
+    if (Mage::getStoreConfig('shopbybrand/feature_brand_flexibebox/display_featured_brand',$store)) :    
+?>
+
+<?php
+    $featuredBrands = $this->getFeaturedBrands();
+    $showAsSlider = Mage::getStoreConfig('shopbybrand/feature_brand_flexibebox/show_featured_brand_as_slider',$store);
+    $logo_width = Mage::getStoreConfig('shopbybrand/brand_list/brand_logo_width',$store);
+    $logo_height = Mage::getStoreConfig('shopbybrand/brand_list/brand_logo_height',$store);
+    $brandWidth = $logo_width +50;
+?>
+
+<?php if (count($featuredBrands)): ?>
+<?php if (!$showAsSlider) :  ?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/shopbybrand/templates/default/sliderstyle.css'); ?>" media="all" />
+
+<style type="text/css" media="screen">
+    .ca-container{
+        height: <?php echo $logo_height+35;?>px;
+    }    
+    .ca-container .brand-logo {
+        height: <?php echo $logo_height;?>px;
+    }
+    .ca-item{
+        width:<?php echo $brandWidth;?>px;
+    }
+</style>
+
+<div class="featuredbrands col">
+    <div class="shopbybrand-title">
+        <h1><?php echo $this->__('Featured Brands');?></h1>
+    </div>
+    <div id="ca-container" class="ca-container" style=" max-width: 100%; box-sizing: content-box;">
+        <div class="ca-wrapper">
+            <?php 
+                $i = 0;
+                foreach ($featuredBrands as $featuredBrand) : 
+                    $i++;
+                    $path = 'brands/thumbnail' . DS . $featuredBrand->getId();
+                    $img = Mage::helper('shopbybrand/image')
+                        ->init($featuredBrand, $path)->resizeThumbnail($logo_width, $logo_height);
+            ?>
+            <div class="ca-item ca-item-<?php echo $i;?>">
+                <div class="ca-item-main">
+                    <a href="<?php echo $this->getBrandUrl($featuredBrand); ?>">
+                        <div class="brand-logo" style="margin-bottom: 5px;">
+                            <img src="<?php echo $img; ?>" />
+                        </div>
+                        <div style="display: block;">
+                        <?php echo $featuredBrand->getName(); ?>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <?php endforeach;?>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var brandWidth = <?php echo $brandWidth;?>;
+        var running = false;
+        
+        var countFeaturedBrands = <?php echo count($featuredBrands);?>;
+        var featuredbrandsWidth = $$('.featuredbrands').first().offsetWidth -50;
+        var numberofbrand = Math.floor(featuredbrandsWidth/brandWidth);
+        numberofbrand = (numberofbrand<=countFeaturedBrands)?numberofbrand:countFeaturedBrands;
+        $('ca-container').style.width = numberofbrand*brandWidth +"px";
+        window.onresize = brandresize;
+        function brandresize(){
+            featuredbrandsWidth = $$('.featuredbrands').first().offsetWidth  -50;
+            numberofbrand = Math.floor(featuredbrandsWidth/brandWidth);
+            numberofbrand = (numberofbrand<=countFeaturedBrands)?numberofbrand:countFeaturedBrands;
+            $('ca-container').style.width = numberofbrand*brandWidth +"px";
+        }
+    </script>
+</div>
+<?php else:?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/shopbybrand/templates/default/sliderstyle.css'); ?>" media="all" />
+
+<style type="text/css" media="screen">
+    .ca-container{
+        height: <?php echo $logo_height+35;?>px;
+    }    
+    .ca-container .brand-logo {
+        height: <?php echo $logo_height;?>px;
+    }
+    .ca-item{
+        width:<?php echo $brandWidth;?>px;
+    }
+</style>
+
+<div class="featuredbrands col">
+    <div class="shopbybrand-title">
+        <h1><?php echo $this->__('Featured Brands');?></h1>
+    </div>
+    <div id="ca-container" class="ca-container" style="overflow: hidden; max-width: 100%; box-sizing: content-box;">
+        <div class="ca-nav"><span class="ca-nav-prev" onclick="brandNavPrev()">Previous</span><span class="ca-nav-next" onclick="brandNavNext();">Next</span></div>
+        <div class="ca-wrapper" style="overflow: hidden;">
+            <?php 
+                $i = 0;
+                foreach ($featuredBrands as $featuredBrand) : 
+                    $i++;
+                    $path = 'brands/thumbnail' . DS . $featuredBrand->getId();
+                    $img = Mage::helper('shopbybrand/image')
+                        ->init($featuredBrand, $path)->resizeThumbnail($logo_width, $logo_height);
+            ?>
+            <div class="ca-item ca-item-<?php echo $i;?>">
+                <div class="ca-item-main">
+                    <a href="<?php echo $this->getBrandUrl($featuredBrand); ?>">
+                        <div class="brand-logo" style="margin-bottom: 5px;">
+                            <img src="<?php echo $img; ?>" />
+                        </div>
+                        <div style="display: block;">
+                        <?php echo $featuredBrand->getName(); ?>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <?php endforeach;?>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var brandWidth = <?php echo $brandWidth;?>;
+        var running = false;
+        
+        var countFeaturedBrands = <?php echo count($featuredBrands);?>;
+        var featuredbrandsWidth = $$('.featuredbrands').first().offsetWidth -50;
+        var numberofbrand = Math.floor(featuredbrandsWidth/brandWidth);
+        numberofbrand = (numberofbrand<=countFeaturedBrands)?numberofbrand:countFeaturedBrands;
+        $('ca-container').style.width = numberofbrand*brandWidth +"px";
+        window.onresize = brandresize;
+        function brandresize(){
+            featuredbrandsWidth = $$('.featuredbrands').first().offsetWidth  -50;
+            numberofbrand = Math.floor(featuredbrandsWidth/brandWidth);
+            numberofbrand = (numberofbrand<=countFeaturedBrands)?numberofbrand:countFeaturedBrands;
+            $('ca-container').style.width = numberofbrand*brandWidth +"px";
+        }
+        $$('#ca-container .ca-item').each(function(el,index){
+                el.style.position = 'absolute';
+                el.style.left = brandWidth*index + 'px';
+            });
+        function brandNavNext(){
+            if(running)
+                return;
+            running = true;
+            $$('#ca-container .ca-wrapper').first().insert({
+                bottom: $$('#ca-container .ca-item').first().outerHTML
+            });
+            $$('#ca-container .ca-item').each(function(el,index){
+                el.style.left = brandWidth*index + 'px';
+            });
+            var i = 1;
+            var interval = setInterval( function(){
+                if(i<=10){
+                $$('.ca-item').each(function(el,index){
+                        el.style.left = (index - 0.1*i)*brandWidth + 'px';
+                    });
+                    i++;
+                }else{
+                    $$('#ca-container .ca-item').first().remove();
+                    clearInterval(interval);
+                    running = false;
+                }
+            }, 30);
+        }
+        function brandNavPrev(){
+            if(running)
+                return;
+            running = true;
+            $$('#ca-container .ca-wrapper').first().insert({
+                top: $$('#ca-container .ca-item').last().outerHTML
+            });
+            $$('#ca-container .ca-item').each(function(el,index){
+                el.style.left = brandWidth*(index-1) + 'px';
+            });
+            var i = 1;
+            var interval = setInterval( function(){
+                if(i<=10){
+                    $$('.ca-item').each(function(el,index){
+                        el.style.left = (index + 0.1*i -1)*brandWidth + 'px';
+                    });
+                    i++;
+                }else{
+                    $$('#ca-container .ca-item').last().remove();
+                    clearInterval(interval);
+                    running = false;
+                }
+            }, 30);
+        }
+        setInterval( function(){
+            brandNavNext();
+        }, 2500);
+    </script>
+</div>
+<?php endif; ?>
+<?php endif; ?>
+
+<?php endif; ?>

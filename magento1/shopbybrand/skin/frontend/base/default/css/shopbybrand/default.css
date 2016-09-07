@@ -1,0 +1,131 @@
+/* 
+    Document   : default.css    
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.shopbybrand_sidebar .brand-content ul{
+    padding:0 10px;
+    margin: 0;
+}
+/* add by Peter */
+.shopbybrand_sidebar .brand-content ul li{
+    list-style: none;
+}
+.shopbybrand_sidebar .brand-content ul li a{
+    text-decoration: none;
+    margin-left: 5px;
+   /* float: left;*/
+}
+.shopbybrand_sidebar .brand-content .brands-item{
+    margin-bottom: 0;
+    border-bottom: 1px dashed #F0EFEF;
+    padding: 10px 0;
+}
+/*.shopbybrand_sidebar .brand-content .brands-item:hover{
+    background: #ECECEC;
+}*/
+.brands-item{
+    margin-bottom: 30px;
+    width: 100%;
+    clear: left;
+    height: 52px;
+    display: inline-table;
+}
+.bestsllerbrand-allview {
+    clear: left;
+    padding: 10px 5px 10px 10px;
+    display: block;
+}
+.shopbybrand_sidebar .brand-content .brands-item .brand-name{
+   /* float: left;*/
+    padding-top: 1em;
+    text-align: left;
+}
+.shopbybrand_sidebar .brand-content .brands-item .brand-name:hover{
+    text-decoration: underline;
+}
+li.brands-item img {
+    float: left;
+    width: 100%;
+    max-width: 75px;
+    margin-right: 10%;
+    border: 1px solid #ECEAEA;
+}
+/* end add by Peter */
+.shopbybrand_sidebar .actions a{float:right;}
+.shopbybrand .brand-input-search .validation-advice{top:50px;}
+.shopbybrand .brand-input-search form{position:relative;}
+.brand-right button.button{height:auto  !important;}
+/* */
+.shopbybrand_sidebar {
+    clear: both;
+    border: 1px solid #ccc;
+}
+.shopbybrand_sidebar .brand-content {
+    padding: 0;
+    margin-top: 0;
+    background: #fff
+}
+.searchbrand {z-index:999}
+.shopbybrand_sidebar .shopbybrand-title h1 {
+    margin-bottom: 0;
+}
+.shopbybrand_sidebar .actions{
+    padding: 0 10px 10px;
+    margin: 0;
+}
+/**/
+/**Best Seller Brand**/
+.bestsllerbrand {
+    border: 1px solid #ccc;
+    float: left;
+    width: 100%;
+    background: #fff;
+}
+.bestsllerbrand .mini-products-list{
+    padding-bottom: 10px;
+/*    float: left;*/
+    padding: 0 10px;
+}
+.bestsllerbrand .shopbybrand-title h1{
+    font-size: 14px;
+}
+.brand-bestseller-content {
+    float: left;
+    height: auto;
+    width: 100%;
+    display: block;
+}
+.bestsllerbrand .shopbybrand-title h1 {
+    background: url("templates/default/images/image-icon.png") no-repeat -3px -543px;
+    background-color:  #ffa500;
+}
+.brand-bestseller-content li.item {
+    display: inline-table;
+    float: left;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ccc;
+    margin-bottom: 0;
+}
+.brand-bestseller-content li.item.last{
+    border-bottom: none;
+}
+.brand-bestseller-content li.item .product-name a{
+    text-decoration: none;
+    color: #3399cc;
+    text-transform: none;
+}
+.brand-bestseller-content li.item .product-name a:hover{
+    text-decoration: underline;
+}
+.brand-bestseller-content li.item.last{
+   /* border-bottom: none;*/
+}
+.brand-bestseller-content li.item p.product-name{
+    padding-top: 0px;
+}
+.brand-category-content ul lo {
+    padding-right: 0px;
+    padding-left: 0px;
+}

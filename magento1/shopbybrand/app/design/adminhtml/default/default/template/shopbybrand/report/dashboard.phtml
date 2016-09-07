@@ -1,0 +1,69 @@
+<?php
+$data = $this->getDataLifetime();
+$currency = Mage::getModel('directory/currency')->load(Mage::app()->getStore()->
+                getBaseCurrencyCode());
+?>
+<table width="100%">
+    <tr>
+        <td>
+
+            <?php if (1 || $data['totals_qty']) { ?>
+                <div class="entry-edit" class="a-center bold" style="float:left;width: 45%;margin-left: 18px;">
+                    <div class="entry-edit-head">
+                        <h4><?php echo $this->__('Number of items sold') ?></h4>
+                    </div>
+                    <fieldset id="commissions_diagram_content" class="np a-center bold">
+                        <?php echo round($data['totals_qty']) ?>
+                    </fieldset>
+                </div>
+            <?php } ?>
+            <?php if (1 || $data['totals_money']) { ?>
+                <div class="entry-edit" class="a-center bold" style="float:right;width: 45%;margin-right: 18px;">
+                    <div class="entry-edit-head">
+                        <h4><?php echo $this->__('Lifetime Sales') ?></h4>
+                    </div>
+                    <fieldset id="commissions_diagram_content" class="np a-center bold">
+                        <?php echo $currency->format($data['totals_money']) ?>
+                    </fieldset>
+                </div>
+            <?php } ?>
+        </td>
+    </tr>
+</table>
+<div id="shopbybrand-report-from-to" class="shopbybrand-report-from-to" style="display: none;margin-bottom: 30px"> 
+    <div class="magestore-shopbybrand-report" style="float:right; margin-right: 20px;">
+        <span style="float: left; margin-right:20px;"><h3 class="icon-head" style="color:#eb5e00;margin-bottom:0px;"><?php echo $this->__('Show sales chart'); ?></h3></span>
+        <div class="f-left">
+            <div id="magestore-shopbybrand-formdate"><?php echo $this->__('from') ?>:&nbsp;<input class="input-text no-changes" type="text" id="period_date_from" name="report_from" value="<?php echo $this->getReportFrom() ?>" style="width:6em"/> <img src="<?php echo $this->getSkinUrl('images/grid-cal.gif') ?>" title="<?php echo $this->__('Select Date') ?>" id="period_date_from_trig" alt="<?php echo $this->__('Select Date') ?>" class="v-middle"/>&nbsp;&nbsp;</div>
+            <div id="period_date_from_advaice"></div>
+        </div>
+        <div class="f-left">
+            <div id="magestore-shopbybrand-todate"><?php echo $this->__('to') ?>:&nbsp;<input  class="input-text no-changes" type="text" id="period_date_to" name="report_to"  value="<?php echo $this->getReportTo() ?>" style="width:6em"/> <img src="<?php echo $this->getSkinUrl('images/grid-cal.gif') ?>" class="v-middle" title="<?php echo $this->__('Select Date') ?>"id="period_date_to_trig" alt="<?php echo $this->__('Select Date') ?>"/>&nbsp;&nbsp;</div>
+            <div id="period_date_to_advaice"></div>
+        </div>
+        <div class="f-left">
+            <button type="button" onclick="viewChartPeriod()"><?php echo $this->__('View Chart') ?></button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        <!--
+        Calendar.setup({
+            inputField : 'period_date_from',
+            ifFormat : '<?php echo $this->getDateFormat() ?>',
+            button : 'period_date_from_trig',
+            align : 'Bl',
+            singleClick : true
+        });
+        Calendar.setup({
+            inputField : 'period_date_to',
+            ifFormat : '<?php echo $this->getDateFormat() ?>',
+            button : 'period_date_to_trig',
+            align : 'Bl',
+            singleClick : true
+        });
+        //-->
+    </script>
+</div>
+<div id="shopbybrand_sales_chart_content">
+    <?php echo $this->getChildHtml('report-graph') ?>
+</div>

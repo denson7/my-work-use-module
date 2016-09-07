@@ -1,0 +1,28 @@
+<?php $brand = $this->getBrand();?>
+<?php $displayBrandSignup = $this->displayBrandSignup(); ?>
+<?php $displayBrandSearch = $this->displayBrandsearch(); ?>
+		
+        
+        <?php if ($displayBrandSignup): ?>
+            <div class="block brand-subcribers block-subscribe">
+                <div class="block-title"><strong><span><?php echo $this->__('Sign up for new products') ?></span></strong></div>
+				<div class="subcribers-content">
+                <form id="brand-subcribers-form" class="actions" method="post" action="<?php echo $this->getUrl("shopbybrand/index/subscribe") ?>">
+                    <div class="block-content">
+<!--					<p><?php // echo $this->__('Be "in-the-know" when we add new styles of %s to our website! Simply sign up and we\'ll notify you.', $brand->getName()); ?></p>-->
+                    <input type="hidden" name="brand_id" value="<?php echo $brand->getBrandId() ?>">                  
+                    <input id="brand-subcribers-input" name="email" onfocus="if(this.value=='Type your email address') this.value=''" onblur="if(this.value=='') this.value='Type your email address'" class="input-text required-entry validate-email" title="<?php echo $this->__('Type your email address') ?>" value="<?php echo $this->__('Type your email address') ?>">
+                    <button class="button" id="subcribers" type="submit"><span><span><?php echo $this->__('Submit'); ?></span></span></button>
+                    <!--<p><?php // echo $this->__('We respects your privacy. We don\'t rent or sell your personal information to anyone.'); ?></p>-->
+					</div>
+                </form>
+				</div>
+            </div>
+        <?php endif; ?>
+   
+    
+<script type="text/javascript">
+    //<![CDATA[
+        var newsletterSubscriberFormDetail = new VarienForm('brand-subcribers-form');
+    //]]> 
+</script>
