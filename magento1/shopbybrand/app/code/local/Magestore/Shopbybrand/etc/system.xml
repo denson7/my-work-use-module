@@ -1,0 +1,676 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Shopbybrand
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <tabs>
+        <magestore translate="label">
+            <label>Magestore Extension</label>
+            <sort_order>400</sort_order>
+        </magestore>
+    </tabs>
+    <sections>
+        <shopbybrand translate="label" module="shopbybrand">
+            <class>separator-top</class>
+            <label>Shop by Brand</label>
+            <tab>magestore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>299</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>        
+                        <enable translate="label">
+                            <label>Enable Shop by Brand</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>0</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </enable>
+                        <toplink translate="label">
+                            <label>Display Top Link</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>4</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </toplink>
+                        <router translate="label">
+                            <label>Frontend URL Path</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[ Set URL path for the Brand Listing page. For example: http://www.yourstore.com/brand. ]]></comment>
+                        </router>
+                        <attribute_code translate="label">
+                            <label>Attribute Code</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>shopbybrand/system_config_source_attributecode</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Name of  the Manufacturer attribute will be imported to brands. "manufacturer" is default .]]></comment>
+                        </attribute_code>
+                        
+                        <brand_separator_brandnavigation translate="label">
+                            <label>Menu Bar</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>shopbybrand/adminhtml_field_separator</frontend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_separator_brandnavigation>
+                        <display_brandnavigation>
+                            <label>Show Link to Brand Listing Page</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>31</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Support Magento Community Edition 1.7.x and later.]]></comment>
+                        </display_brandnavigation>
+                        <maximum_item_brandnavigation>
+                            <label>Number of Brands Displayed</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>32</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty or zero, there is no limitation.</comment>
+                        </maximum_item_brandnavigation>
+                    </fields>
+                </general>
+                <brand_list translate="label">
+                    <label>Brand Listing Page</label>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <brand_separator_list_brand_style translate="label">
+                            <label>Brand Display</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>shopbybrand/adminhtml_field_separator</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_separator_list_brand_style>
+                        <display_brand_group_by_name>
+                            <label>Group Brands by First Character</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>3</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_brand_group_by_name>
+<!--                        <char_to_group>
+                            <label>List charactor to group</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </char_to_group>-->
+                        <display_brand_have_product>
+                            <label>Hide Brands Without Products</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>5</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_brand_have_product>
+                        <display_product_number>
+                            <label>Show Number of Products</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>6</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Show each brand’s product number next to its name.</comment>
+                        </display_product_number>
+                        
+                        <brand_separator_brand_logo_size translate="label">
+                            <label>Logo</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>shopbybrand/adminhtml_field_separator</frontend_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_separator_brand_logo_size>
+                        <display_brand_image>
+                            <label>Display Logo</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>8</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_brand_image>
+                        <brand_logo_width>
+                            <label>Width</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>In pixel. Recommended size: smaller than 200px.</comment>
+                        </brand_logo_width>
+                        <brand_logo_height>
+                            <label>Height</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>In pixel. Recommended size: smaller than 200px.</comment>
+                        </brand_logo_height>
+                        
+                        <brand_separator_featured_brand translate="label">
+                            <label>Featured Brands </label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>shopbybrand/adminhtml_field_separator</frontend_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_separator_featured_brand>
+                        <display_featured_brand>
+                            <label>Display</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>12</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_featured_brand>
+                        <show_featured_brand_as_slider>
+                            <label>Shown as Slider</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>13</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </show_featured_brand_as_slider>
+                        <brand_separator_brand_filter_bar translate="label">
+                            <label>Search and Filter</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>shopbybrand/adminhtml_field_separator</frontend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_separator_brand_filter_bar>
+                        <display_brand_character_list>
+                            <label>Display Filter by Character</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>31</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_brand_character_list>
+                        <display_brand_search_box>
+                            <label>Display Search Box</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>32</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_brand_search_box>
+                        <display_brand_category>
+                            <label>Display Brand by Category</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>33</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_brand_category>   
+                    </fields>
+                </brand_list>
+                
+                <brand_detail translate="label">
+                    <label>Brand Detailed Page</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <brand_detail_template>
+                            <label>Layout</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <source_model>shopbybrand/system_config_source_branddetailtemplate</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_detail_template>
+<!--                        <brand_products_per_row>
+                            <label>Number of products per row</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>2</sort_order>
+                            <source_model>shopbybrand/system_config_source_productsperrow</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_products_per_row>-->
+                        <display_brandbanner>
+                            <label>Display Banner</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>21</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_brandbanner>
+                        <display_logo>
+                            <label>Display Logo</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>22</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_logo>
+                        <display_brand_featured_products>
+                            <label>Display Featured Products</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>41</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_brand_featured_products>
+                        <display_brand_categories>
+                            <label>Display Brand by Category</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>42</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_brand_categories>
+                        
+                        <brand_separator_brand_instant_search translate="label">
+                            <label>Brand Detailed Page On Sidebar</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>shopbybrand/adminhtml_field_separator</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_separator_brand_instant_search>
+                        <display_brand_instant_search>
+                            <label>Display Search Box</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>52</sort_order>
+                            <source_model>shopbybrand/system_config_source_selectcolumn</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_brand_instant_search>
+<!--                        <brand_instant_search_position>
+                            <label>Search Box</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_instant_search_position>-->
+                        <display_brand_bestseller_products>
+                            <label>Display Bestseller Products</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>61</sort_order>
+                            <source_model>shopbybrand/system_config_source_selectcolumn</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_brand_bestseller_products>
+                        <bestseller_products_number_show>
+                            <label>Number of Products Shown</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>62</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </bestseller_products_number_show>
+<!--                        <brand_bestseller_products_position>
+                            <label>Bestseller Products</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>91</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_bestseller_products_position>-->
+<!--                        <display_brand_shop_by_option>
+                            <label>Display Shop by Option</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>71</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_brand_shop_by_option>-->
+<!--                        <brand_shop_by_option_position>
+                            <label>Shop by Option</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>92</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_shop_by_option_position>-->
+<!--                        <brand_separator_brand_shop_by_option translate="label">
+                            <label>Sidebar Block Order</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>shopbybrand/adminhtml_field_separator</frontend_model>
+                            <sort_order>89</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_separator_brand_shop_by_option>  -->
+<!--                        <left_block_hide translate="label">
+                            <label>Hide Block In Left</label>
+                            <frontend_type>multiselect</frontend_type>              
+                            <source_model>shopbybrand/system_config_source_leftlistblock</source_model>              
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select block will show in left column</comment>
+                        </left_block_hide>
+                        <right_block_hide translate="label">
+                            <label>Hide Block In Right</label>
+                            <frontend_type>multiselect</frontend_type>              
+                            <source_model>shopbybrand/system_config_source_rightlistblock</source_model>              
+                            <sort_order>91</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select block will show in right column</comment>
+                        </right_block_hide>-->
+                    </fields>
+                </brand_detail>
+                <sidebar translate="label">
+                    <label>Brand Listing Sidebar</label>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <brand_sidebar translate="label">
+                            <label>Enable Block</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>80</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Display the block on pages having sidebar.</comment>
+                        </brand_sidebar>
+                        <maximum_item_sidebar>
+                            <label>Number of Brands Shown</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If empty or zero, there’s no limitation.</comment>
+                        </maximum_item_sidebar>
+                        <option_display>
+                            <label>Display Option</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>95</sort_order>
+                            <source_model>shopbybrand/system_config_source_displaybrand</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Show logo and name by default.</comment>
+                        </option_display>
+                    </fields>
+                </sidebar>
+                
+                <feature_brand_flexibebox translate="label">
+                    <label>Featured Brands Advanced Configuration</label>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <brand_separator_featured_brand translate="label">
+                            <label>Display On Other Places</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>shopbybrand/adminhtml_field_separator</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_separator_featured_brand>
+                        <display_featured_brand>
+                            <label>Display</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>11</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </display_featured_brand>
+                        <show_featured_brand_as_slider>
+                            <label>Shown as Slider</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>12</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </show_featured_brand_as_slider>
+                        
+                        <brand_separator_implement_code translate="label">
+                            <label>Embedded Code</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>shopbybrand/adminhtml_field_separator</frontend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </brand_separator_implement_code>
+                        <implement translate="label">
+                            <label></label>
+                            <frontend_model>shopbybrand/adminhtml_system_config_implementcode</frontend_model>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </implement>
+                    </fields>
+                </feature_brand_flexibebox>
+                
+                <style_config translate="label">
+                    <label>Style Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>                        
+                        <background_title translate="label">
+                            <label>Background Title Brand</label>
+                            <frontend_type>text</frontend_type>     
+                            <validate>color</validate>              
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is FFA500</comment>
+                        </background_title>                           
+                        <brand_title_color translate="label">
+                            <label>Brand Title Color</label>
+                            <frontend_type>text</frontend_type>     
+                            <validate>color</validate>              
+                            <sort_order>24</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is FFFFFF</comment>
+                        </brand_title_color>
+                        <background-filter-label translate="label">
+                            <label>Background Label Filter</label>
+                            <frontend_type>text</frontend_type>     
+                            <validate>color</validate>              
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is 3399CC</comment>
+                        </background-filter-label>
+                        <color-filter-label translate="label">
+                            <label>Color Label Filter </label>
+                            <frontend_type>text</frontend_type>     
+                            <validate>color</validate>              
+                            <sort_order>26</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is FFFFFF</comment>
+                        </color-filter-label>
+                        <background-filter-link translate="label">
+                            <label>Background Link Filter</label>
+                            <frontend_type>text</frontend_type>     
+                            <validate>color</validate>              
+                            <sort_order>27</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is EEEEEE</comment>
+                        </background-filter-link>
+                        <background-filter-link-hover  translate="label">
+                            <label>Background Link Filter Hover</label>
+                            <frontend_type>text</frontend_type>     
+                            <validate>color</validate>              
+                            <sort_order>28</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is 6F6F6F</comment>
+                        </background-filter-link-hover>
+                        <color-link-fitler translate="label">
+                            <label>Color Link Filter </label>
+                            <frontend_type>text</frontend_type>     
+                            <validate>color</validate>              
+                            <sort_order>29</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is 707070</comment>
+                        </color-link-fitler>                        
+                        <color-filter-link-hover  translate="label">
+                            <label>Color Link Filter Hover</label>
+                            <frontend_type>text</frontend_type>     
+                            <validate>color</validate>              
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is FFFFFF</comment>
+                        </color-filter-link-hover>
+                        <color-link  translate="label">
+                            <label>Color Link</label>
+                            <frontend_type>text</frontend_type>     
+                            <validate>color</validate>              
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is 3399CC</comment>
+                        </color-link>
+                        <color-link-hover  translate="label">
+                            <label>Color link hover</label>
+                            <frontend_type>text</frontend_type>     
+                            <validate>color</validate>              
+                            <sort_order>32</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default is 6F6F6F</comment>
+                        </color-link-hover>
+                    </fields>   
+                </style_config> 
+            </groups>
+        </shopbybrand>
+    </sections>
+</config>

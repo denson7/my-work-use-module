@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Shopbybrand
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="top.links">
+            <block type="shopbybrand/toplink" name="toplink-shopbybrand"/>
+        </reference>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/shopbybrand/default.css</stylesheet>
+            </action> 
+                
+            <action method="addCss">
+                <stylesheet>css/shopbybrand/templates/default/shopbybrand-bootstrap.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="left">
+            <block type="shopbybrand/sidebar" name="shopbybrand_left" template="shopbybrand/sidebar.phtml" />
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="style_config" template="shopbybrand/styles.phtml"/>
+        </reference>
+    </default>
+    <shopbybrand_index_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/shopbybrand/bootstrap.css</stylesheet>
+            </action> 
+            <action method="addCss">
+                <stylesheet>css/shopbybrand/bootstrap.css.map</stylesheet>
+            </action> 
+        </reference>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+            
+        </reference>
+        <reference name="content">
+            <block type="shopbybrand/shopbybrand" name="shopbybrand" template="shopbybrand/shopbybrand.phtml" />
+        </reference>
+    </shopbybrand_index_index>
+    <shopbybrand_index_view>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/shopbybrand/bootstrap.css</stylesheet>
+            </action> 
+            <action method="addCss">
+                <stylesheet>css/shopbybrand/bootstrap.css.map</stylesheet>
+            </action> 
+        </reference>
+        <reference name="content">
+            <block type="shopbybrand/view" name="shopbybrand_view" before="-" template="shopbybrand/view.phtml" >
+                <block type="shopbybrand/featuredproduct" name="brandfeaturedproduct" as="brandfeaturedproduct" template="shopbybrand/featuredproduct.phtml"/>
+            </block>
+        </reference>
+    </shopbybrand_index_view>
+    <catalog_product_view>
+        <reference name="alert.urls">
+            <block type="shopbybrand/productinfo" name="shopbybrand_productinfo" template="shopbybrand/info.phtml"/>
+        </reference>
+    </catalog_product_view>
+</layout>

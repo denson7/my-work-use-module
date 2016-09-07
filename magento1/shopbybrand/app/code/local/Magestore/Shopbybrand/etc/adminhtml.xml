@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Shopbybrand
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <menu>
+        <shopbybrand module="shopbybrand" translate="title">
+            <title>Shop by Brand</title>
+            <sort_order>71</sort_order>
+            <children>
+                <shopbybrand module="shopbybrand" translate="title">
+                    <title>Manage Brands</title>
+                    <sort_order>0</sort_order>
+                    <action>brandadmin/adminhtml_brand</action>
+                </shopbybrand>
+                
+                <report module="shopbybrand" translate="title">
+                    <title>Brand Reports</title>
+                    <sort_order>50</sort_order>
+                    <action>brandadmin/adminhtml_Report</action>
+                </report>
+                <settings module="shopbybrand" translate="tditle">
+                    <title>Settings</title>
+                    <sort_order>1000</sort_order>
+                    <action>adminhtml/system_config/edit/section/shopbybrand</action>
+                </settings>
+            </children>
+        </shopbybrand>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <shopbybrand module="shopbybrand" translate="title">
+                                        <title>Shopbybrand</title>
+                                        <sort_order>71</sort_order>
+                                    </shopbybrand>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <shopbybrand module="shopbybrand" translate="title">
+                        <title>Shopbybrand</title>
+                        <sort_order>71</sort_order>
+                        <children>
+                            <shopbybrand module="shopbybrand" translate="title">
+                                <title>Manage Items</title>
+                                <sort_order>0</sort_order>
+                            </shopbybrand>
+                            <report module="shopbybrand" translate="title">
+                                <title>Sales Report by Brand</title>
+                                <sort_order>50</sort_order>
+                            </report>
+                            <settings module="shopbybrand" translate="title">
+                                <title>Settings</title>
+                                <sort_order>1000</sort_order>
+                            </settings>
+                        </children>
+                    </shopbybrand>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

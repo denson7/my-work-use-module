@@ -1,0 +1,126 @@
+<?php
+    $store = Mage::app()->getStore()->getId();
+    $display = Mage::getStoreConfig('shopbybrand/brand_detail/display_brand_featured_products', $store);
+    if($display){
+    $featuredProducts = Mage::getSingleton('shopbybrand/brand')->getBrand()->getFeaturedProductIds();
+    $showAsSlider = true;
+    $logo_width = 125;
+    $logo_height = 125;
+    $numberOfFeaturedProducts = 0;
+    $brandWidth = $logo_width +50;
+?>
+
+<?php if (count($featuredProducts)): ?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/shopbybrand/templates/default/freaturedproductsiliderstyle.css'); ?>" media="all" />
+
+<div class="featuredbrands col" style="">
+    <div class="shopbybrand-title">
+        <h1><?php echo $this->__('Featured Products');?></h1>
+    </div>
+    <div id="ca-container" class="ca-container" style="overflow: hidden;padding: 0px 50px; box-sizing: content-box;">
+        <div class="ca-nav"><span class="ca-nav-prev" onclick="brandNavPrev()">Previous</span><span class="ca-nav-next" onclick="brandNavNext();">Next</span></div>
+        <div class="ca-wrapper">
+            <?php 
+//                $i = 0;
+//                $stock = Mage::getModel('cataloginventory/stock_item');
+                foreach ($featuredProducts as $featuredProduct) : 
+//                    $max_available_quantity = (int)$stock->loadByProduct($featuredProduct)->getQty();
+//                    if($featuredProduct->getStockItem()->getIsInStock()&&($max_available_quantity>0)){
+//                    $i++;
+                    $path = 'brands/thumbnail' . DS . $featuredProduct->getId();
+                    $img = $this->helper('catalog/image')->init($featuredProduct, 'small_image')->resize(145, 112);
+            ?>
+            <div class="ca-item ca-item-<?php echo $i;?>">
+                <div class="ca-item-main">
+                    <a href="<?php echo $this->getProductUrl($featuredProduct); ?>">
+                        <div class="brand-logo" style="margin-bottom: 5px;margin-top: 5px;">
+                            <img src="<?php echo $img; ?>" />
+                        </div>
+                        <div style="display: block;">
+                        <?php echo $featuredProduct->getName(); ?>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <?php 
+//                    }
+                endforeach;
+            ?>
+        </div>
+    </div>
+    <script type="text/javascript">
+        
+        var countFeaturedBrands = <?php echo count($featuredProducts);?>;
+        var brandWidth = <?php echo $brandWidth;?>;
+        var running = false;
+        var featuredbrandsWidth = $$('.featuredbrands').first().offsetWidth -50;
+        var numberofbrand = Math.floor(featuredbrandsWidth/brandWidth);
+       
+        numberofbrand = (numberofbrand<=countFeaturedBrands)?numberofbrand:countFeaturedBrands;
+        $('ca-container').style.width = numberofbrand*brandWidth +"px";
+        window.onresize = brandresize;
+        function brandresize(){
+            featuredbrandsWidth = $$('.featuredbrands').first().offsetWidth  -50;
+            numberofbrand = Math.floor(featuredbrandsWidth/brandWidth);
+            numberofbrand = (numberofbrand<=countFeaturedBrands)?numberofbrand:countFeaturedBrands;
+            $('ca-container').style.width = numberofbrand*brandWidth +"px";
+        }
+        $$('#ca-container .ca-item').each(function(el,index){
+                el.style.position = 'absolute';
+                el.style.left = brandWidth*index + 'px';
+            });
+        function brandNavNext(){
+            if(running)
+                return;
+            running = true;
+            $$('#ca-container .ca-wrapper').first().insert({
+                bottom: $$('#ca-container .ca-item').first().outerHTML
+            });
+            $$('#ca-container .ca-item').each(function(el,index){
+                el.style.left = brandWidth*index + 'px';
+            });
+            var i = 1;
+            var interval = setInterval( function(){
+                if(i<=10){
+                $$('.ca-item').each(function(el,index){
+                        el.style.left = (index - 0.1*i)*brandWidth + 'px';
+                    });
+                    i++;
+                }else{
+                    $$('#ca-container .ca-item').first().remove();
+                    clearInterval(interval);
+                    running = false;
+                }
+            }, 30);
+        }
+        function brandNavPrev(){
+            if(running)
+                return;
+            running = true;
+            $$('#ca-container .ca-wrapper').first().insert({
+                top: $$('#ca-container .ca-item').last().outerHTML
+            });
+            $$('#ca-container .ca-item').each(function(el,index){
+                el.style.left = brandWidth*(index-1) + 'px';
+            });
+            var i = 1;
+            var interval = setInterval( function(){
+                if(i<=10){
+                    $$('.ca-item').each(function(el,index){
+                        el.style.left = (index + 0.1*i -1)*brandWidth + 'px';
+                    });
+                    i++;
+                }else{
+                    $$('#ca-container .ca-item').last().remove();
+                    clearInterval(interval);
+                    running = false;
+                }
+            }, 30);
+        }
+        setInterval( function(){
+            brandNavNext();
+        }, 2500);
+    </script>
+</div>
+<?php endif; ?>
+    <?php } ?>

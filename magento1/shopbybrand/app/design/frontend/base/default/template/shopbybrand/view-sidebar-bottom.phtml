@@ -1,0 +1,59 @@
+<?php $brand = $this->getBrand();?>
+<?php $displayBrandSignup = $this->displayBrandSignup(); ?>
+<?php $displayBrandSearch = $this->displayBrandsearch(); ?>
+		<div class="brand-bottom">
+		<div class="brand-bottom-wrap">
+        
+        <?php if ($displayBrandSignup): ?>
+            <div class="block brand-subcribers block-subscribe">
+				<div class="page-title category-title">
+					<h1><?php echo $this->__('Sign up for new products') ?></h1>
+				</div>
+				<div class="subcribers-content">
+                <form id="brand-subcribers-form-bottom" class="actions" method="post" action="<?php echo $this->getUrl("shopbybrand/index/subscribe") ?>">
+                    <div class="block-content">
+					<p><?php echo $this->__('Be "in-the-know" when we add new styles of %s to our website! Simply sign up and we\'ll notify you.', $brand->getName()); ?></p>
+                    <input type="hidden" name="brand_id" value="<?php echo $brand->getBrandId() ?>">                  
+                    <div class="action-sub">
+						<input id="brand-subcribers-input" name="email" onfocus="if(this.value=='Type your email address') this.value=''" onblur="if(this.value=='') this.value='Type your email address'" class="input-text required-entry validate-email" title="<?php echo $this->__('Type your email address') ?>" value="<?php echo $this->__('Type your email address') ?>">
+						<button class="button" id="subcribers" type="submit"><span><span><?php echo $this->__('Submit'); ?></span></span></button>
+                    </div>
+					<p><?php echo $this->__('We respects your privacy. We don\'t rent or sell your personal information to anyone.'); ?></p>
+					</div>
+                </form>
+				</div>
+            </div>
+        <?php endif; ?>
+		</div>
+		<!--
+         <?php if($this->displayShopby()): ?>
+            <?php echo $this->getChildHtml('shopbybrand-leftnav') ?>
+        <?php endif; ?>
+        <?php if ($displayBrandSearch): ?>
+            <div class="block brand-search">
+                <div class="block-title"><strong><span><?php echo $this->__('Brand Search') ?></span></strong></div>
+                <form id="brand-input-search-form" class="block-subscribe" method="post" action="<?php echo $this->getCharSearchUrl('all').'#shopbybrand_char_filter'; ?>">
+					<div class="block-content">
+                    <p><?php echo $this->__('Please type your keyword') ?></p>
+                    <input id="filterInput" name="input" onfocus="if(this.value=='Enter Keyword') this.value=''" onblur="if(this.value=='') this.value='Enter Keyword'" class="input-text required-entry" title="<?php echo $this->__('Enter Keyword') ?>" value="<?php echo $this->__('Enter Keyword') ?>">
+                    <button class="button" type="submit" id="search"><span><span><?php echo $this->__('Search'); ?></span></span></button>
+                    <ul>
+                        <?php
+                        $lists = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'U', 'V', 'X', 'Y', 'Z');
+                        foreach ($lists as $value) {
+                            ?>
+                            <li style="float: left; width: 20px;"><a href="<?php echo $this->getCharSearchUrl($value) ?>"><?php echo $value ?></a></li>
+                        <?php } ?>
+                    </ul>
+					</div>
+                </form>
+            </div>
+        <?php endif; ?>    
+		-->
+    </div>
+<script type="text/javascript">
+    //<![CDATA[
+    var newsletterSubscriberFormDetail = new VarienForm('brand-subcribers-form-bottom');
+	//var brandinputsearchFormDetail = new VarienForm('brand-input-search-form');
+    //]]> 
+</script>

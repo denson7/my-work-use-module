@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout>
+    <xreview_ajax_index>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xreview/ajax" name="review.ajax.image"/>
+        </block>
+    </xreview_ajax_index>
+</layout>

@@ -1,0 +1,139 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php $_items = $this->getReviewsCollection()->getItems();?>
+<a name="writereview"></a>
+<div class="box-collateral box-reviews" id="customer-reviews">
+    <h2 class="title">
+            <?php echo $this->__('Reviews') ?>
+            <?php if(count($_items)):?>
+            <span><?php echo count($_items); ?> reviews</span>
+            <?php else: ?>
+            <span>0 review</span>
+            <?php endif; ?>
+    </h2>
+    <?php echo $this->getChildHtml('review_form') ?>
+    <?php if (count($_items)):?>
+        
+        <div class="review-heading">    
+            <?php echo $this->getChildHtml('toolbar') ?>
+        </div>
+        <?php foreach ($_items as $_review):?>
+        <dl>
+            <dt>
+                
+                <span class="review-title"><?php echo $this->escapeHtml($_review->getTitle()) ?><br /></span>
+                <span class="review-meta">
+                    <?php echo $this->__('Review by %s', $this->escapeHtml($_review->getNickname())) ?>
+                   <?php echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long') ?>
+                </span>
+            </dt>
+            <dd>
+
+                <?php $_votes = $_review->getRatingVotes(); ?>
+
+                <?php echo nl2br($this->escapeHtml($_review->getDetail())) ?>
+                <!-- 评论图片-->
+                <?php $images = $this->getImages($_review->getId())->getItems();?>
+                <?php if(count($images)):?>
+                    <ul class="view-images">
+                        <?php foreach($images as $image):?>
+                            <li class="image-item" style="float: left;margin-left: 4px;">
+                                <?php $src = Mage::getBaseUrl('media').'review/'.$image->getImage()?>
+                                <a href="javascript:void(0)" onclick="popupImg('<?php echo $image->getId() ?>')">
+                                    <img src="<?php echo $src ?>" alt="" width="50" height="50" />
+                                </a>
+                            </li>
+                        <?php  endforeach;?>
+                    </ul>
+                <?php endif;?>
+                <!-- 评论图片-->
+                <?php if (count($_votes)): ?>
+                <table class="ratings-table">
+                    <colgroup>
+                        <col class="review-label" />
+                        <col class="review-value" />
+                    </colgroup>
+                    <tbody>
+                        <?php foreach ($_votes as $_vote): ?>
+                        <tr>
+                            <th><?php echo $this->escapeHtml($_vote->getRatingCode()) ?></th>
+                            <td>
+                                <div class="rating-box">
+                                    <div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php endif; ?>
+            </dd>
+        </dl>
+        <?php endforeach; ?>
+        <style type="text/css">
+            #loading .loader{border:2px solid;background: #fff4e9 none repeat scroll 0 0;  color: #d85909;  font-weight: bold;  left: 50%;  margin-left: -105px;  padding: 15px 30px;  position: fixed;  text-align: center;  top: 45%;  display: none;  width: 150px;  z-index: 1000;  }
+        </style>
+        <div id="loading">
+            <p id="loading_mask_loader" class="loader">
+            <img alt="Loading..." src="<?php echo $this->getSkinUrl('images/loading-0.gif')?>">
+            <br>
+            Please wait...
+            </p>
+        </div>
+        <?php // echo $this->getChildHtml('toolbar') ?>
+    <?php elseif($this->getParentBlock()): ?>
+        <?php echo $this->getParentBlock()->getReviewsSummaryHtml($this->getProduct(), 'short', true)?>
+    <?php endif;?>
+    
+</div>
+<script type="text/javascript">
+    function popupImg(imgId)
+    {
+        jQuery('#loading_mask_loader').show();
+        jQuery.ajax({
+            url:'<?php echo $this->getUrl('xreview/ajax/')?>',
+            data:{imgId:imgId},
+            type:'POST',
+            dataType:'html',
+            success:function(text){
+                if(text){
+                    jQuery('#loading_mask_loader').hide();
+                    layer.open({
+                        type: 1,
+                        title: false,
+                        closeBtn: 1,
+                        shadeClose: false,
+                        area: ['45%', '60%px'],
+                        skin: 'layui-layer-molv',
+                        content: text
+                    });
+                }
+            }
+        });
+    }
+</script>

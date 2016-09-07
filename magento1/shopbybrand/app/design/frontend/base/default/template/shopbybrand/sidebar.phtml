@@ -1,0 +1,99 @@
+<?php 
+    
+    $display = $this->getDisplaySidebar();
+    $max = $this->getMaximumSidebar();
+    $displayModule = $this->getDisplayModule();
+?>
+
+<?php if($display==1 && $displayModule): ?>
+    
+    <?php 
+    $shopbybrands = Mage::getSingleton('shopbybrand/brand')->getBrandsData();
+    $brandSize = count($shopbybrands);
+    if($brandSize): 
+    ?>
+
+<div class="block shopbybrand_sidebar">
+    <div class="shopbybrand-title">
+       <h1><?php echo $this->__('Brands') ?></h1>
+    </div>
+        <div class="brand-content">
+            <ul>
+                <?php
+                    $show = $this->getOptionDisplay();
+                    $setlink = Mage::getStoreConfig('shopbybrand/general/router');
+                    $file = Mage::getBaseUrl('media') . 'brands/no-image.png';
+                    //$displayConfig = TRUE;
+                    if ($brandSize && $show == 1 ) {
+                        if ($display) {
+                            $i = 0;
+                            foreach ($shopbybrands as $brand) { ?>
+                                <li class='brands-item <?php if($i == 0):?> first <?php elseif($i == max):?> last<?php endif; ?>'><a href="<?php echo $this->getBrandUrl($brand['url_key']); ?>">
+                                       <span class='brand-name'><?php echo $brand['name']; ?></span></a>
+                                </li>
+                                <?php
+                                $i++;
+                                if ($i == $max)
+                                    break;
+                            }
+                        }
+                    }
+                    if ($brandSize && $show == 0 ) {
+                        if ($display) {
+                            $i = 0;
+                            foreach ($shopbybrands as $brand) {
+                                $url = Mage::helper('shopbybrand')->getUrlLogo($brand['brand_id']) . '/' . $brand['thumbnail_image'];
+                                if ($brand['thumbnail_image'] != null) { ?>
+                                    <li class='brands-item'><a href="<?php echo $this->getBrandUrl($brand['url_key']); ?>">
+                                        <img width='70' height='50'  src="<?php echo $url; ?>" class='brands-item-list-image'>
+                                        <span class='brand-name'><?php echo $brand['name']; ?><span>
+                                   </a></li>
+                                <?php } else { ?>
+                                    <li class='brands-item'><a href="<?php echo $this->getBrandUrl($brand['url_key']); ?>">
+                                        <img width='70' height='50'  src="<?php echo $file; ?>" class='brands-item-list-image'>
+                                        <span class='brand-name'><?php echo $brand['name']; ?></span>
+                                   </a></li>
+                                   <?php
+                                }
+                                $i++;
+                                if ($i == $max)
+                                    break;
+                            }
+                        }
+                    }
+                    if ($brandSize && $show == 2 ) {
+                        if ($display) {
+                            $i = 0;
+                            foreach ($shopbybrands as $brand) {
+                                $url = Mage::helper('shopbybrand')->getUrlLogo($brand['brand_id']) . '/' . $brand['thumbnail_image'];
+                                if ($brand['thumbnail_image'] != null) { ?>
+                                    <li class='brands-item'><a href="<?php echo $this->getBrandUrl($brand['url_key']); ?>">
+                                        <img width='70' height='50'  src="<?php echo $url; ?>" class='brands-item-list-image'></a></li>
+                                <?php } else { ?>
+                                    <li class='brands-item'><a href="<?php echo $this->getBrandUrl($brand['url_key']); ?>">
+                                        <img width='90' height='70'  src="<?php echo $file; ?>" class='brands-item-list-image'></a></li>
+                                <?php
+                                
+                            }
+                            $i++;
+                                if ($i == $max)
+                                    break;
+                        }
+                    }
+                }
+                ?>
+            </ul>
+            <div class="bestsllerbrand-allview">
+                
+            <a href="<?php echo $this->getUrl($setlink, array()) ?>">
+                <button type="button" class="button btn-cart">
+                    <span>
+                        <span><?php echo $this->__('View all') ?></span>
+                    </span>
+                </button>
+            </a>
+            </div>
+        </div>    
+</div>
+<?php endif;?>
+<?php endif;?>

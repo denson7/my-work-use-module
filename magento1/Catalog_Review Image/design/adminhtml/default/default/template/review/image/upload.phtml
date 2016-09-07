@@ -1,0 +1,31 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: yang
+ * Date: 2016/7/25
+ * Time: 10:54
+ */
+?>
+<?php echo $this->getChildHtml('uploader')?>
+<p class="note" id="note"><span><?php echo $this->__("('*.gif', '*.jpg','*.jpeg', '*.png')")?></span></p>
+<script type="text/javascript">
+  var uploader = <?php echo $this->getChild('uploader')->getJsObjectName(); ?>;
+  uploader.onFilesComplete = function(files) {
+    var i = 0;
+    files.each(function(file) {
+        if(document.getElementById('upload_image_'+i)){
+            document.getElementById('upload_image_'+i).remove();
+        }
+        var str = file.response;
+        var json = eval('('+str+')');
+        var input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('value', json.file);
+        input.setAttribute('id', 'upload_image_'+i);
+        input.setAttribute('name', 'images[]');
+        document.getElementById('add_review_form').appendChild(input);
+        i++;
+    });
+ }
+</script>
+

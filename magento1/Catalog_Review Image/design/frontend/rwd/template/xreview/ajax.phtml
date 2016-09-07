@@ -1,0 +1,40 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: yang
+ * Date: 2016/7/25
+ * Time: 16:19
+ */?>
+<div class="pop-review-image">
+    <div class="pop-left">
+        <img id="img" src="<?php echo $this->getImageUrlById()?>" alt="" width="300" height="300">
+    </div>
+    <div class="pop-right">
+        <?php $_review = $this->getReview();?>
+        <span class="review-title"><?php echo $this->escapeHtml($_review->getTitle()) ?><br /></span>
+        <?php echo $this->__('Review by %s', $this->escapeHtml($_review->getNickname())) ?>
+        <?php echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long') ?>
+        <div class="review-detail">
+            <?php echo nl2br($this->escapeHtml($_review->getDetail())) ?>
+        </div>
+        <div class="review-images">
+            <span class="image-title"><?php echo $this->__('Images in this review:')?></span>
+            <ul class="view-images">
+                <?php foreach($this->getImages()->getItems() as $image):?>
+                    <li class="image-item" style="float: left;margin-left: 4px;">
+                        <?php $src = Mage::getBaseUrl('media').'review/'.$image->getImage()?>
+                        <a href="javascript:void(0)" onclick="switchImg('<?php echo $image->getImage()?>')">
+                            <img src="<?php echo $src ?>" alt="" width="50" height="50" />
+                        </a>
+                    </li>
+                <?php  endforeach;?>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function switchImg(Image)
+    {
+        jQuery("#img").attr('src','<?php echo Mage::getBaseUrl('media').'review/'?>'+Image);
+    }
+</script>

@@ -1,0 +1,27 @@
+<?php
+    $bestSeller = $this->getProductBestseller();
+?>
+<?php if(count($bestSeller)): ?>
+    <div class="bestsllerbrand">
+        <div class="shopbybrand-title">
+            <h1><?php echo $this->__('BestSeller Products') ?></h1>
+        </div>
+        <div class="brand-bestseller-content">
+            <ol class="mini-products-list" id="block-related">
+                <?php foreach($bestSeller as $_item): ?>
+                <?php $_item = Mage::getModel('catalog/product')->load($_item->getId()); ?>
+                    <li class="item">
+                        <div class="product">
+                            <a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_item->getName()) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(50) ?>" width="50" height="50" alt="<?php echo $this->escapeHtml($_item->getName()) ?>" /></a>
+                            <div class="product-details">
+                                <p class="product-name"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->escapeHtml($_item->getName()) ?></a></p>
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach ?>
+            </ol>
+            <script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+        </div>
+    </div>
+<?php endif ?>
+

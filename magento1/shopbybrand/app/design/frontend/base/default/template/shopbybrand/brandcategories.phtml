@@ -1,0 +1,98 @@
+<?php 
+    $cats = $this->getAllCategories();
+    $categories = $cats['parent'];
+    $count=count($categories);
+    if($count|| count($cats['children'])){
+?>
+<div class="brandscategories col">
+    <div class="shopbybrand-title">
+            <h1><?php echo $this->__('Brand by Category') ?></h1>
+    </div>
+    <strong style="margin-left: 15px;margin-bottom: 20px; width: 100%"><a href="javascript:void(0)" cateId="" onclick="cateFilter(this)"><?php echo $this->__('All Categories');?></a></strong>
+    <ul>
+    <?php 
+        $div = intval($count/4);
+        if($count%4==3) $div++ ;
+        if($count%4==1||$count%4==2) $div_more=$div+1;
+        $j=0;
+        $column=1;
+        $i=0; 
+        foreach ($categories as $category) {
+            if(isset($cats['children'][$category->getId()]))
+                $childs = $cats['children'][$category->getId()];
+            else
+                $childs = array();
+            $i++;
+            $j++;
+    ?>
+		
+        <?php if($j==1): ?>
+        <ol class="col-md-3 col-sm-6 col-xs-12">
+        <?php endif;?>
+			
+            <li id="cat-<?php echo $i; ?>">
+            <?php if(count($childs)>1) : ?>
+                    <a class="show-child" onclick="showChild(this)">&nbsp;</a>
+            <?php endif;?>
+                    <a style="<?php if(count($childs)<=1): ?>padding-left:25px;<?php endif ;?>" 
+                       href="javascript:void(0)"
+                       cateId="<?php echo $category->getId();?>"
+                       onclick="cateFilter(this)"
+                       id="a-cat-<?php echo $category->getId();?>"
+                    >
+                            <?php echo $category->getName(); ?>
+                    </a>
+                    <?php if(count($childs)>1) : ?>
+                    <ul class="brand-child" style="display:none;">
+                    <?php
+                    $i = 0;
+                            foreach($childs as $child):
+                                $i++;
+                                    if($child->getId() != $category->getId()):
+                    ?>
+                            <li class="child-cat <?php if($i == count($childs)):?>last<?php endif ?>">
+                                    <a href="javascript:void(0)"
+                                       cateId="<?php echo $child->getId();?>"
+                                       onclick="cateFilter(this)"
+                                       id="a-cat-<?php echo $child->getId();?>"
+                                    >
+                                            <?php echo $child->getName(); ?>
+                                    </a>
+                            </li>
+                    <?php endif;endforeach;?>
+                    </ul>
+                    <?php endif; ?>
+            </li>
+        <?php if($count%4==1):if($column==1):if($j==$div_more):?></ol><?php $j=0;$column++;endif;endif;endif;?>
+        <?php if($count%4==1):if($column!=1):if($j==$div&&$div>0): ?></ol><?php $j=0;$column++; endif;endif;endif;?>
+        <?php if($count%4==2):if($column==1||$column==2):if($j==$div_more):?></ol><?php $j=0;$column++;endif;endif;endif;?>
+        <?php if($count%4==2):if($column!=1&&$column!=2):if($j==$div&&$div>0):?></ol><?php $j=0;$column++;endif;endif;endif;?>
+        <?php if($count%4==3||$count%4==0): if($j==$div): ?></ol><?php $j=0;$column++;  endif;endif;?>
+        <?php if($count%4==3): if($column==4):if($j==$div-1&&$div>1): ?></ol><?php endif; endif;endif;?>						
+        <?php
+        }?>
+    </ul>
+    <script>
+        var curentActiveCate = null;
+        var curentFilter = null;
+        function cateFilter(el){
+            if(curentActiveCate)
+                curentActiveCate.removeClassName('isActiveCate');
+            el.addClassName('isActiveCate');
+            curentActiveCate = el;
+            brandFilter();
+        }
+        function showChild(el){
+            var showChild = el.next('ul')
+            if(el.hasClassName('child_active')){
+                    el.removeClassName('child_active');
+                    showChild.hide();
+                }
+                else{
+                    el.addClassName('child_active');
+                    showChild.show();
+                }
+        }
+    </script>
+</div>
+    <?php  }?>

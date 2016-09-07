@@ -1,0 +1,24 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: yang
+ * Date: 2016/7/25
+ * Time: 9:59
+ */
+?>
+<div class="review-images">
+    <?php if($this->getImages()):?>
+        <ul>
+            <?php foreach($this->getImages() as $image) :?>
+                <li class="item" style="display: inline;margin-left: 5px;">
+                    <a onclick="imagePreview('image_<?php echo $image->getId()?>'); return false;" href="<?php echo Mage::getBaseUrl('media').'review/'.$image->getImage()?>">
+                        <img id="image_<?php echo $image->getId()?>" class="small-image-preview v-middle" width="30" height="30"  src="<?php echo Mage::getBaseUrl('media').'review/'.$image->getImage()?>">
+                    </a>
+                </li>
+            <?php endforeach;?>
+        </ul>
+        <p class="note">click picture,see big image.</p>
+    <?php else:?>
+        <p><?php echo  $this->__('This review does not exist images.')?></p>
+    <?php endif;?>
+</div>
