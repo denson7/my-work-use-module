@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="left">
+            <block class="Silk\Test\Block\Adminhtml\News\Edit\Tabs" name="test_news_edit_tabs">
+                <block class="Silk\Test\Block\Adminhtml\News\Edit\Tab\Main" name="test_news_edit_tab_main"/>
+                <!--方法一添加Tab选项,方法二参考Tabs.php使用$this->addTab()方法-->
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">test_news_edit_tab_main</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Silk\Test\Block\Adminhtml\News\Edit" name="test_news_edit"/>
+        </referenceContainer>
+    </body>
+</page>

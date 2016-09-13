@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Silk_Test::news_head" title="Test" module="Silk_Test" sortOrder="10" resource="Silk_Test::news_head" />
+        <add id="Silk_Test::news" title="Test" module="Silk_Test" sortOrder="20" parent="Silk_Test::news_head" action="test/news" resource="Silk_Test::news" />
+    </menu>
+</config>

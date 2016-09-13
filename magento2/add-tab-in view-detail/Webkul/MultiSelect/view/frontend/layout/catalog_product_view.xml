@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page layout="2columns-left" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<body>
+    <!--添加自定义内容-->
+    <referenceContainer name="product.info.main">
+        <block class="Webkul\MultiSelect\Block\Product\View\Extra"
+               name="product.view.extra"
+               template="Webkul_MultiSelect::product/view/extra.phtml"
+               after="product.info.overview">
+        </block>
+    </referenceContainer>
+    <!--详情页添加Tab选项-->
+    <referenceBlock name="product.info.details">
+        <block class="Magento\Catalog\Block\Product\View" name="demo.tab" template="Webkul_MultiSelect::demo_tab.phtml" group="detailed_info" >
+            <arguments>
+                <argument translate="true" name="title" xsi:type="string">Demo Tab</argument>
+            </arguments>
+        </block>
+    </referenceBlock>
+</body>
+</page>

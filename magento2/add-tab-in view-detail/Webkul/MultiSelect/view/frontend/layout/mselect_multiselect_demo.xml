@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="jquery/editableMultiselect/css/jquery.multiselect.css"/>
+    </head>
+    <update handle="customer_account"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Webkul\MultiSelect\Block\Multiselect" name="multiselect_demo" template="demo.phtml" cacheable="false" />
+        </referenceContainer>
+    </body>
+</page>

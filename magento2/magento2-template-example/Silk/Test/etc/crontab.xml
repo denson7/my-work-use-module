@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <news name="silk_test_disable_test" instance="Silk\Test\Cron\DisableTest" method="execute">
+            <!-- Every five minutes -->
+            <!--<schedule>*/5 * * * *</schedule>-->
+            <config_path>test/cron/schedule</config_path>
+        </news>
+    </group>
+</config>

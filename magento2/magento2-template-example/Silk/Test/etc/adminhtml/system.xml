@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="test" translate="label" sortOrder="1000">
+            <label>Test</label>
+        </tab>
+        <section id="test" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Test</label>
+            <tab>test</tab>
+            <resource>Silk_Test::test</resource>
+
+
+            <group id="cron" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Cron configuration</label>
+                <field id="schedule" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Schedule</label>
+                    <comment><![CDATA[
+<pre>
+* * * * *
+| | | | |
+| | | | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
+| | | +------ Month of the Year (range: 1-12)
+| | +-------- Day of the Month  (range: 1-31)
+| +---------- Hour              (range: 0-23)
++------------ Minute            (range: 0-59)
+Example: 0 0 * * * Daily at midnight
+</pre>
+                            ]]></comment>
+                </field>
+            </group>
+
+            <group id="parameter" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Color Settings</label>
+                <field id="color_picker" translate="label comment"  sortOrder="116" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Chooser Color</label>
+                    <frontend_model>Silk\Test\Block\Color</frontend_model>
+                </field>
+            </group>
+
+            <group id="date" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Date Setting</label>
+                <field id="startdate" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Date</label>
+                    <comment><![CDATA[Date Format (Date/Month/Year)]]></comment>
+                    <frontend_model>Silk\Test\Block\Calendar</frontend_model>
+                </field>
+            </group>
+
+            <group id="edd" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>WYSIWYG</label>
+                <field id="editortextarea" translate="label" type="editor" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Textare with WYSIWYG</label>
+                    <frontend_model>Silk\Test\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+            </group>
+        </section>
+
+
+    </system>
+</config>

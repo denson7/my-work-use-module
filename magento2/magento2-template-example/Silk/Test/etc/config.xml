@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default><!--即表示对system.xml中设置默认值-->
+        <test><!--该节点对应system.xml中的section节点id值-->
+            <cron>
+                <!-- Every day at midnight -->
+                <schedule>0 10 * * *</schedule>
+            </cron>
+        </test>
+    </default>
+</config>

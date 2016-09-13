@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="custom_widget" class="Silk\Test\Block\Widget\Mwcontact">
+        <label translate="true">Silk Custom - Widget</label>
+        <description>Silk Custom - Widget</description>
+        <parameters>
+            <parameter name="name" xsi:type="text" visible="true" required="true" sort_order="0" >
+                <label translate="true">Name</label>
+            </parameter>
+            <parameter name="address" xsi:type="text" visible="true" sort_order="10">
+                <label translate="true">Address</label>
+            </parameter>
+            <parameter name="var1" xsi:type="select" visible="true"  source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Yes/No</label>
+            </parameter>
+            <parameter name="website" xsi:type="text" visible="true" sort_order="30">
+                <label translate="true">Website URL</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

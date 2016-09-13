@@ -1,0 +1,44 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: denson
+ * Date: 16-8-19
+ * Time: 上午9:49
+ */
+?>
+<fieldset class="fieldset">
+    <legend class="legend">
+        <span><?php /* @escapeNotVerified */ echo __('Multi Select Demo') ?></span>
+    </legend>
+    <form action="#">
+        <div class="field required">
+            <label class="label">
+                <?php
+                /* @escapeNotVerified */ echo __('Multi Select')
+                ?>:
+            </label>
+            <div class="control">
+                <select id="myElement" class="select multiselect myElement" multiple="multiple">
+                    <option value="0"><?php /* @escapeNotVerified */ echo __("Value one"); ?></option>
+                    <option value="2"><?php /* @escapeNotVerified */ echo __("Value two"); ?></option>
+                    <option value="3"><?php /* @escapeNotVerified */ echo __("Value three"); ?></option>
+                    <option value="4"><?php /* @escapeNotVerified */ echo __("Value four"); ?></option>
+                    <option value="5"><?php /* @escapeNotVerified */ echo __("Value five"); ?></option>
+                </select>
+            </div>
+        </div>
+    </form>
+</fieldset>
+
+<!-- inititializing the javascript -->
+<script type="text/x-magento-init">
+    {
+        "*":{
+            "mselectjs":{
+                "somData": {
+                    "myElement": ".myElement"
+                }
+            }
+        }
+    }
+</script>
