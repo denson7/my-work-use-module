@@ -1,7 +1,7 @@
 <?php
 /**
  * WEB4PRO - Creating profitable online stores
- * 
+ *
  * @author WEB4PRO <srepin@corp.web4pro.com.ua>
  * @category  WEB4PRO
  * @package   Web4pro_Attachments
@@ -138,8 +138,7 @@ class Web4pro_Attachments_Adminhtml_Attachments_AttachmentController extends Web
                 if ($products != -1) {
                     $attachment->setProductsData(Mage::helper('adminhtml/js')->decodeGridSerializedInput($products));
                 }
-                print_r($attachment->getData());
-                die();
+
                 $attachment->save();
                 Mage::getSingleton('adminhtml/session')->addSuccess(
                     Mage::helper('web4pro_attachments')->__('Attachment was successfully saved')
