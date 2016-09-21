@@ -33,7 +33,7 @@ class Magestore_Bannerslider_Block_Bannerslider extends Mage_Core_Block_Template
                 if(!Mage::getStoreConfig('bannerslider/general/enable')){
                     return '';
                 }
-              //die(11);
+              //die(111);
         $collection = null;
         $banners = array();
         $collection = Mage::getModel('bannerslider/bannerslider')->getCollection()
