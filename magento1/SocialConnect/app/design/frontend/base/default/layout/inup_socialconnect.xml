@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addItem"
+                    ifconfig="customer/inup_socialconnect_weibo/enabled">
+                <type>skin_css</type>
+                <name>inup_socialconnect/weibo/css/button.css</name>
+            </action>
+            <action method="addItem"
+                    ifconfig="customer/inup_socialconnect_qq/enabled">
+                <type>skin_css</type>
+                <name>inup_socialconnect/qq/css/button.css</name>
+            </action>
+            <action method="addItem"
+                    ifconfig="customer/inup_socialconnect_wechat_web/enabled">
+                <type>skin_css</type>
+                <name>inup_socialconnect/wechat/css/button.css</name>
+            </action>
+            <action method="addItem"
+                    ifconfig="customer/inup_socialconnect_wechat_qr/enabled">
+                <type>skin_css</type>
+                <name>inup_socialconnect/wechat/css/button.css</name>
+            </action>
+        </reference>
+    </default>
+
+    <customer_account_login>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>inup_socialconnect/css/styles.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="inup_socialconnect/login" name="inup_socialconnect_login">
+                <block type="inup_socialconnect/weibo_button" name="inup_socialconnect_weibo_login_button"/>
+                <block type="inup_socialconnect/qq_button" name="inup_socialconnect_qq_login_button"/>
+                <block type="inup_socialconnect/wechat_button" name="inup_socialconnect_wechat_login_button"/>
+            </block>
+        </reference>
+    </customer_account_login>
+
+    <customer_account_create>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>inup_socialconnect/css/styles.css</name>
+            </action>
+        </reference>
+        <reference name="customer_form_register">
+            <action method="setTemplate">
+                <template>inup/socialconnect/customer/form/register.phtml</template>
+            </action>
+            <block type="inup_socialconnect/register" name="inup_socialconnect_register">
+                <block type="inup_socialconnect/weibo_button" name="inup_socialconnect_checkout_weibo_button"/>
+                <block type="inup_socialconnect/qq_button" name="inup_socialconnect_checkout_qq_button"/>
+                <block type="inup_socialconnect/wechat_button" name="inup_socialconnect_checkout_wechat_button"/>
+            </block>
+        </reference>
+    </customer_account_create>
+
+    <inup_socialconnect_account_weibo translate="label">
+        <label>Customer My Account weibo Connect</label>
+        <update handle="customer_account"/>
+        <reference name="head">
+            <action method="setTitle" translate="title" module="inup_socialconnect">
+                <title>weibo Connect</title>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>inup_socialconnect/css/styles.css</name>
+            </action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="inup_socialconnect/weibo_account" name="inup_socialconnect_weibo_account">
+                <block type="inup_socialconnect/weibo_button" name="inup_socialconnect_account_weibo_button"/>
+            </block>
+        </reference>
+        <reference name="customer_account_navigation">
+            <action method="setActive" module="inup_socialconnect">
+                <path>socialconnect/account/weibo</path>
+            </action>
+        </reference>
+    </inup_socialconnect_account_weibo>
+
+    <inup_socialconnect_account_qq translate="label">
+        <label>Customer My Account qq Connect</label>
+        <update handle="customer_account"/>
+        <reference name="head">
+            <action method="setTitle" translate="title" module="inup_socialconnect">
+                <title>qq Connect</title>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>inup_socialconnect/css/styles.css</name>
+            </action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="inup_socialconnect/qq_account" name="inup_socialconnect_qq_account">
+                <block type="inup_socialconnect/qq_button" name="inup_socialconnect_account_qq_button"/>
+            </block>
+        </reference>
+        <reference name="customer_account_navigation">
+            <action method="setActive" module="inup_socialconnect">
+                <path>socialconnect/account/qq</path>
+            </action>
+        </reference>
+    </inup_socialconnect_account_qq>
+
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>inup_socialconnect/css/styles.css</name>
+            </action>
+        </reference>
+        <reference name="checkout.onepage.login">
+            <action method="setTemplate">
+                <template>inup/socialconnect/checkout/onepage/login.phtml</template>
+            </action>
+            <block type="inup_socialconnect/checkout" name="inup_socialconnect_checkout">
+                <block type="inup_socialconnect/weibo_button" name="inup_socialconnect_checkout_weibo_button"/>
+                <block type="inup_socialconnect/qq_button" name="inup_socialconnect_checkout_qq_button"/>
+                <block type="inup_socialconnect/wechat_button" name="inup_socialconnect_checkout_wechat_button"/>
+            </block>
+        </reference>
+    </checkout_onepage_index>
+</layout>

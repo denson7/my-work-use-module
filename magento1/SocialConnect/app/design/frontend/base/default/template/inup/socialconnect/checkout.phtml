@@ -1,0 +1,25 @@
+<div class="inup-socialconnect-checkout">
+    <div class="<?php echo $this->_getColSet(); ?>">
+        <?php if ($this->_weiboEnabled()): ?>
+            <div class="<?php echo $this->_getCol(); ?> inup-socialconnect-checkout-weibo">
+                <h3><?php echo $this->__('weibo Connect') ?></h3>
+                <p><?php echo $this->__('You can continue with checkout using your <strong>weibo</strong> account.') ?></p>
+                <?php echo $this->getChildHtml('inup_socialconnect_checkout_weibo_button') ?>
+            </div>
+        <?php endif; ?>
+        <?php if ($this->_qqEnabled()): ?>
+            <div class="<?php echo $this->_getCol(); ?> inup-socialconnect-checkout-qq">
+                <h3><?php echo $this->__('qq Connect') ?></h3>
+                <p><?php echo $this->__('You can continue with checkout using your <strong>qq</strong> account.') ?></p>
+                <?php echo $this->getChildHtml('inup_socialconnect_checkout_qq_button') ?>
+            </div>
+        <?php endif; ?>
+        <?php if ($this->_wechatEnabled()): ?>
+            <div class="<?php echo $this->_getCol(); ?> inup-socialconnect-checkout-wechat">
+                <h3><?php echo $this->__('Wechat Connect') ?></h3>
+                <p><?php echo $this->__('You can continue with checkout using your <strong>Wechat</strong> account.') ?></p>
+                <?php echo $this->getChildHtml('inup_socialconnect_checkout_wechat_button') ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
