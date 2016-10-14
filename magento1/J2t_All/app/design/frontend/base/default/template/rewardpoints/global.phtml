@@ -1,0 +1,9 @@
+
+<?php if (Mage::getSingleton('customer/session')->isLoggedIn() && Mage::getSingleton('customer/session')->getCustomer()->getRewardpointsAvailable()
+        && $this->canShowPoints()):?>
+<script type="text/javascript">
+    document.observe("dom:loaded", function() {
+        $('j2t-toplink-login').insert({after: ' <a class="top.link.reward.points" href="<?php echo $this->getUrl('rewardpoints/index/points');?>" title="<?php $this->__('Your points');?>">(<?php echo $this->__('%s points', (int)Mage::getSingleton('customer/session')->getCustomer()->getRewardpointsAvailable());?>)</a>'});
+    });
+</script>
+<?php endif;?>

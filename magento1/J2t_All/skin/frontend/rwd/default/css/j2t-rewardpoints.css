@@ -1,0 +1,56 @@
+#j2t-track1 {background-image:url(../images/j2t-bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;}
+#j2t-handle1 {background-image:url(../images/j2t-thumb-n.gif); background-repeat:no-repeat; width:17px; height:21px; cursor:move;}
+#j2t-track2 {background-image:url(../images/j2t-bg-fader.gif); background-repeat:no-repeat; width:209px; height:28px;}
+#j2t-handle2 {background-image:url(../images/j2t-thumb-orange.gif); background-repeat:no-repeat; width:17px; height:21px; cursor:pointer;}
+.j2t-loyalty-points {display:block; clear:both;}
+.rewards_point_cart em {color:#EB340A;}
+.form-list .field.j2t-rewardpoints-email {width: 280px;}
+.form-list .field.j2t-rewardpoints-email img {vertical-align: middle;}
+.order-items h2.front-rewardpoints-details-title, .page-print h2.front-rewardpoints-details-title {margin-top: 10px;}
+.j2t-loyalty-points img {display: inline; vertical-align: middle;}
+#rewardFormArea .login-area-reward-form { border: 1px solid #E2E2E2; padding: 5px; background-color: #F0F8FC; margin-top: 5px;}
+#rewardFormArea .innner-item-points {font-size: 11px;}
+.rewardpoints-msgs .success-msg {background-image: url(../images/rewardpoints/rewardpoints.png);}
+
+ul.catalog-points-details {list-style: disc; margin-left: 30px; font-style: italic; color: #5E5E5E;}
+
+span.inline-catalog-points-details, span.catalog-points-details {display:list-item;}
+span.catalog-points-details {list-style: disc; margin-left: 30px; font-style: italic; color: #5E5E5E;}
+
+#my-rewardpoints-table {margin-bottom: 20px;}
+
+.block .j2t-content {margin: 0; padding: 5px 9px; clear:both;}
+.block .jiathis_style_32x32 {margin: 0; padding: 5px 9px;}
+
+
+.j2t-content input.input-text {width:98%;}
+
+#rewardFormArea p.onestepcheckout-numbers {
+    margin-top:20px;
+}
+
+@media only screen and (max-width: 1200px) {
+	.reward-data-table thead {
+		display: none;
+	}
+	.data-table.reward-data-table td {
+		display: block;
+		width: 100%;
+		border:none;
+		padding: 0px;
+	}
+	
+	.reward-data-table td[data-theme-label] {
+		padding-left: 15px;
+		margin-bottom: 6px;
+	}
+
+	.reward-data-table td[data-theme-label]:before {
+		content: attr(data-theme-label) ":";
+		padding-right: 5px;
+		font-weight: bold;
+	}
+	.form-list .field.j2t-rewardpoints-email, .form-list .field.j2t-rewardpoints-name {
+		width: 100%;
+	}
+}

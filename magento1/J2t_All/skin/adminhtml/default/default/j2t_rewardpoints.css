@@ -1,0 +1,41 @@
+#row_rewardpoints_events_event_list p.note, #row_rewardpoints_notifications_points_notifications p.note, #row_rewardpoints_status_notification_points_notifications p.note,
+#row_rewardpoints_custom_point_custom_point_value p.note, #row_rewardpoints_custom_point_custom_point_usage  p.note,
+#row_rewardpoints_referral_advanced_referral_steps p.note, #row_rewardpoints_j2trewardcouponlink_point_coupon p.note,
+#row_rewardpoints_j2trewardwebhook_webhooks p.note, #row_rewardpoints_slips_points_share_slips p.note,
+#row_rewardpoints_slips_points_qrcode p.note
+{width:auto;}
+.reward-points-entry-edit {border: 1px solid #87a900; padding-top: 10px; margin-top: 10px; padding-bottom: 10px; background-color: #FDFFF5; text-align: center;}
+.reward-admin-logo {height:26px; margin: 5px 20px 5px 27px;}
+
+
+.admin-rewardpoints-details .admin-point-details h4 {text-align: right; padding-right: 20px; margin-bottom: 0px;}
+.order-totals table.admin-rewardpoints-details {margin-top:10px; border-top: 1px dashed #000; padding-top:10px;}
+
+ul.tabs a.j2t-rewardpoints-module span, ul.tabs a.j2t-rewardpoints-module:hover span {
+    background: url("./images/j2t/reward_points.png") no-repeat scroll 0 0 transparent;
+    padding: 0 20px 0;
+}
+ul.tabs a.j2t-rewardpoints-module, ul.tabs a.j2t-rewardpoints-module:hover
+{
+    padding: 0.5em 0.5em 0.28em 1.5em;
+    border-bottom: dotted 1px #c0c0c0;
+}
+ul.tabs a.j2t-rewardpoints-module.active, ul.tabs a.j2t-rewardpoints-module.active:hover
+{
+    background-color: #FFFFFF;
+}
+
+.form-list td.value select.j2t_customdelivery_countries {
+    width: 220px;
+}
+
+.form-list td.value select.j2t_rewardgroup_voidgroup { width: 180px; }
+#row_rewardpoints_j2trewardgroup_point_group .note {width:auto;}
+
+ul#customer_info_tabs li a.j2trewardpoints {
+    background: url("./images/j2t/reward_points.png") no-repeat scroll 1px 4px transparent;
+}
+
+ul.tabs a.j2trewardpoints.active span, ul.tabs a:hover.j2trewardpoints.active span {
+    background: url("./images/j2t/reward_points.png") no-repeat scroll 1px 4px #fff !important;
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <web_adminhtml_web_index>
+        <reference name="content">
+            <block type="web/adminhtml_web" name="web" />
+        </reference>
+    </web_adminhtml_web_index>
+</layout>

@@ -1,0 +1,63 @@
+<script type="text/javascript">
+	
+	function reloadOnestep() {
+		document.location.reload(true);
+	}
+	
+	function rewardQuotation(url, current_button){
+		var loadInAjax = true;
+		var parameters = Form.serializeElements($$('.input-rewards'));
+		var nameInput = parameters.split('&');
+		
+		if (loadInAjax){
+			var summary = $$('div.onestepcheckout-summary').first();
+			summary.update('<div class="loading-ajax">&nbsp;</div>');
+			
+			var rewardcoupon = $('rewardFormArea');
+			rewardcoupon.update('<div class="loading-ajax">&nbsp;</div>');
+			parameters += '&is_onestepcheckout=1';
+			
+			new Ajax.Request(url, {
+				method: 'post',
+				parameters: parameters,
+				onSuccess: function (transport) {
+					if (transport.status == 200) {
+						var response = transport.responseText.evalJSON();
+						if (response.success) {
+							summary.update(response.summary);
+							rewardcoupon.update(response.rewardcoupon);
+						}
+						else {
+							summary.update(response.summary);
+							rewardcoupon.update(response.rewardcoupon);
+						}
+					}
+				}
+			});
+		} else {
+			$(current_button).hide();
+			$('onestepcheckout-place-order').hide();
+			var form = new Element( 'form',
+			{
+				method: 'post',
+				action: url
+			});
+
+
+			for(i = 0; i < nameInput.length; i++){
+				var elem = nameInput[i];
+				var vals = elem.split('=');
+				var name = vals[0];
+				var value = vals[1];
+				form.insert(new Element( 'input',
+							{
+							  name: name,
+							  value: value,
+							  type: 'text'
+							}));
+			}
+			$(document.body).insert(form);
+			form.submit(); 
+		}
+	}
+</script>

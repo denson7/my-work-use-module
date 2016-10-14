@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <name>j2t_rewardpoints.css</name>
+            </action>
+            <action method="addJs"><file>j2t_rewardpoints.js</file></action>
+        </reference>
+    </default>
+    
+    <adminhtml_customer_edit>
+        <reference name="customer_edit_tabs">
+            <!-- J2t_Rewardpoints_Block_Adminhtml_Customer_Edit_Tabs -->
+            <block type="rewardpoints/adminhtml_customer_edit_tabs" name="rewardpoints_tab">
+                <action method="addRewardsTab" />
+            </block>
+        </reference>
+    </adminhtml_customer_edit>
+
+
+</layout>

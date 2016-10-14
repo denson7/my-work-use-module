@@ -1,0 +1,32 @@
+<?php if (Mage::helper('rewardpoints')->isModuleActive()):?>
+
+<?php if($this->showOnepageSummary()):?>
+
+<?php $points_currently_used = $this->getPointsCurrentlyUsed(); ?>
+<?php $couponCode = Mage::getSingleton('checkout/cart')->getQuote()->getCouponCode(); ?>
+<?php $pts = $this->getPointsOnOrder();?>
+
+
+
+<ol class="checkout-agreements discount-box-review">
+    <li>
+        <span class="discount-codes box discount">
+            <h2><?php echo $this->__('Reward points'); ?></h2>
+            <?php echo $this->getIllustrationImage()?>
+            <p class="rewards_point_cart"><?php echo $this->__("This shopping cart is worth %s loyalty point(s).", $pts);?><?php echo Mage::helper('rewardpoints/data')->getEquivalence($pts);?><?php if (!$this->getCustomerId()): ?> <em>*</em><?php endif;?></p>
+            <?php if ($this->getCustomerId()): ?>
+                <?php $customerPoints = $this->getCustomerPoints(); ?>
+                <?php if ($customerPoints > 0):?>
+                    <p><?php echo $this->__('You are currently using %d point(s) of your %d loyalty point(s) available.', $points_currently_used, $customerPoints); ?></p>
+                    <p><?php echo $this->__("Review your <a href='%s'>shopping cart</a> to apply or modify points usage.",$this->getUrl('checkout/cart'));?></p>
+                <?php endif;?>
+            <?php else:?>
+                    <p class="required"><?php echo $this->__('* Points are gathered only for registered clients.');?></p>
+            <?php endif;?>
+        </span>
+   </li>
+</ol>
+
+<?php endif;?>
+
+<?php endif;?>

@@ -1,0 +1,68 @@
+<?php if($this->isPermanentLink() || Mage::getStoreConfig('rewardpoints/registration/referral_custom_code')):?>
+
+<div class="block block-referral">
+    
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Referral program') ?></span></strong>
+    </div>
+    <div class="block-content">
+        
+        <?php if(Mage::getSingleton('customer/session')->isLoggedIn()):?>
+        <?php if($this->isPermanentLink()):?>
+        <p class="j2t-content">
+            <strong><?php echo $this->__('Permanent Link') ?></strong>
+            <br />
+            <?php echo $this->__('Share the following link with your friends: <br /><strong>%s</strong>', '<input onclick="this.select();"  type="text" id="referral_url" name="referral_url" value="'.$this->getReferringUrl().'" title="Referral url" class="input-text" readonly="readonly">') ?>
+        </p>
+        <?php endif;?>
+
+        <?php if ($custom_code = Mage::getStoreConfig('rewardpoints/registration/referral_custom_code')):?>
+        <p class="j2t-content">
+            <strong><?php echo $this->__('Share with the following') ?></strong>
+            <br />
+            <?php echo str_replace("{{referral_url}}", $this->getReferringUrl(), $custom_code);?>
+        </p>
+        <?php endif;?>
+        <?php else:?>
+        <p class="j2t-content">
+            <?php $login_extra_box = $this->__('Please %s in order to use referral program.', '<a href="'.$this->getUrl('rewardpoints/index/rewardLogin').'" title="">'.$this->__('Log In').'</a>');?>
+            <?php echo $login_extra_box;?>
+        </p>
+        <?php endif;?>
+        
+        
+        <div class="j2t-content">
+            <p><strong><?php echo $this->__('Benefits from referral program') ?></strong></p>
+            <?php if($this->getReferrerRegistrationPoints()):?>
+                <p><?php echo $this->__('For any referred friend\'s registration, you earn: <strong>%s points</strong>', $this->getReferrerRegistrationPoints());?></p>
+            <?php endif;?>
+            <?php if($this->getFriendRegistrationPoints()):?>
+                <p><?php echo $this->__('For any referred friend\'s registration, you friend earn: <strong>%s points</strong>', $this->getFriendRegistrationPoints());?></p>
+            <?php endif;?>
+            <?php if($this->getReferrerPoints() && $this->getReferrerCalculationType() == J2t_Rewardpoints_Model_Calculationtype::STATIC_VALUE):?>
+                <p><?php echo $this->__('For any first valid order placed by referred friend, you earn: <strong>%s points</strong>', $this->getReferrerPoints());?></p>
+                <?php elseif ($this->getReferrerPoints() && $this->getReferrerCalculationType() == J2t_Rewardpoints_Model_Calculationtype::RATIO_POINTS):?>
+                <p><?php echo $this->__('For any first valid order placed by referred friend, you earn: <strong>%s points x product price values</strong>', $this->getReferrerPoints());?></p>
+                <?php elseif ($this->getReferrerPoints() && $this->getReferrerCalculationType() == J2t_Rewardpoints_Model_Calculationtype::CART_SUMMARY):?>
+                <p><?php echo $this->__('For any first valid order placed by referred friend, you earn: <strong>%s points x cart summary</strong>', $this->getReferrerPoints());?></p>
+            <?php endif;?>
+            <?php if($this->getFriendPoints() && $this->getFriendCalculationType() == J2t_Rewardpoints_Model_Calculationtype::STATIC_VALUE):?>
+                <p><?php echo $this->__('For any first valid order placed by referred friend, your friend gets: <strong>%s extra points</strong>', $this->getFriendPoints());?></p>
+                <?php elseif ($this->getFriendPoints() && $this->getFriendCalculationType() == J2t_Rewardpoints_Model_Calculationtype::RATIO_POINTS):?>
+                <p><?php echo $this->__('For any first valid order placed by referred friend, you friend gets: <strong>%s points x product price values</strong>', $this->getFriendPoints());?></p>
+                <?php elseif ($this->getFriendPoints() && $this->getFriendCalculationType() == J2t_Rewardpoints_Model_Calculationtype::CART_SUMMARY):?>
+                <p><?php echo $this->__('For any first valid order placed by referred friend, you friend gets: <strong>%s points x cart summary</strong>', $this->getFriendPoints());?></p>
+            <?php endif;?>
+            <?php if ($this->getMinOrderAmount()):?>
+                <div class="min-order-referral-j2t">
+                <?php echo $this->__("Minimum order for referral program to be processed is: <strong>%s</strong>", Mage::helper('core')->currency($this->getMinOrderAmount(),true,false));?>
+                </div>
+            <?php endif;?>
+        </div>
+        
+    </div>
+</div>
+
+<?php endif;?>
+
+

@@ -1,0 +1,299 @@
+<?php
+/**
+ * J2T RewardsPoint2
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@j2t-design.com so we can send you a copy immediately.
+ *
+ * @category   Magento extension
+ * @package    RewardsPoint2
+ * @copyright  Copyright (c) 2015 J2T DESIGN. (http://www.j2t-design.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ ?>
+
+<?php if (Mage::helper('rewardpoints')->isModuleActive()):?>
+
+<?php $points_currently_used = $this->getPointsCurrentlyUsed(); ?>
+<?php $couponCode = Mage::getSingleton('checkout/cart')->getQuote()->getCouponCode(); ?>
+<?php $pts = $this->getPointsOnOrder();?>
+
+<?php $login_extra_box = '';?>
+<?php if (!Mage::getModel('customer/session')->isLoggedIn() && $this->showLogin()):?>
+<?php $login_extra_box = '<div class="login-area-reward-form">'.$this->__('Please %s in order to redeem points.', '<a href="'.$this->getUrl('rewardpoints/index/rewardLogin').'" title="">'.$this->__('Log In').'</a>').'</div>';?>
+<?php endif;?>
+
+<?php $details_items = '';?>
+<?php if ($this->showDetails()):?>
+    <?php 
+    $show_hide = '<div>'
+            . '<a id="j2t-show-rewards-details" onclick="$(this).hide(); $(\'j2t-hide-rewards-details\').show(); $(\'item-details-rewardpoints\').show(); $(\'content-details-rewardpoints\').show(); " href="javascript:$(this).hide(); $(\'j2t-hide-rewards-details\').show(); $(\'item-details-rewardpoints\').show(); $(\'content-details-rewardpoints\').show(); void(0)" alt="'. $this->__('Show details').'">'. $this->__('Show details').'</a>'
+            . '<a id="j2t-hide-rewards-details" style="display:none;" onclick="$(\'j2t-show-rewards-details\').show(); $(this).hide(); $(\'content-details-rewardpoints\').hide();" href="javascript:$(\'j2t-show-rewards-details\').show(); $(this).hide(); $(\'content-details-rewardpoints\').hide(); void(0);" alt="'. $this->__('Hide details').'">'. $this->__('Hide details').'</a>
+    </div>';
+    ?>
+    <?php $details_items = '<div id="content-details-rewardpoints" style="display:none;">';?>
+    <?php if (($items_line = $this->getItemPoints()) && sizeof($this->getItemPoints())):?>
+        <?php $details_items .= '<div class="item-details-rewardpoints" id="item-details-rewardpoints">';?>
+        <?php foreach($items_line as $point_line):?>
+            <?php $details_items .= '<div class="innner-item-points">'.$point_line.'</div>';?>
+        <?php endforeach;?>
+        <?php $details_items .= '</div>';?>
+    <?php endif;?>
+
+    <?php if($rule_lines = $this->getQuoteCartRuleText()):?>
+        <?php $details_items .= '<div class="item-details-rewardpoints-cartrule" id="item-details-rewardpoints-cartrule"><h4>'.$this->__("Extra details").'</h4>';?>
+        <?php foreach($rule_lines as $point_line):?>
+            <?php $details_items .= '<div class="innner-item-points">'.$point_line.'</div>';?>
+        <?php endforeach;?>
+        <?php $details_items .= '</div>';?>
+    <?php endif;?>
+    <?php $details_items .= '</div>';?>
+    <?php $details_items = $show_hide . $details_items;?>
+
+<?php endif;?>
+
+<?php if (!$this->getAutoUse()): ?>
+    <?php if (!$this->getCustomerId()):?>
+    <div class="discount-codes box discount" id="rewardFormArea">
+        <p class="onestepcheckout-numbers"><?php echo $this->__('Reward points'); ?></p>
+        <?php echo $this->getIllustrationImage()?>
+        <div class="rewards_point_cart">
+            <?php if (!$this->isCouponPointsRemoved()): ?>
+                <?php echo $this->__("This shopping cart is worth %s loyalty point(s).", $pts);?><?php echo Mage::helper('rewardpoints/data')->getEquivalence($pts);?>
+            <?php else:?>
+                <?php echo $this->__("You are currently using a discount code. Therefore, this order will not allow point gathering.");?>
+            <?php endif;?>
+        </div>
+        <?php if (!$this->isCouponPointsRemoved()): ?>
+        <?php echo $details_items;?>
+        <?php endif;?>
+        <?php echo $login_extra_box;?>
+    </div>
+    <?php endif; ?>
+<?php if ($this->getCustomerId()): ?>
+    <?php $point_details = $this->getPointsInfo();?>
+
+<?php if ($this->canUseCouponCode() && ($couponCode == "" || $couponCode == null) || !$this->canUseCouponCode()):?>
+<div class="discount-codes box discount" id="rewardFormArea">
+    <?php if (!$points_currently_used): ?>
+    <div id="discountFormPoints2">
+        <fieldset>
+            <p class="onestepcheckout-numbers"><?php echo $this->__('Reward points'); ?></p>
+            <?php echo $this->getIllustrationImage()?>
+            <div class="rewards_point_cart">
+                <?php if (!$this->isCouponPointsRemoved()): ?>
+                    <?php echo $this->__("This shopping cart is worth %s loyalty point(s).", $pts);?><?php echo Mage::helper('rewardpoints/data')->getEquivalence($pts);?>
+                <?php else:?>
+                    <?php echo $this->__("You are currently using a discount code. Therefore, this order will not allow point gathering.");?>
+                <?php endif;?>
+            </div>
+            <?php if (!$this->isCouponPointsRemoved()): ?>
+                <?php echo $details_items;?>
+            <?php endif;?>
+            <?php echo $login_extra_box;?>
+            <?php if ($point_details['min_use'] > $point_details['customer_points']):?>
+                <p><?php echo $this->__('You have %d loyalty point(s) available.', $point_details['customer_points']); ?><?php echo Mage::helper('rewardpoints/data')->getEquivalence($point_details['customer_points']);?></p>
+                <?php //if ($point_details['step_apply']):?>
+                <p><?php echo $this->__('To get a discount you need at least %d loyalty point(s).', $point_details['min_use']); ?></p>
+                <?php //endif;?>
+            <?php else:?>
+                <p class="no-display"><?php echo $this->__('Enter quantity of loyalty point(s) you want to use.') ?></p>
+                <p><?php echo $this->__('You have %d loyalty point(s) available.', $point_details['customer_points']); ?><?php echo Mage::helper('rewardpoints/data')->getEquivalence($point_details['customer_points']);?></p>
+                
+				<?php if($this->isUsable() && $this->getCustomerPoints() > 0) : ?>
+                <?php if ($point_details['step_apply']):?>
+                    <?php if (!$this->useSlider()):?>
+                    <select name="points_to_be_used" id="coupon_code_points_qty" class="input-text input-rewards">
+                        <?php echo $this->pointsToAddOptions($point_details['customer_points'], $point_details['step']);?>
+                    </select>
+                    <?php else:?>
+
+                    <div class="j2t-slider">
+                        <div onclick="new Effect.SwitchOff(this)"><?php echo $this->__('Slide to specify the amount of points to be used.');?></div>
+                        <div id="j2t-track1">
+                            <div id="j2t-handle1"> </div>
+                        </div>
+                        <div id='j2t-height_value_1'></div>
+
+                        <?php $option_slider = $this->pointsToAddOptions($point_details['customer_points'], $point_details['step'], true);?>
+                        <?php $arr_slider = explode(',',$option_slider);?>
+
+                        <script type="text/javascript" language="javascript">
+                        // <![CDATA[
+                            <?php if (Mage::getStoreConfig('rewardpoints/default/point_equivalence', Mage::app()->getStore()->getId())):?>
+
+                                Number.prototype.j2tFormatMoney = function(c, d, t){
+                                    var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, t = t == undefined ? "." : t, s = n < 0 ? "-" : "", i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
+                                    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+                                };
+
+                                //////////////////////////////////
+
+                                <?php
+                                $locale = Mage::app()->getLocale()->getDefaultLocale();
+                                $format = Zend_Locale_Data::getContent($locale, 'currencynumber');
+
+                                $value_format = Zend_Locale_Format::toNumber(1234.99, array('locale' => $locale,
+                                                                                           'number_format' => $format,
+                                                                                           'precision'     => 2));
+                                $pos_mil = strpos($value_format, "234") - 1;
+                                $mil_sep = substr($value_format, $pos_mil, 1);
+
+                                $pos_dec = strpos($value_format, "99") - 1;
+                                $dec_sep = substr($value_format, $pos_dec, 1);
+
+                                ?>
+                                var j2t_mil_sep = "<?php echo (!in_array(trim($mil_sep), array(',','.',' '))) ? " " : $mil_sep;?>";
+
+                                var j2t_dec_sep = "<?php echo $dec_sep;?>";
+
+                                var j2t_convert_template = (12345.23).j2tFormatMoney(2, j2t_dec_sep, j2t_mil_sep);
+
+                                var j2t_point_currency_base = "<?php echo str_replace('"', '\"', Mage::helper('core')->currency(1, false, false));?>";
+                                var j2t_point_currency = "<?php echo str_replace('"', '\"', Mage::app()->getStore()->formatPrice(1.00, false));?>";
+                                j2t_point_currency = j2t_point_currency.replace((1.00).j2tFormatMoney(2, j2t_dec_sep, j2t_mil_sep), "__MONEY__");
+
+                                var j2t_point_default_point_unit_base = "<?php echo Mage::helper('core')->currency(Mage::helper('rewardpoints')->convertPointsToMoneyEquivalence(floor(1)), true, false);?>";
+                                var j2t_point_default_point_unit = <?php echo Mage::helper('rewardpoints')->convertPointsToMoneyEquivalence(1);?>;
+                                var j2t_point_equivalence_txt = "<?php echo str_replace('"', '\"', Mage::helper('rewardpoints')->__("%d points = %s.", 1111, 2222));?>";
+
+
+                                function verifyJ2tCartPointsValue(current_points) {
+                                    var money_equivalence = current_points * j2t_point_default_point_unit * j2t_point_currency_base;
+                                    money_equivalence = Math.round(money_equivalence * 100)/100;
+                                    money_equivalence = j2t_point_currency.replace("__MONEY__", (money_equivalence).j2tFormatMoney(2, j2t_dec_sep, j2t_mil_sep));
+                                    var return_value = j2t_point_equivalence_txt.replace("1111", current_points);
+                                    return_value = return_value.replace("2222", money_equivalence);
+                                    return return_value;
+                                }
+                                
+                            <?php else:?>
+                                function verifyJ2tCartPointsValue(current_points) {
+                                    return current_points;
+                                }
+                            <?php endif;?>
+                        
+                        // ]]>
+                      </script>
+                      <input type="hidden" value="<?php if(isset($arr_slider[0])):?><?php echo $arr_slider[0];?><?php endif;?>"  name="points_to_be_used" id="points_to_be_used" class="input-text input-rewards" />
+                      <script type="text/javascript">
+                      // <![CDATA[
+                                var s1 = new Control.Slider('j2t-handle1','j2t-track1', {axis:'horizontal', range: $R(<?php echo $arr_slider[0];?>,<?php echo end($arr_slider);?>), values: [<?php echo $option_slider;?>]});
+                                s1.options.onChange = function(value){
+                                    //$('j2t-height_value_1').innerHTML = value;
+                                    $('j2t-height_value_1').innerHTML = verifyJ2tCartPointsValue(value);
+                                    $('points_to_be_used').value = s1.value;
+                                };
+                                //$('j2t-height_value_1').innerHTML = s1.value;
+                                $('j2t-height_value_1').innerHTML = verifyJ2tCartPointsValue(s1.value);
+                                $('points_to_be_used').value = s1.value;
+                      </script>
+                    </div>
+                    <?php endif;?>
+
+
+                <?php else:?>
+                    <input <?php if($point_details['full_use']):?>type="hidden"<?php else:?>type="text"<?php endif;?> value="<?php if($point_details['full_use']):?><?php echo $point_details['max_use'];?><?php endif;?>"  name="points_to_be_used" class="input-text input-rewards" />
+                <?php endif;?>
+                <?php if($this->getCustomerPoints() > 0) : ?>
+                <div class="buttons-set">
+                    <button class="form-button-alt button btn-small" value="<?php echo $this->__('Apply Points') ?>" onclick="rewardQuotation('<?php echo $this->getUrl('rewardpoints/index/quotation/') ?>', this);" type="button">
+                        <span><span><?php echo $this->__('Apply Points') ?></span></span>
+                    </button>
+                </div>
+                <?php endif;?>
+                <?php elseif($this->getCustomerPoints() > 0 && $this->getConversionValue()): ?>
+                    <p><?php echo $this->__('You must have at least %s point(s) to apply points.', $this->getMinimumBalance()); ?></p>
+                <?php endif; ?>
+            <?php endif;?>
+
+            <?php //echo Mage::helper('rewardpoints/event')->getCreditPoints(); ?>
+
+        </fieldset>
+    </div>
+    <?php else: ?>
+    <div id="discountFormPoints2">
+        <fieldset>
+            <p class="onestepcheckout-numbers"><?php echo $this->__('Reward points'); ?></p>
+            <?php echo $this->getIllustrationImage()?>
+            <div class="rewards_point_cart">
+                <?php if (!$this->isCouponPointsRemoved()): ?>
+                    <?php echo $this->__("This shopping cart is worth %s loyalty point(s).", $pts);?><?php echo Mage::helper('rewardpoints/data')->getEquivalence($pts);?>
+                <?php else:?>
+                    <?php echo $this->__("You are currently using a discount code. Therefore, this order will not allow point gathering.");?>
+                <?php endif;?>
+            </div>
+            <?php if (!$this->isCouponPointsRemoved()): ?>
+                <?php echo $details_items;?>
+            <?php endif;?>
+            <?php echo $login_extra_box;?>
+            <?php if ($points_currently_used > 0):?>
+            <p><?php echo $this->__('You are currently using %d point(s) of your %d loyalty point(s) available.', $points_currently_used, $this->getCustomerPoints()); ?></p>
+            <?php endif;?>
+            <div class="buttons-set">
+                <button class="form-button-alt button btn-small" type="button" onclick="rewardQuotation('<?php echo $this->getUrl('rewardpoints/index/removequotation/') ?>', this);" value="<?php echo $this->__('Remove Points') ?>"><span><span><?php echo $this->__('Remove Points') ?></span></span></button>
+            </div>
+        </fieldset>
+    </div>
+    <?php endif;?>
+</div>
+
+<?php endif;?>
+<?php endif;?>
+
+<?php else: ?>
+
+<div class="discount-codes box discount" id="rewardFormArea">
+    <p class="onestepcheckout-numbers"><?php echo $this->__('Reward points'); ?></p>
+    <?php echo $this->getIllustrationImage()?>
+    <div class="rewards_point_cart">
+        <?php if (!$this->isCouponPointsRemoved()): ?>
+            <?php echo $this->__("This shopping cart is worth %s loyalty point(s).", $pts);?><?php echo Mage::helper('rewardpoints/data')->getEquivalence($pts);?>
+        <?php else:?>
+            <?php echo $this->__("You are currently using a discount code. Therefore, this order will not allow point gathering.");?>
+        <?php endif;?>
+    </div>
+    <?php if (!$this->isCouponPointsRemoved()): ?>
+        <?php echo $details_items;?>
+    <?php endif;?>
+    <?php echo $login_extra_box;?>
+    <?php if ($this->getCustomerId()): ?>
+    <?php $customerPoints = $this->getCustomerPoints(); ?>
+    <?php if ($customerPoints):?>
+    
+        <?php if ($points_currently_used > 0):?>
+        <p><?php echo $this->__('You are currently using %d point(s) of your %d loyalty point(s) available.', $points_currently_used, $customerPoints); ?></p>
+        <?php endif;?>
+    <?php endif;?>
+    <?php endif;?>
+</div>
+<?php //endif; ?>
+
+<?php endif;?>
+
+<?php if ($this->canUseCouponCode() && ($points_currently_used < 1 || $points_currently_used == null) || !$this->canUseCouponCode()):?>
+<?php echo $this->getChildHtml('coupon_original');?>
+<?php endif;?>
+
+<script type="text/javascript">
+    document.observe("dom:loaded", function() { 
+        
+        <?php if ($this->canShowRemoveLink() && $points_currently_used > 0):?>
+                var points_text = "<?php echo str_replace('"', '\"', $this->__('%s points used', $points_currently_used));?>";
+                var reward_link_cart = '<span id="link_j2t_rewards"> <a href="javascript:$(\'discountFormPoints2\').submit();" title="<?php echo Mage::helper('rewardpoints')->__('Remove Points').'"><img src="'.Mage::getDesign()->getSkinUrl('images/j2t_delete.gif').'" alt="'.Mage::helper('rewardpoints')->__('Remove Points').'" /></a></span>'; ?>';
+                $$(".totals-rewards").each(function (el){
+                    el.innerHTML = el.innerHTML.replace(points_text, points_text+reward_link_cart);
+                });
+        <?php endif;?>
+    });
+    
+</script>
+<?php else:?>
+<?php echo $this->getChildHtml('coupon_original');?>
+<?php endif;?>

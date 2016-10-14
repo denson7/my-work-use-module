@@ -1,0 +1,56 @@
+<?php if (Mage::getStoreConfig('amrules/general/breakdown')):?>
+<?php if (is_array($this->getTotal()->getFullInfo())) : ?>
+<?php foreach ($this->getTotal()->getFullInfo() as $info): ?>
+    <tr class="summary-details-amrules summary-details" style="display:none;">
+        <td class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+            <?php echo $info['label']; ?>
+            <br />
+        </td>
+        <td class="a-right" rowspan="1">
+            -<?php echo $this->helper('checkout')->formatPrice($info['amount']); ?>
+        </td>
+    </tr>
+<?php endforeach; ?>
+    <?php if (Mage::getConfig()->getModuleConfig('Amasty_Rules')->is('active', 'true') && ($pts = Mage::helper('rewardpoints/event')->getCreditPoints($this->getQuote()))):?>
+        
+        <tr class="summary-details-amrules summary-details" style="display:none;">
+            <td class="a-right totals-rewards" colspan="<?php echo $this->getColspan(); ?>">
+                <?php echo $this->__('%s points used', $pts);?>
+                <br />
+            </td>
+            <td class="a-right" rowspan="1">
+                -<?php echo $this->helper('checkout')->formatPrice($this->getQuote()->getStore()->convertPrice(Mage::helper('rewardpoints/data')->convertPointsToMoneyEquivalence($pts))); ?>
+            </td>
+        </tr>
+    
+    <?php endif;?>
+<?php endif; ?>
+<tr class="summary-total" onclick="expandDetails(this, '.summary-details-amrules')" >
+    <td colspan="<?php echo $this->getColspan(); ?>" style="<?php echo $this->getTotal()->getStyle() ?>" class="a-right">
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><strong><?php endif; ?>
+             <div class="summary-collapse"><?php echo $this->getTotal()->getTitle() ?></div>
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></strong><?php endif; ?>
+    </td>
+    <td style="<?php echo $this->getTotal()->getStyle() ?>" class="a-right">
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><strong><?php endif; ?>
+            <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?>
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></strong><?php endif; ?>
+    </td>
+</tr>
+<?php else:?>
+
+
+<tr>
+    <th colspan="<?php echo $this->getColspan(); ?>" style="<?php echo $this->getTotal()->getStyle() ?>" class="a-right totals-rewards">
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><strong><?php endif; ?>
+            <?php //echo $this->escapeHtml($this->getTotal()->getTitle()); ?>
+            <?php echo $this->getTotal()->getTitle(); ?>
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></strong><?php endif; ?>
+    </th>
+    <td style="<?php echo $this->getTotal()->getStyle() ?>" class="a-right">
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><strong><?php endif; ?>
+            <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?>
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></strong><?php endif; ?>
+    </td>
+</tr>
+<?php endif; ?>

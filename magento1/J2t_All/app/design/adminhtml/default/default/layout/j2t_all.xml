@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <name>j2t_all_admin.css</name>
+            </action>
+        </reference>
+    </default>
+</layout>

@@ -1,0 +1,146 @@
+<?php $_product = $this->getProduct() ?>
+
+<?php 
+    // TODO: check tierprice to properly calculate point value
+    // check if reward_point value is not fix value, otherwise, don't take this to consideration
+    // get discount value per quantity
+?>
+
+<?php echo Mage::helper('rewardpoints/data')->getProductPointsText($_product, false, false);?>
+<script type="text/javascript">
+//<![CDATA[
+    var is_loaded_information = true;
+    var is_bundle = true;
+    var json_tier_prices = <?php echo $this->getTierPricesJson($_product);?>;
+    var j2t_options = 0;
+    var j2t_product_id = <?php echo $_product->getId();?>;
+    var j2t_points = 0;
+    var bundle_rules = null;
+    var bundle_fixed_price = false;
+    
+    var isCustomPoints = false;
+    
+    <?php
+    $locale = Mage::app()->getLocale()->getDefaultLocale();
+    $format = Zend_Locale_Data::getContent($locale, 'currencynumber');
+    
+    $value_format = Zend_Locale_Format::toNumber(1234.99, array('locale' => $locale,
+                                                               'number_format' => $format,
+                                                               'precision'     => 2));
+    $pos_mil = strpos($value_format, "234") - 1;
+    $mil_sep = substr($value_format, $pos_mil, 1);
+    
+    $pos_dec = strpos($value_format, "99") - 1;
+    $dec_sep = substr($value_format, $pos_dec, 1);
+    
+    ?>
+    var j2t_mil_sep = "<?php echo (!in_array(trim($mil_sep), array(',','.',' '))) ? " " : $mil_sep;?>";
+    
+    var j2t_dec_sep = "<?php echo $dec_sep;?>";
+    
+    var j2t_convert_template = (12345.23).j2tFormatMoney(2, j2t_dec_sep, j2t_mil_sep);
+    
+    <?php
+        $j2t_point_currency_base = Mage::helper('core')->currency(1, false, false);
+        //$j2t_point_currency_base = (strpos($dec_sep, $j2t_point_currency_base) === false) ? $j2t_point_currency_base.$dec_sep.'00' : $j2t_point_currency_base;
+
+        $j2t_point_currency = Mage::app()->getStore()->formatPrice(1.00, false);
+        $array_dec = explode($dec_sep, $j2t_point_currency);
+        $j2t_point_currency = (sizeof($array_dec) == 1) ? $j2t_point_currency.$dec_sep.'00' : $j2t_point_currency;
+        
+        $j2t_point_default_point_unit_base = Mage::helper('core')->currency(Mage::helper('rewardpoints')->convertPointsToMoneyEquivalence(floor(1)), true, false);
+        $array_base_dec = explode($dec_sep, $j2t_point_default_point_unit_base);
+        $j2t_point_default_point_unit_base = (sizeof($array_base_dec) == 1) ? $j2t_point_default_point_unit_base.$dec_sep.'00' : $j2t_point_default_point_unit_base;
+    ?>
+    
+    var j2t_point_currency_base = "<?php echo str_replace('"', '\"', $j2t_point_currency_base);?>";
+    //var j2t_point_currency_currency = "<?php echo str_replace('"', '\"', Mage::helper('core')->currency(1, true, false));?>";
+    var j2t_point_currency = "<?php echo str_replace('"', '\"', $j2t_point_currency);?>";
+    j2t_point_currency = j2t_point_currency.replace((1.00).j2tFormatMoney(2, j2t_dec_sep, j2t_mil_sep), "__MONEY__");
+    
+    var j2t_point_default_point_unit_base = "<?php echo $j2t_point_default_point_unit_base;?>";
+    var j2t_point_default_point_unit = <?php echo Mage::helper('rewardpoints')->convertPointsToMoneyEquivalence(1);?>;
+    j2t_point_default_point_unit = (j2t_point_default_point_unit) ? j2t_point_default_point_unit : 1;
+    var j2t_point_equivalence_txt = "<?php echo str_replace('"', '\"', Mage::helper('rewardpoints')->__("%d points = %s.", 1111, 2222));?>";
+    
+//]]>    
+</script>
+
+<?php if (Mage::getConfig()->getModuleConfig('Mage_Downloadable')->is('active', 'true')):?>
+<?php if($_product->getTypeId() == Mage_Downloadable_Model_Product_Type::TYPE_DOWNLOADABLE):?>
+<script type="text/javascript">
+//<![CDATA[
+    var json_credit_downloadable = <?php echo $this->getJsDownloadable($_product) ?>;
+//]]>
+</script>
+<?php endif;?>
+<?php endif;?>
+
+<?php if($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_GROUPED):?>
+<script type="text/javascript">
+//<![CDATA[
+    var json_credit_grouped = <?php echo $this->getJsGrouped($_product);?>;
+//]]>
+</script>
+<?php ?>
+<?php endif;?>
+
+<?php if($_product->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_BUNDLE):?>
+<?php //$this->getConfigurableProducts($_product);?>
+<script type="text/javascript">
+//<![CDATA[
+    <?php $points = Mage::helper('rewardpoints/data')->getProductPoints($_product, true); ?>
+    <?php if (!$points && $_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_GROUPED):?>
+        <?php $associatedProducts = $_product->getTypeInstance(true)->getAssociatedProducts($_product); ?>
+        <?php $points = 0; ?>
+        <?php foreach ($associatedProducts as $single_product): ?>
+            <?php $points += Mage::helper('rewardpoints/data')->getProductPoints($single_product, true); ?>
+        <?php endforeach; ?>
+    <?php endif;?>
+        
+    is_bundle = false;
+    j2t_points = <?php echo $points ?>;
+    j2t_options = 0;
+    
+    <?php if (!Mage::helper('rewardpoints/data')->isCustomProductPoints($_product)):?>
+        isCustomPoints = false;
+        var json_credit = <?php echo $this->getJsPoints($_product) ?>;
+    <?php else:?>
+        isCustomPoints = true;
+    <?php endif;?>
+//]]>
+</script>
+<?php else:?>
+
+<?php //echo $this->getJsBundlePoints($_product);?>
+
+<script type="text/javascript">
+//<![CDATA[
+    is_bundle = true;
+    <?php if(Mage::helper('rewardpoints/data')->canBundleChildrendRule()):?>
+    bundle_rules = <?php echo Mage::getModel('rewardpoints/catalogpointrules')->getCatalogRulePointsJson($_product, Mage::app()->getStore()->getId(), 1); ?>;
+    <?php endif;?>
+    <?php if ($_product->getPriceType() == Mage_Bundle_Model_Product_Price::PRICE_TYPE_FIXED):?>
+    bundle_fixed_price = true;
+    <?php endif;?>
+    j2t_points = <?php echo Mage::helper('rewardpoints/data')->getProductPoints($_product, true) ?>;
+    //j2t_points += <?php //echo Mage::helper('rewardpoints/data')->checkBundleMandatoryPrice($_product);?>; 
+    j2t_options = 0;
+    var json_credit_bundle = <?php echo $this->getJsBundlePoints($_product) ?>;
+//]]>    
+</script>
+<?php endif;?>
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+    var json_option_credit = <?php echo $this->getJsOptions($_product) ?>;
+    
+    var isCustomPoints = false;
+    <?php if ($_product->getTypeInstance(true)->hasOptions($_product) && !Mage::helper('rewardpoints/data')->isCustomProductPoints($_product)):?>
+        isCustomPoints = true;
+    <?php endif;?>
+//]]>
+</script>
+

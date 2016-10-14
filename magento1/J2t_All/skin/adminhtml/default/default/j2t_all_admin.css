@@ -1,0 +1,78 @@
+ul.tabs a.j2t-all-tab span, ul.tabs a.j2t-all-tab:hover span {
+    background: url("./images/j2t_all.png") no-repeat scroll 0 0 transparent;
+    height: 0;
+    overflow: hidden;
+    padding: 21px 0 0;
+    width: 192px;
+}
+
+ul.tabs a.j2t-all-tab, ul.tabs a.j2t-all-tab:hover {
+    background: url("../../images/tabs_span_bg.gif") repeat-x scroll 0 100% transparent;
+    border-bottom: medium none;
+    padding: 0.5em 0.5em 0.28em 1.5em;
+}
+
+ul.tabs a.j2t-ajaxcart-module span, ul.tabs a.j2t-ajaxcart-module:hover span {
+    background: url("./images/j2t/ajax_cart.png") no-repeat scroll 0 0 transparent;
+    padding: 0 20px 0;
+}
+ul.tabs a.j2t-rewardpoints-module span, ul.tabs a.j2t-rewardpoints-module:hover span {
+    background: url("./images/j2t/reward_points.png") no-repeat scroll 0 0 transparent;
+    padding: 0 20px 0;
+}
+ul.tabs a.j2t-autoadd-module span, ul.tabs a.j2t-autoadd-module:hover span {
+    background: url("./images/j2t/auto_add.png") no-repeat scroll 0 0 transparent;
+    padding: 0 20px 0;
+}
+ul.tabs a.j2t-onecheckout-module span, ul.tabs a.j2t-onecheckout-module:hover span {
+    background: url("./images/j2t/one_checkout.png") no-repeat scroll 0 0 transparent;
+    padding: 0 20px 0;
+}
+
+ul.tabs a.j2t-socialconnect-module span, ul.tabs a.j2t-socialconnect-module:hover span {
+    background: url("./images/j2t/social_connect.png") no-repeat scroll 0 0 transparent;
+    padding: 0 20px 0;
+}
+
+ul.tabs a.j2t-producthold-module span, ul.tabs a.j2t-producthold-module:hover span {
+    background: url("./images/j2t/product_hold.png") no-repeat scroll 0 0 transparent;
+    padding: 0 20px 0;
+}
+
+ul.tabs a.j2t-giftwrap-module span, ul.tabs a.j2t-giftwrap-module:hover span {
+    background: url("./images/j2t/gift_wrap.png") no-repeat scroll 0 0 transparent;
+    padding: 0 20px 0;
+}
+
+ul.tabs a.j2t-giftvoucher-module span, ul.tabs a.j2t-giftvoucher-module:hover span {
+    background: url("./images/j2t/gift_voucher.png") no-repeat scroll 0 0 transparent;
+    padding: 0 20px 0;
+}
+
+ul.tabs a.j2t-ajaxcart-module, ul.tabs a.j2t-ajaxcart-module:hover,
+ul.tabs a.j2t-rewardpoints-module, ul.tabs a.j2t-rewardpoints-module:hover,
+ul.tabs a.j2t-autoadd-module, ul.tabs a.j2t-autoadd-module:hover,
+ul.tabs a.j2t-onecheckout-module, ul.tabs a.j2t-onecheckout-module:hover,
+ul.tabs a.j2t-socialconnect-module, ul.tabs a.j2t-socialconnect-module:hover,
+ul.tabs a.j2t-producthold-module, ul.tabs a.j2t-producthold-module:hover,
+ul.tabs a.j2t-giftwrap-module, ul.tabs a.j2t-giftwrap-module:hover,
+ul.tabs a.j2t-giftvoucher-module, ul.tabs a.j2t-giftvoucher-module:hover
+{
+    padding: 0.5em 0.5em 0.28em 1.5em;
+    border-bottom: dotted 1px #c0c0c0;
+}
+
+ul.tabs a.j2t-ajaxcart-module.active, ul.tabs a.j2t-ajaxcart-module.active:hover,
+ul.tabs a.j2t-rewardpoints-module.active, ul.tabs a.j2t-rewardpoints-module.active:hover,
+ul.tabs a.j2t-autoadd-module.active, ul.tabs a.j2t-autoadd-module.active:hover,
+ul.tabs a.j2t-onecheckout-module.active, ul.tabs a.j2t-onecheckout-module.active:hover,
+ul.tabs a.j2t-all-tab.active, ul.tabs a.j2t-all-tab.active:hover,
+ul.tabs a.j2t-socialconnect-module.active, ul.tabs a.j2t-socialconnect-module.active:hover,
+ul.tabs a.j2t-producthold-module.active, ul.tabs a.j2t-producthold-module.active:hover,
+ul.tabs a.j2t-giftwrap-module.active, ul.tabs a.j2t-giftwrap-module.active:hover,
+ul.tabs a.j2t-giftvoucher-module.active, ul.tabs a.j2t-giftvoucher-module.active:hover
+{
+    background-color: #FFFFFF;
+}
+
+ul.tabs a.j2t-all-tab, ul.tabs a.j2t-all-tab {border:none;}

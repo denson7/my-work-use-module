@@ -1,0 +1,1683 @@
+<config>
+    
+    <tabs>
+        <j2t_all>
+            <label>J2T Modules</label>
+            <class>j2t-all-area</class>
+            <sort_order>100</sort_order>
+        </j2t_all>
+    </tabs>
+    <sections>
+        <rewardpoints translate="label comment" module="rewardpoints">
+            <tab>j2t_all</tab>
+            <class>j2t-rewardpoints-module</class>
+            <label>Reward Points</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <module_serial translate="label comment" module="rewardpoints">
+                    <label>Module Serial</label>
+                    <comment><![CDATA[Module serial key linked to your server IP address. Note that it is necessary to fill your IP address on <a href='http://www.j2t-design.net' target='blank'>http://www.j2t-design.net</a>. If serial value is wrong, configuration can't be saved.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <key translate="label">
+                            <label>Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_model>rewardpoints/serialtext</frontend_model>
+                            <backend_model>rewardpoints/config_serialverification</backend_model>
+                            <comment><![CDATA[This is the module serial key linked to your server IP address. This information is available on your user account page on <a href='http://www.j2t-design.net' target='blank'>http://www.j2t-design.net</a>.]]></comment>
+                        </key>
+                    </fields>
+                </module_serial>
+                <default translate="label comment" module="rewardpoints">
+                    <label>Defaults</label>
+
+                    <comment><![CDATA[
+                            <script type="text/javascript">
+                                //rewardpoints_default_auto_use
+                                //rewardpoints_default_step_apply
+                                //rewardpoints_default_step_value
+                                //rewardpoints_default_full_use
+                                
+                                checkAllowDirectUsage = function () {
+                                    if ($('rewardpoints_default_remove_discount').getValue() == 1){
+                                        var options = $$('select#rewardpoints_default_allow_direct_usage option');
+                                        var len = options.length;
+                                        for (var i = 0; i < len; i++) {
+                                            if(options[i].value == 0){
+                                                options[i].selected = true;
+                                            }
+                                        }
+                                        $('rewardpoints_default_allow_direct_usage').up(1).hide();
+                                    } else {
+                                        $('rewardpoints_default_allow_direct_usage').up(1).show();
+                                    }
+                                }
+                        
+                                checkAutoUse = function(){                
+                                    /*if ($('rewardpoints_default_step_multiplier').getValue() == 1){
+                                        $('rewardpoints_default_step_apply').up(1).hide();
+                                        $('rewardpoints_default_step_value').up(1).hide();
+                                        $('rewardpoints_default_full_use').up(1).hide();
+                                        $('rewardpoints_default_step_slide').up(1).hide();
+                                        $('rewardpoints_default_step_multiplier').up(1).hide();
+                                    } else*/ if ($('rewardpoints_default_auto_use').getValue() == 1){
+                                        var options = $$('select#rewardpoints_default_step_apply option');
+                                        var len = options.length;
+                                        for (var i = 0; i < len; i++) {
+                                            if(options[i].value == 0){
+                                                options[i].selected = true;
+                                            }
+                                        }
+
+                                        var options = $$('select#rewardpoints_default_step_slide option');
+                                        var len = options.length;
+                                        for (var i = 0; i < len; i++) {
+                                            if(options[i].value == 0){
+                                                options[i].selected = true;
+                                            }
+                                        }
+
+
+                                        $('rewardpoints_default_step_apply').up(1).hide();
+                                        $('rewardpoints_default_step_value').up(1).hide();
+                                        $('rewardpoints_default_full_use').up(1).hide();
+                                        $('rewardpoints_default_step_slide').up(1).hide();
+                                        $('rewardpoints_default_step_multiplier').up(1).hide();
+                                    } else {
+                                        $('rewardpoints_default_step_apply').up(1).show();
+                                        $('rewardpoints_default_step_value').up(1).show();
+                                        $('rewardpoints_default_full_use').up(1).show();
+                                        $('rewardpoints_default_step_slide').up(1).show();
+                                        $('rewardpoints_default_step_multiplier').up(1).show();
+                                        checkStepUse();
+                                    }
+                                };
+
+                                checkStepUse = function(){
+                                    if ($('rewardpoints_default_step_apply').getValue() == 1){
+                                        $('rewardpoints_default_step_value').up(1).show();
+                                        $('rewardpoints_default_step_slide').up(1).show();
+                                        $('rewardpoints_default_step_multiplier').up(1).show();
+                                    } else {
+                                        $('rewardpoints_default_step_value').up(1).hide();
+                                        $('rewardpoints_default_step_slide').up(1).hide();
+                                        $('rewardpoints_default_step_multiplier').up(1).hide();
+                                    }
+                                };
+                                
+                                
+                                
+                                checkImg = function(){                                    
+                                    if ($('rewardpoints_design_small_inline_image_show').getValue() == 1){
+                                        $('rewardpoints_design_small_inline_image').up(1).show();
+                                    } else {
+                                        $('rewardpoints_design_small_inline_image').up(1).hide();
+                                    }
+                                    
+                                    if ($('rewardpoints_design_big_inline_image_show').getValue() == 1){
+                                        $('rewardpoints_design_big_inline_image').up(1).show();
+                                    } else {
+                                        $('rewardpoints_design_big_inline_image').up(1).hide();
+                                    }
+                                };
+                                
+
+                                Event.observe(window, 'load', function() {
+                                    Event.observe('rewardpoints_default_auto_use', 'change', checkAutoUse);
+                                    Event.observe('rewardpoints_default_step_apply', 'change', checkStepUse);
+                                    
+                                    Event.observe('rewardpoints_design_small_inline_image_show', 'change', checkImg);
+                                    Event.observe('rewardpoints_design_big_inline_image_show', 'change', checkImg);
+                        
+                                    Event.observe('rewardpoints_default_remove_discount', 'change', checkAllowDirectUsage);
+                                    
+                                    checkAllowDirectUsage();
+                                    checkAutoUse();
+                                    checkStepUse();
+                                    checkImg();
+                                });
+
+
+                                
+
+                            </script>
+                            ]]>
+                    </comment>
+
+
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Set to yes in order to activate the module.]]></comment>
+                        </active>
+                        <process_restriction translate="label">
+                            <label>Attribute restriction</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Only process points when reward_points attribute is filled (reward_points attribute needs to be created and must containt integer).]]></comment>
+                        </process_restriction>
+                        <!--<spread_equally translate="label">
+                            <label>Spread equally</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Spead discount point equally on each cart items.]]></comment>
+                        </spread_equally>-->
+                        <process_tax translate="label">
+                            <label>Include Tax</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Include tax in reward point discounts (only when customer tax applied before discount in customer tax tab).]]></comment>
+                        </process_tax>
+                        <exclude_tax translate="label">
+                            <label>Exclude Tax</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Exclude tax on gathered points.]]></comment>
+                        </exclude_tax>
+
+                        <process_shipping translate="label">
+                            <label>Include shipping</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Include shipping price in discount (only for magento 1.4.x or greater).]]></comment>
+                        </process_shipping>
+                        
+                        <!--<exclude_special translate="label">
+                            <label>Exclude Special Price</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Remove points to products having special price.]]></comment>
+                        </exclude_special>-->
+
+                        <process_rate translate="label">
+                            <label>Process currency rate</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Use currency exchange rate while calculating points & discount (default magento base currency is used).]]></comment>
+                        </process_rate>
+
+                        <money_points translate="label">
+                            <label>Points gathered / unit of money spent</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Points gathered for 1 unit of money spent. (e.g. if set to 2, you will obtain 100 points for $50 spent).]]></comment>
+                        </money_points>
+						
+                        <min_point_collect translate="label">
+                            <label>Min. Cart Point Collection</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Minimum point value in order to start point collection (use 0 for no minimum point value). This feature is not compatible with "show details".]]></comment>
+                        </min_point_collect>
+						
+                        <gather_step translate="label">
+                            <label>Gather Step Value</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Point gathering step value in cart (0 for no step value). E.g.: if 10, your customer will collect points by steps (10, 20, 30, etc.). This feature is not compatible with "show details".]]></comment>
+                        </gather_step>
+						
+                        <exclude_groups translate="label">
+                            <label>Exclude Groups</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>rewardpoints/groups</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Exclude groups from being able to see and use reward points features on front-end.]]></comment>
+                        </exclude_groups>
+						
+						
+                        <points_money translate="label comment">
+                            <label>Points to obtain 1 unit of money</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater validate-number required-entry</validate>
+                            <comment><![CDATA[Amount of points required to obtain a discount. Use 0 to forbid point usage.]]></comment>
+                        </points_money>
+                        
+                        <points_delay translate="label comment">
+                            <label>Points availability delay</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>34</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Delaying the points availability (use 0 for no-delay).]]></comment>
+                        </points_delay>
+
+                        <points_duration translate="label comment">
+                            <label>Points validity duration</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Points validity duration in days (use 0 for unlimited).]]></comment>
+                        </points_duration>
+						
+                        <start_date translate="label">
+                            <label>Date Restriction</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>rewardpoints/adminhtml_system_config_date</frontend_model>
+                            <backend_model>rewardpoints/config_date</backend_model>
+                            <sort_order>36</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Date used to verify point insertion. Any order date prior this value will no be treated. Leave blank for no restrictions.]]></comment>
+                        </start_date>
+						
+
+                        <min_use translate="label">
+                            <label>Minimum points balance to apply</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>37</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[The minimum amount of points a customer must have to be able to use at checkout (use 0 for no-limit).]]></comment>
+                        </min_use>
+
+                        <max_point_collect_order translate="label comment">
+                            <label>Maximum points collected per order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>38</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Maximum points to be collected per order (use 0 for unlimited).]]></comment>
+                        </max_point_collect_order>
+
+                        <max_point_used_order translate="label comment">
+                            <label>Maximum points used per order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>39</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Maximum points to be used per order (use 0 for unlimited).]]></comment>
+                        </max_point_used_order>
+                        
+                        <max_point_percent_order translate="label comment">
+                            <label>Percent usage per order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-greater-than-zero validate-number required-entry</validate>
+                            <comment><![CDATA[Order total amount percent value of maximum point usage (e.g. for a total cart amount of $400, if this value is set to 50, maximum point discount will not be higher than $200).]]></comment>
+                        </max_point_percent_order>
+
+
+                        <auto_use translate="label">
+                            <label>Automatic use of points</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>41</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Use maximum amount of point while in shopping cart.]]></comment>
+                        </auto_use>
+                        <step_apply translate="label">
+                            <label>Apply points by step</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>42</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Apply credit points step by step. e.g. 250, 500, 750, etc.]]></comment>
+                        </step_apply>
+                        <step_value translate="label comment">
+                            <label>Step value</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-digits</validate>
+                            <comment><![CDATA[The step value]]></comment>
+                        </step_value>
+                        
+                        <step_multiplier>
+                            <label>Step multiplier</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>61</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-digits validate-greater-than-zero</validate>
+                            <comment><![CDATA[Multiplier for the step value. e.g. if the multiplier is 10 and step value 20, the steps will be: 20, 200, 2000, etc. Default value is 1.]]></comment>
+                        </step_multiplier>
+                        
+                        <step_slide translate="label">
+                            <label>Use slider</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>65</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Use slider to specify points.]]></comment>
+                        </step_slide>
+                        <full_use translate="label">
+                            <label>Use max amount of points</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Apply the maximum amount of point to the order]]></comment>
+                        </full_use>
+                        <math_method translate="label">
+                            <label>Math method</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/mathmethod</source_model>
+                            <sort_order>71</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Math method applied to point calculation. (For exact point value, round up method might be used when necessary.)]]></comment>
+                        </math_method>
+                        <!--<math_method_usage>
+                            <label>Math method (usage)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/mathmethod</source_model>
+                            <sort_order>71</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Math method applied to point calculation when using points. (For exact point value, round up method might be used when necessary.)]]></comment>
+                        </math_method_usage>-->
+
+                        <coupon_codes translate="label">
+                            <label>Coupon codes restriction</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>72</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[If yes, customers will not be able to use coupon codes and reward points at the same time within an order.]]></comment>
+                        </coupon_codes>
+                        
+                        <disable_points_coupon translate="label">
+                            <label>Disable points on coupon usage</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>73</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Disable point gathering when coupon code is used by the customer.]]></comment>
+                        </disable_points_coupon>
+                        
+                        
+                        <store_scope translate="label">
+                            <label>Apply store scope</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>74</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[If yes, the points collected will be available only for the store where the points were earned.]]></comment>
+                        </store_scope>
+
+
+                        <status_used translate="label">
+                            <label>Validity status field</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/statusfield</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Only for magento 1.4.x or greater. Order status database field used when checking points validity (modify this only if you know what you are doing).]]></comment>
+                        </status_used>
+
+                        <valid_statuses translate="label">
+                            <label>Valid gathering statuses</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <comment><![CDATA[Order statuses used to validate points (modify this only if you know what you are doing).]]></comment>
+                        </valid_statuses>
+                        
+                        <valid_used_statuses translate="label">
+                            <label>Valid usage statuses</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>91</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <comment><![CDATA[Order statuses used to validate used points (modify this only if you know what you are doing).]]></comment>
+                        </valid_used_statuses>
+                        
+                        
+                        <!--<flatstats>
+                            <label>Turbo Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>95</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Turbo Mode allow performance increases within cart process and customer account dashboard.]]></comment>
+                        </flatstats>-->
+                        
+                        <onepage_summary>
+                            <label>Show onepage checkout summary</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show summary of point usage within onepage checkout review (compatible with magento 1.4.x or greater).]]></comment>
+                        </onepage_summary>
+                        
+                        <remove_link>
+                            <label>Show remove link</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show link from cart totals area.]]></comment>
+                        </remove_link>
+                        
+                        <point_equivalence>
+                            <label>Show money point equivalence</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show to the customer point value in unit of money as well as amout of points.]]></comment>
+                        </point_equivalence>
+                        
+                        <allow_recalculate>
+                            <label>Always recalculate</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Always recalculate points when order is modified. Note that points allocated to an order may vary according to rules and points configuration.]]></comment>
+                        </allow_recalculate>
+                        
+                        <allow_recalculate_referral>
+                            <label>Always recalculate referral</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Always recalculate referral points when order is modified. Note that points allocated to an order may vary according to rules, points configuration and referral program configuration.]]></comment>
+                        </allow_recalculate_referral>
+                        
+                        
+                        <remove_discount translate="label">
+                            <label>Remove discounts</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Remove discount value to point collection.]]></comment>
+                        </remove_discount>
+                        
+                        <allow_direct_usage translate="label">
+                            <label>Allow Direct Usage</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>145</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Allow customers to directly use points on same order (e.g. if a customer is collecting 100 points on his order, currently collected points can be directly used).]]></comment>
+                        </allow_direct_usage>
+                        
+                        <cron_remove translate="label">
+                            <label>Remove cancelled orders</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Remove points linked to cancel orders - automated task (Magento cron needs to be active).]]></comment>
+                        </cron_remove>
+                        
+                        <show_login>
+                            <label>Show Log In</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show Log In url on cart review page, within reward point area.]]></comment>
+                        </show_login>
+                        
+                        <show_details>
+                            <label>Show Details</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show point gathering details on cart review page, within reward point area.]]></comment>
+                        </show_details>
+                        
+                        <show_customer_summary>
+                            <label>Show Top Points</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show customer points next to my account (works with default top.links theme).]]></comment>
+                        </show_customer_summary>
+                        
+                        <bundle_rule_child translate="label">
+                            <label>Bundle Children Rule Action</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>190</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[If set to yes, rules are applied also on children items of bundle products. In order to avoid double rule processing on bundle products, it is advised to set this value to no.]]></comment>
+                        </bundle_rule_child>
+                        
+                        <force_store translate="label">
+                            <label>Force Store Id On Admin Customer Insertion</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[By default, when customer is created through admin, admin store id is used. However, when using store scope or notification system, it is required to retrieve correct store information from customer. When set to yes, store id will be stored when creating customer through admin.]]></comment>
+                        </force_store>
+                        
+                    </fields>
+                </default>
+                
+                <custom_point>
+                    <label>Custom point values</label>
+                    <comment><![CDATA[Custom point values according to customer groups and dates.]]></comment>
+
+                    <frontend_type>text</frontend_type>
+                    <sort_order>15</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <custom_point_value translate="label comment">
+                            <label>Custom point worthing values</label>
+                            <frontend_model>rewardpoints/config_mapfieldspoints</frontend_model>
+                            <backend_model>rewardpoints/config_serialized_arraypoints</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Setup custom point worthing values according to cart <strong>min/max</strong> values (use 0 for no min or max value), <strong>groups</strong> and <strong>date range</strong> (date is optional value). <strong>Value</strong> is point value that will worth 1 unit of money (e.g. if set to 2, $100 spent will give 200 points - 100 x 2 - if unit of money is '$'). <strong>Important:</strong> if always recalculate is set to yes, make sure that the above rules are still available when updating an order.]]></comment>
+                        </custom_point_value>
+                        <custom_point_usage translate="label comment">
+                            <label>Custom point usage values</label>
+                            <frontend_model>rewardpoints/config_mapfieldspoints</frontend_model>
+                            <backend_model>rewardpoints/config_serialized_arraypointsusage</backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Setup custom point usage values according to cart <strong>min/max</strong> values (use 0 for no min or max value), <strong>groups</strong> and <strong>date range</strong> (date is optional value). <strong>Value</strong> is the point required in order to get 1 unit of money discount (e.g. if set to 100, 200 points will give $2 discount - 200 / 100 - if unit of money is '$'). <strong>Important:</strong> if always recalculate is set to yes, make sure that the above rules are still available when updating an order.]]></comment>
+                        </custom_point_usage>
+                    </fields>
+                </custom_point>
+
+                <first_order translate="label comment" module="rewardpoints">
+                    <label>First Order Action</label>
+                    <comment><![CDATA[First Order action allow to add points on first's client order.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>16</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <point_qty translate="label">
+                            <label>Point Qty</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Point Qty to be given for first valid client's order (0 will void any actions).]]></comment>
+                        </point_qty>
+                        <min_order translate="label">
+                            <label>Min. Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Minimum order amount (base subtotal amount without shipping fees) in order to process first order action (0 for no minimum amount).]]></comment>
+                        </min_order>
+                        <from_customer_id translate="label">
+                            <label>From Customer Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Start processing first order point from specific user id.]]></comment>
+                        </from_customer_id>
+                    </fields>
+                </first_order>
+
+                <registration translate="label comment" module="rewardpoints">
+                    <label>Registration/Referral points</label>
+                    <comment><![CDATA[Note that guest orders do not allow referral points to be collected.]]></comment>
+
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <registration_points translate="label">
+                            <label>Registration points</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Points earned upon customer registration (points are allocated when customer logs into the system for the first time).]]></comment>
+                        </registration_points>
+                        <show_registration_points translate="label">
+                            <label>Show registration point sentence (account creation)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[If set to yes, registration point sentence is shown on top of account creation form (detault magento theme).]]></comment>
+                        </show_registration_points>
+                        
+                        <registration_points_customer_id translate="label">
+                            <label>From customer id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>75</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Start processing registration point from specific user id.]]></comment>
+                        </registration_points_customer_id>
+                        
+                        
+                        <referral_show translate="label">
+                            <label>Show referral link</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>77</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show refer a friend link in user account.]]></comment>
+                        </referral_show>
+                        <referral_points translate="label">
+                            <label>Referral points or ratio</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>78</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Points earned when referred friend orders.]]></comment>
+                        </referral_points>
+                                              
+                        <referral_points_method translate="label">
+                            <label>Calculation type (referral points)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/calculationtype</source_model>
+                            <sort_order>79</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Calculation type used. "Cart summary Ratio points" multiplies cart subtotal by inserted value, "Ratio points" uses inserted value to calculate points and "static value" uses configuration value without any calculation. Note that any configured rules or points on product page will override Ratio points calculation.]]></comment>
+                        </referral_points_method>
+                        
+                        <referral_child_points>
+                            <label>Referral child points or ratio</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Points earned by referred friend for first order.]]></comment>
+                        </referral_child_points>
+                        
+                        <referral_child_points_method translate="label">
+                            <label>Calculation type (child points)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/calculationtype</source_model>
+                            <sort_order>81</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Calculation type used. "Cart summary Ratio points" multiplies cart subtotal by inserted value, "Ratio points" uses inserted value to calculate points and "static value" uses configuration value without any calculation. Note that any configured rules or points on product page will override Ratio points calculation.]]></comment>
+                        </referral_child_points_method>
+                        
+                        <referral_min_order translate="label">
+                            <label>Referral min. order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>82</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Referral minimum order amount (base subtotal amount without shipping fees) in order to process referral actions (0 for no minimum amount).]]></comment>
+                        </referral_min_order>
+                        
+                        <referral_permanent>
+                            <label>Show referral permanent link</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>83</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[This will allow customers to share permanent their permanent link to refer friends.]]></comment>
+                        </referral_permanent>
+                        
+                        <referral_redirection translate="label">
+                            <label>Referral Redirection</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>84</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Redirection path for permanent link, excluding domain name and index.php/ part (e.g. electronics/cell-phones.html). Leave blank to use default redirection.]]></comment>
+                        </referral_redirection>
+
+                        <referral_addthis>
+                            <label>Share with addthis</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>85</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Allow customers to share permanent link using addthis. Visit addthis.com to create an account.]]></comment>
+                        </referral_addthis>
+
+                        <referral_addthis_account>
+                            <label>addthis account name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>86</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </referral_addthis_account>
+                        
+                        <referral_addthis_code>
+                            <label>addthis code</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>87</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Addthis buttons code without javascript element.]]></comment>
+                        </referral_addthis_code>
+                        
+                        <referral_custom_code>
+                            <label>Custom Social Share Code</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>88</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Custom social share code. You can integrate any other social network sharing tool (such as jiathis, sharethis, addinto, etc.) in order to share referral url. Referral url must be integrated to the code with the following: {{referral_url}}]]></comment>
+                        </referral_custom_code>
+                        
+                        <referrer_registration_points translate="label">
+                            <label>Referrer Registration points</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>89</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Extra points earned by referrer customer upon referred friend registration (points are allocated when customer logs into the system for the first time).]]></comment>
+                        </referrer_registration_points>
+                        
+                        <referred_registration_points translate="label">
+                            <label>Referred Registration points</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Extra points earned by referred customer upon registration (points are allocated when customer logs into the system for the first time).]]></comment>
+                        </referred_registration_points>
+
+                        <subscription_email_template translate="label">
+                            <label>Select email template (Referral subscribe)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>91</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </subscription_email_template>
+                        
+                        <subscription_email_identity translate="label">
+                            <label>Subscription email identity</label>
+                            <frontend_type>select</frontend_type>
+                            <!-- J2t_Rewardpoints_Model_System_Config_Email_Identity -->
+                            <source_model>rewardpoints/config_email_identity</source_model>
+                            <sort_order>92</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Referral email idendity used while sending referral requests.]]></comment>
+                        </subscription_email_identity>
+
+                        <confirmation_email_template translate="label">
+                            <label>Select email template (Referral confirm)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>93</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </confirmation_email_template>
+                        
+                        <confirmation_email_identity translate="label">
+                            <label>Confirmation email identity</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>95</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </confirmation_email_identity>
+                        
+                        
+                        <referral_guestallow>
+                            <label>Disable guest orders</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Disable guest orders when customer orders from referral url/email.]]></comment>
+                        </referral_guestallow>
+                        
+                        <referral_side>
+                            <label>Show Extra box</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/sideboxes</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show referral boxes on side areas of your store. Allow to show permanent link and custom code but excludes addthis.]]></comment>
+                        </referral_side>
+                        
+                    </fields>
+                </registration>
+                
+                <other_points translate="label comment" module="rewardpoints">
+                    <label>Other point allocation</label>
+                    <comment><![CDATA[Other point allocation such as product review points, newsletter points, polls points are available from this section.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>24</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <review_points translate="label">
+                            <label>Points per validated review</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Points the customer get while sending a valid review.]]></comment>
+                        </review_points>
+                        <show_review_points translate="label">
+                            <label>Show review point sentence</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[If set to yes, review point sentence is shown under review urls on product view pages.]]></comment>
+                        </show_review_points>
+                        <newsletter_points translate="label">
+                            <label>Newsletter points</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>76</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Newsletter points. Give points when user registers to newsletter (unsubscribing doesn't remove points).]]></comment>
+                        </newsletter_points>
+                        <show_newsletter_points translate="label">
+                            <label>Show newsletter sentence (account creation)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>77</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[If set to yes, newsletter point sentence is shown on top of account creation form (detault magento theme).]]></comment>
+                        </show_newsletter_points>
+                        <poll_points translate="label">
+                            <label>Poll points</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Points collected for poll participation.]]></comment>
+                        </poll_points>
+                        <show_poll_points translate="label">
+                            <label>Show poll point sentence</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>115</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[If set to yes, poll point sentence is shown within poll sideboxes.]]></comment>
+                        </show_poll_points>
+                        
+                        <tag_points translate="label">
+                            <label>Tag points</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Points collected for any new valid customer tag.]]></comment>
+                        </tag_points>
+                        <show_tag_points translate="label">
+                            <label>Show tag point sentence</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>125</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[If set to yes, tag point sentence is shown within tag form (product.tag.list.list.before block alias must be loaded within your layout.).]]></comment>
+                        </show_tag_points>
+                    </fields>
+                </other_points>
+                
+                <referral_advanced translate="label comment" module="rewardpoints">
+                    <label>Advanced Referral Points</label>
+                    <comment><![CDATA[Advanced referral points' configuration.]]></comment>
+
+                    <frontend_type>text</frontend_type>
+                    <sort_order>25</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <referral_steps translate="label comment">
+                            <label>Referral Steps</label>
+                            <frontend_model>rewardpoints/config_mapfieldsreferral</frontend_model>
+                            <backend_model>rewardpoints/config_serialized_arrayreferral</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Min/Max valid orders' quantity values for referrer and referred friends while collecting points. Dates are optionnal and 0 can be used as min/max values as no values. Note that no re-calculations are available for advanced referral points' allocation. Important: only valid orders (defined as above configuration) are processed and order can be processed more than once.]]></comment>
+                        </referral_steps>
+                    </fields>
+                </referral_advanced>
+
+
+                <dataflow_profile translate="label comment" module="rewardpoints">
+                    <label>Import profile</label>
+                    <comment><![CDATA[Exports are available from 'Default config store' scope and Import is available from website scope. No referral points nor validation dates are imported.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <field_email translate="label">
+                            <label>Email address</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/columns</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Used for import file configuration.]]></comment>
+                        </field_email>
+                        <field_points translate="label">
+                            <label>Points</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/columns</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Used for import file configuration. Negative values may be used for used points.]]></comment>
+                        </field_points>
+                        <field_order translate="label">
+                            <label>Order Reference</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/columns2</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Used for import file configuration. This is the incremented order reference. This field is not a mandatory field (default value will be admin gift). Use -1 for admin gift.]]></comment>
+                        </field_order>
+                        <field_store translate="label">
+                            <label>Store Ids</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>rewardpoints/columns2</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Used for import file configuration. This field is not a mandatory field (store ids of current website scope will be used). For multiple values, separate with comma.]]></comment>
+                        </field_store>
+
+
+                        <export translate="label">
+                            <label>Import/Export</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>rewardpoints/config_export</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </export>
+
+                        <import translate="label">
+                            <label>Import</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>rewardpoints/config_import</frontend_model>
+                            <backend_model>rewardpoints/config_tablecell</backend_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </import>
+
+                    </fields>
+                </dataflow_profile>
+                
+                <notifications translate="label comment" module="rewardpoints">
+                    <label>Expiry Email notifications</label>
+                    <comment><![CDATA[Notify customers by email when points are reaching expiry date.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>35</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <expiry_notification_active translate="label">
+                            <label>Activate expiry notifications</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Activate point expiry notifications.]]></comment>
+                        </expiry_notification_active>
+                        <notification_email_identity translate="label">
+                            <label>Email Sender notification</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notification_email_identity>
+                        <notification_email_template translate="label">
+                            <label>Email sent before points expiring</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notification_email_template>
+                        
+                        <notification_days translate="label">
+                            <label>Number of days before points expiring</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[In days.]]></comment>
+                        </notification_days>
+                    </fields>
+                </notifications>
+                
+                <status_notification>
+                    <label>Email point status notification</label>
+                    <comment><![CDATA[Sends email notifications according to rules.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>36</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <points_notifications translate="label comment">
+                            <label>Customer Point status Notifications</label>
+                            <frontend_model>rewardpoints/config_mapfields</frontend_model>
+                            <!-- J2t_Rewardpoints_Model_Config_Serialized_Array -->
+                            <backend_model>rewardpoints/config_serialized_array</backend_model>
+                            <!--<backend_model>adminhtml/system_config_backend_serialized_array</backend_model>-->
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Setup point value used to notify customers of their accumuated point value. Min and Max value must be defined. Duration is the gap in days between two same customer's notifications.]]></comment>
+                        </points_notifications>
+                        <points_notification_email_template translate="label">
+                            <label>Email sent to notify customers</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </points_notification_email_template>
+                    </fields>
+                </status_notification>
+                
+                <admin_notifications translate="label comment" module="rewardpoints">
+                    <label>Admin Email notifications</label>
+                    <comment><![CDATA[Customer points notifications through admin area.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>37</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        
+                        <notification_admin_email_identity translate="label">
+                            <label>Admin Email Sender notification</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notification_admin_email_identity>
+                        
+                        <notification_admin_email_template translate="label">
+                            <label>Email sent through admin points adding</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notification_admin_email_template>
+                    </fields>
+                </admin_notifications>
+                
+                
+                
+                <top_cart_messages>
+                    <label>Cart Rule Messages</label>
+                    <comment><![CDATA[Reward Points Cart Rule Messages shown on cart page.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>35</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <show_information translate="label comment">
+                            <label>Show information</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show point details on product page.]]></comment>
+                        </show_information>
+                        <block_default translate="label comment">
+                            <label>Default block name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Default layout block name where the rule messages will be injected (default is: global_messages). Other block name could be checkout.cart.form.before for example.]]></comment>
+                        </block_default>
+                        <message_duration translate="label comment">
+                            <label>Duration between messages</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-greater-than-zero validate-number required-entry</validate>
+                            <comment><![CDATA[Duration in seconds between each messages (default is: 2000).]]></comment>
+                        </message_duration>
+                    </fields>
+                </top_cart_messages>
+                
+                
+                
+                
+                <design>
+                    <label>Design and Graphics</label>
+                    <comment><![CDATA[Setup graphic design of the module.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <small_inline_image_show translate="label">
+                            <label>Show small image</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show small inline image on product views.]]></comment>
+                        </small_inline_image_show>
+                        <!--<small_inline_image translate="label">
+                            <label>Small inline image</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>rewardpoints/config_import</frontend_model>
+                            <backend_model>rewardpoints/config_imageimport</backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </small_inline_image>-->
+                        
+                        
+                        <small_inline_image translate="label comment">
+                            <label>Small inline image</label>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <!--<upload_dir config="system/filesystem/media" scope_info="1">theme</upload_dir>-->
+                            <upload_dir>media</upload_dir>
+                            <!--<base_url type="media" scope_info="1">theme</base_url>-->
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </small_inline_image>
+                        
+                        
+                        
+                        <small_inline_image_size translate="label comment">
+                            <label>Small inline image size</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-greater-than-zero validate-number required-entry</validate>
+                            <comment><![CDATA[Define the small inline image size. The value inserted will be used as: value x value.]]></comment>
+                        </small_inline_image_size>
+                        
+                        
+                        <big_inline_image_show translate="label">
+                            <label>Show big image</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show big image on shopping cart area.]]></comment>
+                        </big_inline_image_show>
+                        
+                        <!--<big_inline_image translate="label">
+                            <label>Big inline image</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>rewardpoints/config_import</frontend_model>
+                            <backend_model>rewardpoints/config_imageimport</backend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </big_inline_image>-->
+                        
+                        <big_inline_image translate="label comment">
+                            <label>Big inline image</label>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <!--<upload_dir config="system/filesystem/media" scope_info="1">theme</upload_dir>-->
+                            <upload_dir>media</upload_dir>
+                            <!--<base_url type="media" scope_info="1">theme</base_url>-->
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </big_inline_image>
+                        
+                        <big_inline_image_size translate="label comment">
+                            <label>Big inline image size</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-greater-than-zero validate-number required-entry</validate>
+                            <comment><![CDATA[Define the big inline image size. The value inserted will be used as: value x value.]]></comment>
+                        </big_inline_image_size>
+                    </fields>
+                </design>
+                <product_page>
+                    <label>Product point information</label>
+                    <comment><![CDATA[Details on product page regarding points customer collects.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <cms_page translate="label comment">
+                            <label>CMS page identifier</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[CMS Page identifier where your customer will find information about the point details (page created by you, explaining details regarding the point scheme on your site). 'About' link will appear on product pages. Leave blank for no links.]]></comment>
+                        </cms_page>
+                        <show_information translate="label comment">
+                            <label>Show information</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show point details on product page.]]></comment>
+                        </show_information>
+                        <duplicate_text_product_page translate="label comment">
+                            <label>Duplicate text on top</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Duplicate text on top of product page (only when product have options with price on top and price on bottom of the page).]]></comment>
+                        </duplicate_text_product_page>
+                        <block_default translate="label comment">
+                            <label>Default block name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Default layout block name where the point details will be injected (default is: product.info.addtocart).]]></comment>
+                        </block_default>
+                        <block_extra translate="label comment">
+                            <label>Extra block name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Layout block name where duplicated point details will be injected (default is: product.info.configurable).]]></comment>
+                        </block_extra>
+                        <show_list_points>
+                            <label>Show list points</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show point details on product list page. Depending on your theme, you may need to set this value to no and modify your theme according to explanations available on installation procedures.]]></comment>
+                        </show_list_points>
+                    </fields>
+                </product_page>
+                
+                
+                <admin_dashboard>
+                    <label>Admin Dashboard</label>
+                    <comment><![CDATA[Point dashboard on admin area page.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <show_dashboard translate="label comment">
+                            <label>Show information</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Show point dashboard area within admin.]]></comment>
+                        </show_dashboard>
+                    </fields>
+                </admin_dashboard>
+                
+                
+                <events translate="label comment" module="rewardpoints">
+                    <label>Event Observers</label>
+                    <comment><![CDATA[Specify custom event triggering point actions.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <event_list translate="label comment">
+                            <label>Event List</label>
+                            <frontend_model>rewardpoints/config_mapfieldsevents</frontend_model>
+                            <!-- J2t_Rewardpoints_Model_Config_Serialized_Array -->
+                            <backend_model>rewardpoints/config_serialized_arrayevents</backend_model>
+                            <!--<backend_model>adminhtml/system_config_backend_serialized_array</backend_model>-->
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[List of event defined by: observed magento class name, point value, type of process, maximum point allocation (0 for no value), duration in days between two insertions (0 for no value). Customer needs to be logged in order to collect customer details. Id verification constraint insertion of points only for different model ids for same customer (same inserted model id will be rejected). Validity duration refers to the points validity duration in days (use 0 for unlimited). Verifications allow you to use object variables and their values as condition (defined as variable_name|variable_expected_value. If many verifications, separate them by ';') for point allocation (e.g. group_id|1;active|1 will verify that the group id is 1 and active is 1).]]></comment>
+                        </event_list>
+                        
+                        
+                    </fields>
+                </events>
+                
+                <order_invoice translate="label comment" module="rewardpoints">
+                    <label>Orders / Invoices summary</label>
+                    <comment><![CDATA[Enable/disable summary on orders / invoices.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>70</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <show_on_order_admin translate="label">
+                            <label>Show on admin orders</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show on order's viewing admin pages.]]></comment>
+                        </show_on_order_admin>
+                        
+                        <show_on_invoice_admin translate="label">
+                            <label>Show on admin invoices</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show on invoice's viewing admin pages.]]></comment>
+                        </show_on_invoice_admin>
+                        
+                        <show_on_order_client translate="label">
+                            <label>Show on client orders</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show on order's viewing client pages.]]></comment>
+                        </show_on_order_client>
+                        
+                        <show_on_invoice_client translate="label">
+                            <label>Show on client invoices</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show on invoice's viewing client pages.]]></comment>
+                        </show_on_invoice_client>
+                        
+                        <show_on_pdf_invoice>
+                            <label>Show on pdf invoices</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show on pdf generated invoice's.]]></comment>
+                        </show_on_pdf_invoice>
+                        
+                    </fields>
+                </order_invoice>
+                
+            </groups>
+
+        </rewardpoints>
+    </sections>
+</config>

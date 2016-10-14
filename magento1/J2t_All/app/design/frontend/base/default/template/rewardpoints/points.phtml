@@ -1,0 +1,71 @@
+<?php
+/**
+ * J2T RewardsPoint2
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@j2t-design.com so we can send you a copy immediately.
+ *
+ * @category   Magento extension
+ * @package    RewardsPoint2
+ * @copyright  Copyright (c) 2009 J2T DESIGN. (http://www.j2t-design.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ ?>
+<div class="my-account">
+    <div class="page-title">
+        <h1><?php echo $this->__('Reward points') ?></h1>
+    </div>
+
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+        <?php echo $this->getChildHtml('points') ?>
+    <br />
+    <div class="page-title">
+        <h1><?php echo $this->__('History') ?></h1>
+    </div>
+
+    <?php $_points = $this->getPoints();?>
+    <?php if($_points->getSize()): ?>
+    <?php echo $this->getPagerHtml() ?>
+
+    <table cellspacing="0" class="data-table linearize-table reward-data-table" id="reward-points-table">
+        <thead>
+            <tr>
+                <?php ?><th><?php echo $this->__('Type of point') ?></th><?php ?>
+                <th><?php echo $this->__('Points added') ?></th>
+                <th><?php echo $this->__('Points used') ?></th>
+                <th><?php echo $this->__('Allocation date') ?></th>
+                <th><?php echo $this->__('Valid until') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $_odd = ''; ?>
+            <?php foreach ($_points as $_point): ?>
+                <tr>
+                    <td data-theme-label="<?php echo $this->__('Type of point') ?>">
+                        <?php echo $this->getTypeOfPoint($_point);?>
+                    </td>
+                    <td data-theme-label="<?php echo $this->__('Points added') ?>"><?php echo $_point->getData('points_current') ?></td>
+                    <?php /*?><?php echo $_point->getPoints_spent() ? $this->__('yes') : $this->__('no') ?><?php */?>
+                    <td data-theme-label="<?php echo $this->__('Points used') ?>"><?php echo $_point->getData('points_spent') ?></td>
+                    <?php /*?><td><?php if ($_point->getDate_start() != ""): echo $this->formatDate($_point->getDate_start(), 'short'); endif; ?></td>
+                    <td><?php if ($_point->getDate_end() != ""): echo $this->formatDate($_point->getDate_end(), 'short'); endif; ?></td>
+                    <?php */?>
+
+                    <td data-theme-label="<?php echo $this->__('Allocation date') ?>"><?php if ($_point->getData('date_start') != ""): echo $this->formatDate($_point->getDate_start(), 'short'); endif; ?></td>
+                    <td data-theme-label="<?php echo $this->__('Valid until') ?>"><?php if ($_point->getData('date_end') != ""): echo $this->formatDate($_point->getDate_end(), 'short'); endif; ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php echo $this->getPagerHtml() ?>
+    <?php else: ?>
+        <p><?php echo $this->__('You don\'t have any recorded points.'); ?></p>
+    <?php endif ?>
+</div>

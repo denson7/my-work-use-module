@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<layout>
+    <!--
+    Customer account home dashboard layout
+    -->
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/j2t-rewardpoints.css</stylesheet></action>
+            <block type="rewardpoints/global" name="custom.rewards.global" as="custom_rewards_global" template="rewardpoints/global.phtml" />
+        </reference>
+        
+        <reference name="top.links">
+            <action method="removeLinkByUrl"><url helper="customer/getAccountUrl"/></action>
+            <action method="addLink" translate="label title" module="customer">
+                <label>My Account</label>
+                <!--<url>customer-service</url>-->
+                <url helper="customer/getAccountUrl"/>
+                <title>My Account</title>
+                <prepare/>
+                <urlParams/>
+
+                <position>10</position>
+                <liParams/>
+                <aParams>id="j2t-toplink-login"</aParams>
+                <beforeText/>
+                <afterText/>
+            </action>
+        </reference>
+        
+    </default>
+    
+    
+    <catalog_product_view translate="label">
+        <reference name="head">
+            <!--<action method="addJs"><script>js/j2t-rewardpoints.js</script></action>-->
+            <action method="addItem"><type>skin_js</type><name>js/j2t-rewardpoints.js</name></action>
+        </reference>
+    </catalog_product_view>
+    
+    <checkout_cart_index>
+        <block type="checkout/cart_totals" name="checkout.cart.totals" as="totals" template="checkout/cart/totals.phtml"> 
+            <block type="tax/checkout_discount" name="discount_total_renderer" template="rewardpoints/total/default.phtml" /> 
+        </block>
+    </checkout_cart_index>
+    
+    <checkout_onepage_review>
+        <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml">
+            <block type="tax/checkout_discount" name="discount_total_renderer" template="rewardpoints/total/default.phtml" />
+        </block>
+    </checkout_onepage_review>
+    
+    <!--<customer_account_index>
+        <reference name="customer_account_dashboard">
+            <action method="setTemplate">
+                <template>rewardpoints/my_dashboard.phtml</template>
+            </action>
+            <block type="rewardpoints/dashboard" name="customer_account_points" as="points" template="rewardpoints/dashboard_points.phtml" />
+        </reference>
+    </customer_account_index>-->
+    
+    <checkout_cart_index>
+        <reference name="checkout.cart.coupon">
+            <action method="setTemplate">
+                    <template>rewardpoints/coupons.phtml</template>
+            </action>
+            <block type="rewardpoints/coupon" name="checkout_cart_coupon_normal" as="coupon_points" template="rewardpoints/reward_coupon.phtml">
+                <block type="checkout/cart_coupon" name="checkout_cart_coupon_reward" as="coupon_original" template="checkout/cart/coupon.phtml"/>
+                <!--<block type="j2tmulticoupon/coupon" name="checkout_cart_coupon_reward" as="coupon_original" template="j2tmulticoupon/coupon.phtml"/>-->
+            </block>
+        </reference>        
+    </checkout_cart_index>
+
+    <catalog_product_view>
+        <!-- comment out if magento 1.4.x or greater -->
+        <!--<reference name="product.info.addtocart">
+            <action method="setTemplate">
+                    <template>rewardpoints/addtocart_wrapper.phtml</template>
+            </action>
+
+            <block type="rewardpoints/productpoints" name="points_product" as="points_product" template="rewardpoints/addtocart.phtml"/>
+            <block type="catalog/product_view" name="original_addtocart" as="original_addtocart" template="catalog/product/view/addtocart.phtml">
+                <block type="page/html_wrapper" name="product.info.addtocart.paypal.wrapper" as="paypal_wrapper">
+                    <action method="setHtmlTagName"><tag>p</tag></action>
+                    <action method="setElementClass"><class>paypal-logo</class></action>
+                    <block type="paypal/express_shortcut" name="product.info.addtocart.paypal" template="paypal/express/shortcut.phtml">
+                        <action method="setIsInCatalogProduct"><value>1</value></action>
+                    </block>
+                </block>
+            </block>
+        </reference>-->
+        
+        <!-- remove comments if magento 1.4.x or greater -->
+        <!--<reference name="product.info.addtocart">
+            <block type="rewardpoints/productpoints" name="j2t.points.product" as="points_product" template="rewardpoints/addtocart.phtml" />
+            <action method="insert">
+                <blockName>j2t.points.product</blockName>
+                <siblingName>points_product</siblingName>
+                <after>1</after>
+                <alias>points_product</alias>
+            </action>
+        </reference>-->
+        <!--<reference name="product.info.addtocart">
+            <block type="page/html_wrapper" name="j2t.points.product.wrapper" translate="label">
+                <label>J2T Social Points Wrapper</label>
+                <block type="rewardpoints/productpoints" name="j2t.points.product" as="points_product" template="rewardpoints/addtocart.phtml">
+                    <action method="setIsInCatalogProduct"><value>1</value></action>
+                    <action method="setShowOrPosition">
+                        <value>after</value>
+                    </action>
+                </block>
+            </block>
+        </reference>-->
+        
+        
+    </catalog_product_view>
+    
+    
+    <checkout_onepage_review translate="label">        
+        <reference name="checkout.onepage.agreements">
+            <action method="setTemplate">
+                    <template>rewardpoints/onepage.phtml</template>
+            </action>
+            <block type="rewardpoints/coupon" name="checkout.onepage.reward" as="reward_review" template="rewardpoints/onepage_review.phtml" />
+            <block type="checkout/agreements" name="checkout.onepage.agreements.reward" as="agreements_rewards" template="checkout/onepage/agreements.phtml"/>
+        </reference>           
+    </checkout_onepage_review>
+    
+    
+    <checkout_onepage_index translate="label">        
+        <reference name="checkout.onepage.agreements">
+            <action method="setTemplate">
+                    <template>rewardpoints/onepage.phtml</template>
+            </action>
+            <block type="rewardpoints/coupon" name="checkout.onepage.reward" as="reward_review" template="rewardpoints/onepage_review.phtml" />
+            <block type="checkout/agreements" name="checkout.onepage.agreements.reward" as="agreements_rewards" template="checkout/onepage/agreements.phtml"/>
+        </reference>
+    </checkout_onepage_index>
+
+
+    <customer_account>
+        <!--<reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="rewardpoints" ifconfig="rewardpoints/registration/referral_show"><name>referral</name><path>rewardpoints/index/referral/</path><label>Referred Friends</label></action>
+            <action method="addLink" translate="label" module="rewardpoints" ifconfig="rewardpoints/default/active"><name>rewardpoints</name><path>rewardpoints/index/points/</path><label>Reward points</label></action>
+        </reference>-->
+    </customer_account>
+
+    <rewardpoints_index_points>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="rewardpoints/points" name="rewardpoints" template="rewardpoints/points.phtml">
+                <block type="rewardpoints/dashboard" name="customer_account_points" as="points" template="rewardpoints/dashboard_points.phtml" />
+            </block>
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+        </reference>
+    </rewardpoints_index_points>
+
+
+    <rewardpoints_index_referral>
+        <!--<reference name="head">
+            <block type="core/text" name="addthis_widget.js"><action method="setText"><text><![CDATA[<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=nouser"></script>]]></text></action></block>
+        </reference>-->
+
+        <reference name="before_body_end">
+            <block type="rewardpoints/j2thead" name="j2thead" as="j2thead"></block>
+        </reference>
+
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="rewardpoints/referral" name="referral" template="rewardpoints/referral.phtml" />
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+        </reference>
+    </rewardpoints_index_referral>
+
+    
+    <customer_new_handle>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="rewardpoints" ifconfig="rewardpoints/registration/referral_show"><name>referral</name><path>rewardpoints/index/referral/</path><label>Referred Friends</label></action>
+            <action method="addLink" translate="label" module="rewardpoints"><name>rewardpoints</name><path>rewardpoints/index/points/</path><label>Reward Points</label></action>
+        </reference>
+    </customer_new_handle>
+	
+</layout>

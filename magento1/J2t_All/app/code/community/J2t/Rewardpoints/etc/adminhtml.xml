@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<config>
+    <menu>
+        <rewardpoints translate="title" module="rewardpoints">
+            <title>Reward Points</title>
+            <sort_order>60</sort_order>
+            <children>
+                <!-- child items go here -->
+		<stats translate="title" module="rewardpoints">
+                    <title>Statistics</title>
+                    <sort_order>10</sort_order>
+                    <action>rewardpoints/adminhtml_stats</action>
+                </stats>
+                <clientpoints translate="title" module="rewardpoints">
+                    <title>Client points</title>
+                    <sort_order>20</sort_order>
+                    <action>rewardpoints/adminhtml_clientpoints</action>
+                </clientpoints>
+		<referrals translate="title" module="rewardpoints">
+                    <title>Referrals</title>
+                    <sort_order>30</sort_order>
+                    <action>rewardpoints/adminhtml_referrals</action>
+                </referrals>
+		<catalogpointrules translate="title" module="rewardpoints">
+                    <title>Catalog point rules</title>
+                    <sort_order>40</sort_order>
+                    <action>rewardpoints/adminhtml_catalogpointrules</action>
+                </catalogpointrules>
+
+                <pointrules translate="title" module="rewardpoints">
+                    <title>Cart point rules</title>
+                    <sort_order>50</sort_order>
+                    <action>rewardpoints/adminhtml_pointrules</action>
+                </pointrules>
+                
+                <!--<referralrules translate="title" module="rewardpoints">
+                    <title>Referral point rules</title>
+                    <sort_order>55</sort_order>
+                    <action>rewardpoints/adminhtml_referralrules</action>
+                </referralrules>-->
+                                
+                <config translate="title" module="rewardpoints">
+                    <title>Configuration</title>
+                    <sort_order>60</sort_order>
+                    <action>adminhtml/system_config/edit/section/rewardpoints</action>
+                </config>
+            </children>
+        </rewardpoints>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <rewardpoints translate="title" module="rewardpoints">
+                        <title>Reward Points</title>
+                        <sort_order>60</sort_order>
+                        <children>
+                            <!-- child items go here -->
+                            <stats translate="title" module="rewardpoints">
+                                <title>Statistics</title>
+                                <sort_order>10</sort_order>
+                            </stats>
+			    <clientpoints translate="title" module="rewardpoints">
+                                <title>Client points</title>
+                                <sort_order>20</sort_order>
+                            </clientpoints>
+			    <referrals translate="title" module="rewardpoints">
+                                <title>Referrals</title>
+                                <sort_order>30</sort_order>
+                            </referrals>
+			    <catalogpointrules translate="title" module="rewardpoints">
+                                <title>Catalog point rules</title>
+                                <sort_order>40</sort_order>
+                            </catalogpointrules>
+			    <pointrules translate="title" module="rewardpoints">
+                                <title>Cart point rules</title>
+                                <sort_order>50</sort_order>
+                            </pointrules>
+                            <!--<referralrules>
+                                <title>Referral point rules</title>
+                                <sort_order>55</sort_order>
+                            </referralrules>-->
+			    <config translate="title" module="rewardpoints">
+                                <title>Statistics</title>
+                                <sort_order>60</sort_order>
+                            </config>
+                        </children>
+                    </rewardpoints>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <rewardpoints>
+                                        <title>Reward Points</title>
+                                    </rewardpoints>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+            
+        </resources>
+    </acl>
+    
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <rewardpoints>
+                                        <title>Reward Points</title>
+                                    </rewardpoints>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <customer>
+                        <children>
+                            <rewardpoints translate="title">
+                                <title>Reward Points</title>
+                                <sort_order>41</sort_order>
+                            </rewardpoints>
+                        </children>
+                    </customer>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
