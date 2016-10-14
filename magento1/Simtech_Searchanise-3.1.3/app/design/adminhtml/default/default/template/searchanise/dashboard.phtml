@@ -1,0 +1,89 @@
+<?php 
+/***************************************************************************
+*                                                                          *
+*   (c) 2004 Vladimir V. Kalynyak, Alexey V. Vinokurov, Ilya M. Shalnev    *
+*                                                                          *
+* This  is  commercial  software,  only  users  who have purchased a valid *
+* license  and  accept  to the terms of the  License Agreement can install *
+* and use this program.                                                    *
+*                                                                          *
+****************************************************************************
+* PLEASE READ THE FULL TEXT  OF THE SOFTWARE  LICENSE   AGREEMENT  IN  THE *
+* "copyright.txt" FILE PROVIDED WITH THIS DISTRIBUTION PACKAGE.            *
+****************************************************************************/ ?>
+
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td><h3 class="head-dashboard"><?php echo Mage::helper('searchanise')->__('Searchanise');?></h3></td>
+        </tr>
+    </table>
+</div>
+<div class="snize" id="snize_container"></div>
+
+<?php
+    $searchaniseOptions = Mage::helper('searchanise/ApiSe')->getAddonOptions();
+    
+    $searchaniseOptions['options_link'] = $this->getUrl(Mage::helper('searchanise/ApiSe')->getOptionsLink());
+    $searchaniseOptions['re_sync_link'] = $this->getUrl(Mage::helper('searchanise/ApiSe')->getReSyncLink());
+    $searchaniseOptions['connect_link'] = $this->getUrl(Mage::helper('searchanise/ApiSe')->getConnectLink());
+    
+    $seServiceUrl = Mage::helper('searchanise/ApiSe')->getServiceUrl(false);
+?>
+
+<script type="text/javascript">
+//<![CDATA[
+    SearchaniseAdmin = {};
+    
+    SearchaniseAdmin.host        = '<?php echo $seServiceUrl;?>';
+    SearchaniseAdmin.PrivateKey  = '<?php echo $searchaniseOptions['parent_private_key'];?>';
+    SearchaniseAdmin.OptionsLink = '<?php echo $searchaniseOptions['options_link'];?>';
+    SearchaniseAdmin.ReSyncLink  = '<?php echo $searchaniseOptions['re_sync_link'];?>';
+    SearchaniseAdmin.LastRequest = '<?php echo $searchaniseOptions['last_request'];?>';
+    SearchaniseAdmin.LastResync  = '<?php echo $searchaniseOptions['last_resync'];?>';
+    SearchaniseAdmin.ConnectLink = '<?php echo $searchaniseOptions['connect_link'];?>';
+    SearchaniseAdmin.ShowResultsControlPanel = true;
+
+    SearchaniseAdmin.AddonStatus = '<?php echo $searchaniseOptions['addon_status'];?>';
+    SearchaniseAdmin.AddonVersion = '<?php echo $searchaniseOptions['addon_version'];?>';
+
+    SearchaniseAdmin.Platform = 'magento';
+    SearchaniseAdmin.PlatformEdition = '<?php echo $searchaniseOptions['core_edition'];?>';
+    SearchaniseAdmin.PlatformVersion = '<?php echo $searchaniseOptions['core_version'];?>';
+    
+    SearchaniseAdmin.Engines = [];
+    
+    <?php
+        if (!empty($searchaniseOptions['parent_private_key'])) {
+            $stores = Mage::app()->getStores();
+            
+            if (!empty($stores)) {
+                foreach($stores as $keyStore => $store) {
+                    $priceFormat = Mage::helper('searchanise/ApiSe')->getPriceFormat($store);
+                    $privateKey = $searchaniseOptions['private_key'][$store->getId()];
+                    $exportStatus = empty($searchaniseOptions['export_status'][$store->getId()]) ? 'none' : $searchaniseOptions['export_status'][$store->getId()];
+                    $priceFormat['after'] = $priceFormat['after'] ? 'true' : 'false';
+                    
+                    echo 'SearchaniseAdmin.Engines.push({';
+                        echo 'Name:"' . addslashes($store->getName()) . '",';
+                        echo "PrivateKey:   '{$privateKey}',";
+                        echo "LangCode:     '{$store->getCode()}',";
+                        echo "ExportStatus: '{$exportStatus}',";
+                        echo 'PriceFormat: {';
+                            echo "decimals_separator:  '" . addslashes($priceFormat['decimals_separator'])  . "',";
+                            echo "thousands_separator: '" . addslashes($priceFormat['thousands_separator']) . "',";
+                            echo 'symbol:              "' . addslashes($priceFormat['symbol']) . '",';
+                            
+                            echo "decimals: '{$priceFormat['decimals']}',";
+                            echo "rate:     '{$priceFormat['rate']}',";
+                            echo "after:     {$priceFormat['after']}";
+                        echo '}';
+                    echo '});';
+                }
+            }
+        }
+    ?>
+//]]>
+</script>
+
+<script type="text/javascript" src="<?php echo $seServiceUrl;?>/js/init.js"></script>
