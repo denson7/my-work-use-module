@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Silk_Catalog>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Silk_Catalog>
+    </modules>
+</config>
