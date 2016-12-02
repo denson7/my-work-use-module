@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+    <name>HusseyCoding_AjaxCartPopup</name>
+    <version>1.2.5</version>
+    <stability>stable</stability>
+    <license uri="http://opensource.org/licenses/osl-3.0.php">Open Software License (OSL)</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Gives you both ajax add/remove cart functionality and a rollover mini cart popup.</summary>
+    <description>Remove page reloads when adding/removing and editing product quantities in the cart and add a mini cart popup to your 'My Cart' link with Ajax Cart Popup.&#xD;
+&#xD;
+This extension replaces the sidebar minicart and shows up to 10 products most recently added to the cart. There are also convenient links to the cart and checkout pages from the ajax and mini cart popups.&#xD;
+&#xD;
+Ajax Cart Popup will works all product types.</description>
+    <notes>Added form key to mini cart delete requests</notes>
+    <authors><author><name>Hussey Coding</name><user>husseycoding</user><email>info@husseycoding.co.uk</email></author></authors>
+    <date>2016-02-01</date>
+    <time>15:08:38</time>
+    <contents><target name="magecommunity"><dir name="HusseyCoding"><dir name="AjaxCartPopup"><dir name="Block"><file name="Cart.php" hash="1c2015b9082cf0418735e23d6063e8f4"/><file name="Popup.php" hash="357b60a75321567afb732a007999a3eb"/></dir><dir name="controllers"><file name="CartController.php" hash="26d9896b23a502dc76d919c27415dd95"/></dir><dir name="etc"><file name="adminhtml.xml" hash="0e8cf41422012a721cefbb40a763b702"/><file name="config.xml" hash="c0c14989d95668028839e4a6ffab9f62"/><file name="system.xml" hash="f81637177507e6193ecb0a9a6f7f44a5"/></dir><dir name="Helper"><file name="Data.php" hash="c1f5cb33c97e2896335f2686e4a78c78"/></dir></dir><dir name="Common"><dir name="etc"><file name="system.xml" hash="6c9ba9f227b9adfc9abf97f17b46fdbf"/></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="HusseyCoding_AjaxCartPopup.xml" hash="112a71843351e85521ae9b66965b0112"/><file name="HusseyCoding_Common.xml" hash="31e82d3d9b3179c2fa9e002f9669da47"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="ajaxcartpopup.xml" hash="762a66cc9e1daa065202643b7e2f5356"/></dir><dir name="template"><dir name="ajaxcartpopup"><file name="cart.phtml" hash="e012b212b4a64b7a9416d2500209de86"/><file name="notice.phtml" hash="0dfcd36aac0783cfbb3331f2f7c2e3c3"/><file name="popupbody.phtml" hash="37fad39508776e3012ab4aad8579a22c"/><file name="popup.phtml" hash="9f198328c8e7f236275cf658225444ee"/></dir></dir></dir></dir></dir></target><target name="mageskin"><dir name="frontend"><dir name="base"><dir name="default"><dir name="css"><file name="ajaxcartpopup.css" hash="6dfa39936898305fbea01ce67c22be0d"/></dir><dir name="js"><file name="ajaxcartpopup.js" hash="f7249e9a99930362b3e0e4a52f7add3c"/></dir><dir name="images"><dir name="ajaxcartpopup"><file name="button.gif" hash="ccafde0fa767eaf7faf20da4ea73c8bd"/><file name="loading.gif" hash="faa74e8c61fc64d5edb11613c7eead2c"/><file name="overlay.png" hash="0a949aa705c4792377b09bbd04668195"/></dir></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.1.0</min><max>6.0.0</max></php></required></dependencies>
+</package>
